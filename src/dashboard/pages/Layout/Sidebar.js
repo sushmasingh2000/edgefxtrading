@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaAngleDown, FaAngleRight, FaCheck, FaCoins, FaExchangeAlt, FaMoneyBillWave, FaNetworkWired, FaSignOutAlt, FaTachometerAlt, FaTimes, FaUserCog, FaUserFriends } from "react-icons/fa";
+import { FaAngleDown, FaAngleRight, FaCheck, FaCoins, FaExchangeAlt, FaMoneyBillWave, FaNetworkWired, FaSignOutAlt, FaTachometerAlt, FaTimes, FaUserCog, FaUserFriends, FaWallet } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/favicon.png";
@@ -64,6 +64,7 @@ const Sidebar = () => {
         //         { title: "Transfer", path: "/fund-tranfer" }
         //     ],
         // },
+        { title: "Paying", icon: <FaWallet />, path: "/fund-tranfer" },
         { title: "Payout", icon: <FaExchangeAlt />, path: "/withdrawal" },
         { title: "Profile Settings", icon: <FaUserCog />, path: "/profile" },
         // { title: "Support", icon: <FaHeadset />, path: "/dashboard" },

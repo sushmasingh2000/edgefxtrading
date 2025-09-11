@@ -16,20 +16,17 @@ const Dashboard = () => {
     }
   );
 
-  const dashboard = data?.data?.result || {};
+  const dashboard = data?.data?.result?.[0] || {};
 
   const stats = [
-    { label: "Total Members", value: dashboard?.tot_id || 0 },
-    { label: "Active Members", value: dashboard?.active_id || 0 },
-    { label: "Deactive Members", value: dashboard?.deactive_id || 0 },
+    { label: "Total Customer", value: dashboard?.total_customer || 0 },
     { label: "Current Topup Amount", value: `${dollar} ${dashboard?.curr_topup || 0}` },
-    { label: "Total Topup Amount", value: `${dollar} ${dashboard?.total_topup_amt || 0}` },
-    { label: "Total Topup", value: dashboard?.total_topup || 0 },
-    { label: "Total Withdrawal", value: `${dollar} ${dashboard?.total_withdrawal || 0}` },
-    { label: "Level Income", value: `${dollar} ${dashboard?.levelinc || 0}` },
-    { label: "Direct Income", value: `${dollar} ${dashboard?.direct_inc || 0}` },
-    { label: "Stacking Bonus", value: `${dollar} ${dashboard?.satcking_bonus || 0}` },
-    { label: "Total Paid Members", value: dashboard?.total_paid_mem || 0 },
+    { label: "Total Investor Amount", value: `${dollar} ${dashboard?.total_trader_amount || 0}` },
+    { label: "Verified Investor Account", value: dashboard?.verified_trader || 0} ,
+    { label: "Success Payout Amount", value: `${dollar} ${Number(dashboard?.success_payout)?.toFixed(2) || 0}`},
+    { label: "Pending Payout Amount", value: `${dollar} ${Number(dashboard?.pending_payout)?.toFixed(2) || 0}`},
+    { label: "Pending Investor Account", value: dashboard?.pending_trader || 0 },
+    { label: "Rejected Investor Account", value: dashboard?.rejected_trader || 0 },
   ];
 
   return (

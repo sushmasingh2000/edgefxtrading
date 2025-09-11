@@ -29,7 +29,7 @@ const INRPaying = () => {
   const { data, isLoading } = useQuery(
     ['get_paying_Admin', fk.values.search, fk.values.start_date, fk.values.end_date, page],
     () =>
-      apiConnectorPost(endpoint?.admin_paying_report, {
+      apiConnectorPost(endpoint?.user_deposit_req, {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
@@ -104,53 +104,20 @@ const INRPaying = () => {
     <span>Amount ($)</span>,
     <span>Status</span>,
     <span>Date</span>,
-    <span>Action</span>
 
 
   ];
   const tablerow = allData?.data?.map((row, index) => {
     return [
       <span> {index + 1}</span>,
-      <span>{row?.or_m_user_id}</span>,
-      <span> {row?.or_m_name || 0}</span>,
-      <span>{row?.tr09_req_amount}</span>,
+      <span>{row?.lgn_cust_id || "--"}</span>,
+      <span> {row?.jnr_name || 0}</span>,
+      <span>{row?.topup_real_amount || "--"}</span>,
       <span>
-        {row?.m_top_status === 2
-          ? "Pending"
-          : row?.m_top_status === 1
-            ? "Approved"
-            : row?.m_top_status === 0
-              ? "Rejected"
-              : "N/A"}
+        {row?.topup_roi_status || "N/A"}
       </span>,
-      <span>{row?.m_top_reqdate ? moment(row?.m_top_reqdate)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
-
-      <span className='flex justify-center gap-1'> <span>
-        {row?.m_top_status === 2  ? (
-          <button
-            className="!bg-[#198754] !text-white p-2 rounded"
-            onClick={() => handleSubmit(row?.tr09_req_id)}
-          >
-            Approve
-          </button>
-        ) : (
-          <Lock />
-        )}
-      </span>
-        <span>
-          {row?.m_top_status === 2 ? (
-            <button
-              className="!bg-red-500 !text-white p-2 rounded"
-
-              onClick={() => handleRejectSubmit(row?.tr09_req_id)}
-            >
-              Reject
-            </button>
-          ) : (
-            <Lock />
-          )}
-        </span></span>
-    ];
+      <span>{row?.created_at ? moment(row?.created_at)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
+    ]
   })
 
   return (

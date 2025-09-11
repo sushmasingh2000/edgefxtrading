@@ -8,6 +8,7 @@ import ROIBonus from "../Adminpages/Pages/genealogy/ROIBonus";
 import WeeklyBonus from "../Adminpages/Pages/genealogy/WeeklyBonus";
 import INRPaying from "../Adminpages/Pages/INRPayment/INRPaying";
 import INRPayout from "../Adminpages/Pages/INRPayment/INRPayout";
+import Master from "../Adminpages/Pages/Master";
 import TraderList from "../Adminpages/Pages/Team/TraderList";
 import UserDetail from "../Adminpages/Pages/Team/User";
 import TopUp from "../Adminpages/Pages/Topup";
@@ -21,6 +22,12 @@ export const adminroutes = [
     path: "/admindashboard",
     component: <Dashboard />,
     navItem: "Dashboard",
+  },
+   {
+    id: 2,
+    path: "/master",
+    component: <Master />,
+    navItem: "Master",
   },
   {
     id: 17,

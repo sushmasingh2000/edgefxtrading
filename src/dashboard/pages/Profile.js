@@ -176,11 +176,11 @@ const Profile = () => {
                                 <span className="text-gray-300">{label}:</span>
                                 <button
                                     className="bg-gold-color hover:bg-green-600 text-gray-900 font-semibold py-1.5 px-4 rounded text-xs"
-                                    // onClick={() => {
-                                    //     if (label === "Update Wallet Address") setShowWalletModal(true);
-                                    //     else if (label === "Update Password") setShowPasswordModal(true);
-                                    //     else if (label === "Update Profile") setShowProfileModal(true); // Open profile modal
-                                    // }}
+                                    onClick={() => {
+                                        if (label === "Update Wallet Address") setShowWalletModal(true);
+                                        else if (label === "Update Password") setShowPasswordModal(true);
+                                        else if (label === "Update Profile") setShowProfileModal(true); // Open profile modal
+                                    }}
                                 >
                                     Edit
                                 </button>

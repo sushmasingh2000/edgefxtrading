@@ -1,6 +1,7 @@
 import {
   ColorizeRounded, Compare,
   Games,
+  LeaderboardSharp,
   LoginOutlined,
   MonetizationOn,
   Money,
@@ -13,17 +14,17 @@ import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 export const all_Data = [
-  // {
-  //   id: 1,
-  //   navLink: "/master",
-  //   navItem: "Master",
-  //   navIcon: (
-  //     <span>
-  //       <LeaderboardSharp color="#15317E" fontSize="medium" />
-  //     </span>
-  //   ),
-  //   subcomponent: [],
-  // },
+  {
+    id: 1,
+    navLink: "/master",
+    navItem: "Master",
+    navIcon: (
+      <span>
+        <LeaderboardSharp color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
   {
     id: 2,
     navLink: "/admindashboard",
@@ -361,28 +362,28 @@ export const all_Data = [
   //     },
   //   ],
   // },
-  // {
-  //   id: 11,
-  //   navLink: "/inr_Payout",
-  //   navItem: "Payout",
-  //   navIcon: (
-  //     <span>
-  //       <Games color="#15317E" fontSize="medium" />
-  //     </span>
-  //   ),
-  //   subcomponent: [],
-  // },
-  //  {
-  //   id: 11,
-  //   navLink: "/inr_Paying",
-  //   navItem: "Fund Request",
-  //   navIcon: (
-  //     <span>
-  //       <Games color="#15317E" fontSize="medium" />
-  //     </span>
-  //   ),
-  //   subcomponent: [],
-  // },
+  {
+    id: 11,
+    navLink: "/inr_Payout",
+    navItem: "Payout",
+    navIcon: (
+      <span>
+        <Games color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
+   {
+    id: 11,
+    navLink: "/inr_Paying",
+    navItem: "Fund Request",
+    navIcon: (
+      <span>
+        <Games color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
   // {
   //   id: 111,
   //   navLink: "/inr_Pending",

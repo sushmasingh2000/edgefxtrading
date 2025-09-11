@@ -33,7 +33,7 @@ const FundTransfer = () => {
       page,
     ],
     () =>
-      apiConnectorPost(endpoint?.get_user_fund_request, {
+      apiConnectorPost(endpoint?.user_deposit_req, {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
@@ -53,43 +53,22 @@ const FundTransfer = () => {
 
   const tablehead = [
     <span>S.No.</span>,
-    <span>Type </span>,
     <span>Amount </span>,
-    <span>Reciept</span>,
-    <span>Transaction ID</span>,
-    <span>Date</span>,
+    <span>Transaction ID </span>,
     <span>Status </span>,
+    <span>Date / Time</span>,
   ];
 
   const tablerow = allData?.data?.map((row, index) => {
     return [
       <span> {index + 1}</span>,
-      <span>{row.tr09_req_curr_type}</span>,
-      <span>{row.tr09_req_amount}</span>,
+      <span>{row?.topup_real_amount || "--"}</span>,
+      <span>{row?.topup_trans_id || "--"}</span>,
+      
       <span>
-        <img src={row.tr09_req_recipt} className="h-10 w-10" />
+        {row?.topup_roi_status || "N/A"}
       </span>,
-      <span>{row?.tr09_req_trid}</span>,
-      <span>{moment(row.m_top_reqdate)?.format("DD-MM-YYYY HH:mm:ss")}</span>,
-      <span
-        className={
-          row?.m_top_status === 2
-            ? "text-yellow-500" // Pending - Green
-            : row?.m_top_status === 1
-            ? "text-green-500" // Approved - Blue
-            : row?.m_top_status === 0
-            ? "text-red-500" // Rejected - Red
-            : "text-gray-500" // N/A - Gray
-        }
-      >
-        {row?.m_top_status === 2
-          ? "Pending"
-          : row?.m_top_status === 1
-          ? "Approved"
-          : row?.m_top_status === 0
-          ? "Rejected"
-          : "N/A"}
-      </span>,
+      <span>{row?.created_at ? moment(row?.created_at)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
     ];
   });
 

@@ -28,7 +28,7 @@ const Dashboard = () => {
       refetchOnWindowFocus: false,
     }
   );
-  const dashboard = data?.data?.result;
+  const dashboard = data?.data?.result?.[0];
 
   const { data: profile } = useQuery(
     ["get_profile"],
@@ -48,17 +48,19 @@ const Dashboard = () => {
   );
   const statCards = [
     { title: "Main Wallet", value: Number(user_profile?.jnr_curr_wallet || 0)?.toFixed(2), icon: <FaWallet /> },
-    { title: "Fund Wallet", value: Number(user_profile?.or_m_fund_wallet || 0)?.toFixed(2), icon: <FaChartLine /> },
-    { title: "Sponsor Income", value: Number(dashboard?.directinc || 0)?.toFixed(2), icon: <FaDollarSign /> },
-    { title: "Level Income", value: Number(dashboard?.levelinc || 0)?.toFixed(2), icon: <FaChartLine /> },
-    { title: "ROI Income", value: Number(dashboard?.satcking_bonus || 0)?.toFixed(2), icon: <FaRocket /> },
+    { title: "Fund Wallet", value: Number(dashboard?.td_wallet_amount || 0)?.toFixed(2), icon: <FaChartLine /> },
+    // { title: "Sponsor Income", value: Number(dashboard?.directinc || 0)?.toFixed(2), icon: <FaDollarSign /> },
+    // { title: "Level Income", value: Number(dashboard?.levelinc || 0)?.toFixed(2), icon: <FaChartLine /> },
+    // { title: "ROI Income", value: Number(dashboard?.satcking_bonus || 0)?.toFixed(2), icon: <FaRocket /> },
     { title: "Total Income", value: Number(user_profile?.jnr_total_income || 0)?.toFixed(2), icon: <FaDollarSign /> },
-    { title: "Total Team", value: Number(dashboard?.tot_left || 0)?.toFixed(2), icon: <FaUsers /> },
-    { title: "Total Team Business", value: Number(dashboard?.tot_left_t || 0)?.toFixed(2), icon: <FaSitemap /> },
-    { title: "Direct / Referral", value: Number(dashboard?.tot_d_left || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: "Total Direct Business", value: Number(dashboard?.tot_d_left_t || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: "Withdrawal", value: Number(dashboard?.withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: "Withdrawal Pending", value: Number(dashboard?.withdrawal_pending || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    // { title: "Total Team", value: Number(dashboard?.tot_left || 0)?.toFixed(2), icon: <FaUsers /> },
+    // { title: "Total Team Business", value: Number(dashboard?.tot_left_t || 0)?.toFixed(2), icon: <FaSitemap /> },
+    { title: "Direct / Referral", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    { title: "Total Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    { title: " Withdrawal Reject", value: Number(dashboard?.total_reject_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    { title: "Withdrawal Success", value: Number(dashboard?.total_success_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    { title: "Withdrawal Pending", value: Number(dashboard?.total_pending_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    
   ];
   const functionTOCopy = (value) => {
     copy(value);

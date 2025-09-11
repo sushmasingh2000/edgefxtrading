@@ -21,7 +21,7 @@ const Withdrawal = () => {
             refetchOnWindowFocus: false,
         }
     );
-    const user_profile = profile?.data?.result || 0;
+    const user_profile = profile?.data?.result?.[0] || 0;
 
     const initialValues = {
         with_amount: "",
@@ -31,7 +31,7 @@ const Withdrawal = () => {
         enableReinitialize: true,
         onSubmit: () => {
             const reqbody = {
-                with_amount: amount,
+                user_amount: amount,
             };
             Withdarwal(reqbody)
         }
@@ -70,7 +70,7 @@ const Withdrawal = () => {
                 search: formik.values.search,
                 start_date: formik.values.start_date,
                 end_date: formik.values.end_date,
-                pageNumber: page,
+                page: page,
                 pageSize: "10",
             }),
         {
@@ -97,18 +97,18 @@ const Withdrawal = () => {
     const tablerow = allData?.data?.map((row, index) => {
         return [
             <span> {index + 1}</span>,
-            <span>{row?.m_w_reqdate1 ? moment?.utc(row?.m_w_reqdate1)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
-            <span>{row?.m_order_id}</span>,
-            <span> {row?.m_w_amount || 0}</span>,
-            <span>{row?.or_m_wallet_address}</span>,
-            <span>{row?.m_w_status || 'N/A'}</span>,
+            <span>{row?.wdrl_created_at ? moment?.utc(row?.wdrl_created_at)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
+            <span>{row?.wdrl_transacton_id}</span>,
+            <span> {row?.wdrl_amont || 0}</span>,
+            <span>{row?.wdrl_to}</span>,
+            <span>{row?.wdrl_status || 'N/A'}</span>,
 
         ];
     })
     return (
         <>
- {/* <div className="lg:py-8 bg-gray-900 text-gray-100 rounded-xl flex items-center justify-center">
-               <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-lg">
+            <div className="lg:py-8 bg-gray-900 text-gray-100 rounded-xl flex items-center justify-center">
+                <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-lg">
                     <div className='mb-3'>
                         <label htmlFor="walletBalance" className="block text-sm font-medium text-gray-300 mb-1">
                             Wallet ($)
@@ -117,7 +117,7 @@ const Withdrawal = () => {
                             type="text"
                             id="walletBalance"
                             className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none cursor-not-allowed"
-                            value={user_profile?.or_m_income_wallet}
+                            value={user_profile?.jnr_curr_wallet}
                             readOnly
                         />
                     </div>
@@ -128,7 +128,7 @@ const Withdrawal = () => {
                         <input
                             type="text"
                             className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-500"
-                            value={user_profile?.wallet_Address}
+                            value={user_profile?.lgn_wallet_add}
                             required
                         />
                     </div>
@@ -161,8 +161,8 @@ const Withdrawal = () => {
                             Cancel
                         </button>
                     </div>
-                </div> 
-            </div>*/}
+                </div>
+            </div>
             <div className="p-2">
                 <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700 mb-6">
                     <h2 className="text-xl font-semibold mb-4 text-gray-200">Payout Report</h2>

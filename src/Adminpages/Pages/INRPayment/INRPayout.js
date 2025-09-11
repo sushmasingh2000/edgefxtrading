@@ -29,7 +29,7 @@ const Withdrawal = () => {
   const { data, isLoading } = useQuery(
     ['get_withdrawal_Admin', fk.values.search, fk.values.start_date, fk.values.end_date, page],
     () =>
-      apiConnectorPost(endpoint?.admin_withdrawal_list, {
+      apiConnectorPost(endpoint?.withdrawal_list, {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
@@ -49,9 +49,9 @@ const Withdrawal = () => {
   const changeStatusApprovedFunction = async (id) => {
     try {
       const res = await apiConnectorPost(
-        endpoint?.withdrawal_request, {
-        w_id: id,
-        status: 2
+        endpoint?.withdrawal_request_status, {
+        t_id: id,
+        step: 2
       }
       );
       client.refetchQueries("get_withdrawal_Admin")
@@ -81,9 +81,9 @@ const Withdrawal = () => {
   };
   const changeStatusRejectFunction = async (id) => {
     try {
-      const res = await apiConnectorPost(endpoint?.withdrawal_request, {
-        w_id: id,
-        status: 3,
+      const res = await apiConnectorPost(endpoint?.withdrawal_request_status, {
+        t_id: id,
+        step: 3,
       });
       client.refetchQueries("get_withdrawal_Admin")
       toast(res?.data?.message);
@@ -96,7 +96,7 @@ const Withdrawal = () => {
   const handleRejectSubmit = (id) => {
     SweetAlert.fire({
       title: "Are you sure?",
-      text: "You want to Approve this Amount!",
+      text: "You want to Reject this Amount!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Confirm",
@@ -121,25 +121,26 @@ const Withdrawal = () => {
     <span>Status</span>,
     <span>Date/Time</span>,
     <span>Action</span>
-
-
   ];
+
+
+  
   const tablerow = allData?.data?.map((row, index) => {
     return [
       <span> {index + 1}</span>,
-      <span>{row?.or_m_user_id}</span>,
-      <span>{row?.or_m_name}</span>,
-      <span> {row?.m_w_amount || 0}</span>,
-      <span>{row?.or_m_wallet_address}</span>,
-      <span>{row?.m_order_id}</span>,
-      <span>{row?.m_w_status || 'N/A'}</span>,
-      <span>{row?.m_w_reqdate1 ? moment?.utc(row?.m_w_reqdate1)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
+      <span>{row?.lgn_cust_id}</span>,
+      <span>{row?.jnr_name}</span>,
+      <span> {row?.wdrl_amont || 0}</span>,
+      <span>{row?.wdrl_to}</span>,
+      <span>{row?.wdrl_transacton_id}</span>,
+      <span>{row?.wdrl_status || 'N/A'}</span>,
+      <span>{row?.wdrl_created_at ? moment?.utc(row?.wdrl_created_at)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
 
      <span className='flex justify-center gap-1'> <span>
-        {row?.m_w_status === "Pending" ? (
+        {row?.wdrl_status === "Pending" ? (
           <button
             className="!bg-[#198754] !text-white p-2 rounded"
-            onClick={() => handleSubmit(row?.w_id)}
+            onClick={() => handleSubmit(row?.wdrl_id)}
           >
             Approve
           </button>
@@ -148,11 +149,11 @@ const Withdrawal = () => {
         )}
       </span>
         <span>
-        {row?.m_w_status === "Pending" ? (
+        {row?.wdrl_status === "Pending" ? (
           <button
             className="!bg-red-500 !text-white p-2 rounded"
 
-            onClick={() => handleRejectSubmit(row?.w_id)}
+            onClick={() => handleRejectSubmit(row?.wdrl_id)}
           >
             Reject
           </button>

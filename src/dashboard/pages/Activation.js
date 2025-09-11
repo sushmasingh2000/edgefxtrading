@@ -25,7 +25,7 @@ const Activation = () => {
   const { data, isLoading } = useQuery(
     ['get_actiavtion', fk.values.search, fk.values.start_date, fk.values.end_date, page],
     () =>
-      apiConnectorPost(endpoint?.topup_report, {
+      apiConnectorPost(endpoint?.user_deposit_req, {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
