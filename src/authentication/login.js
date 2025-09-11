@@ -65,7 +65,7 @@ const Login = () => {
     >
           <div
            className="w-full max-w-lg lg:p-3 p-4 border-border-color-green border bg-[#191b21] rounded-xl shadow-2xl">
-            <div className="flex justify-center my-2">
+            <div className="flex justify-center my-2 cursor-pointer" onClick={()=>navigate("/")}>
               <img src={logo} alt="Logo" className="h-16" />
             </div>
             <h2 className="text-xl font-bold text-center text-white mb-6">

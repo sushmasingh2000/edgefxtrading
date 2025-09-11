@@ -54,7 +54,7 @@ const Registration = () => {
       setLoading(false);
       if (response?.data?.success) {
         fk.handleReset();
-        localStorage.setItem("logindataen", response?.data?.result?.token);
+        localStorage.setItem("logindataen", response?.data?.result?.[0]?.token);
         navigate("/dashboard");
         window.location.reload();
       }
@@ -93,13 +93,14 @@ const Registration = () => {
 
         <div
           className="w-full max-w-lg lg:p-6 p-4 border-border-color-green border rounded-xl shadow-2xl" >
-          <div className="flex justify-center my-2">
+                    <div className="flex justify-center my-2 cursor-pointer" onClick={()=>navigate("/")}>
+
             <img src={logo} alt="Logo" className="h-14 " />
           </div>
           <h2 className="text-sm font-bold text-center text-white mb-6">
             You might have already account ?
             <span
-              className="text-black text-sm px-2 font-bold underline cursor-pointer"
+              className="text-white text-sm px-2 font-bold underline cursor-pointer"
               onClick={() => navigate("/login")}
             >
               Login
