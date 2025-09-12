@@ -1,4 +1,5 @@
 
+import Banner from "../Adminpages/Pages/Banner";
 import Dashboard from "../Adminpages/Pages/dashboard/Dashboard";
 import AddAddress from "../Adminpages/Pages/fund/AddAddress";
 import { default as BoosterBonus, default as MatchingBonus } from "../Adminpages/Pages/genealogy/BoosterBonus";
@@ -28,6 +29,12 @@ export const adminroutes = [
     path: "/master",
     component: <Master />,
     navItem: "Master",
+  },
+  {
+    id: 2,
+    path: "/banner",
+    component: <Banner />,
+    navItem: "Gallery",
   },
   {
     id: 17,

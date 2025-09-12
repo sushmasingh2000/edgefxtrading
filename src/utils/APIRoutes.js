@@ -50,6 +50,12 @@ export const endpoint = {
   change_verification: `${domain}/api/v1/change-verification-status`,
   change_general_status: `${domain}/api/v1/change-general-status`,
   master_data: `${domain}/api/v1/master-data`,
+  //bnanner
+  create_Gallery: `${domain}/api/v1/craete-image-galary`,
+  get_Gallery: `${domain}/api/v1/get-image-galary`,
+  update_Gallery: `${domain}/api/v1/update-image-galary`,
+  delete_Gallery: `${domain}/api/v1/delete-image-galary`,
+  status_Gallery: `${domain}/api/v1/update-image-galary-status`,
   
   
 };

@@ -1,6 +1,7 @@
 import {
   ColorizeRounded, Compare,
   Games,
+  Image,
   LeaderboardSharp,
   LoginOutlined,
   MonetizationOn,
@@ -21,6 +22,17 @@ export const all_Data = [
     navIcon: (
       <span>
         <LeaderboardSharp color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
+  {
+    id: 2,
+    navLink: "/banner",
+    navItem: "Gallery",
+    navIcon: (
+      <span>
+        <Image color="#15317E" fontSize="medium" />
       </span>
     ),
     subcomponent: [],

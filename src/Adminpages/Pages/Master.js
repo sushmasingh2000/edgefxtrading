@@ -50,16 +50,23 @@ const Master = () => {
 
     const handleValueUpdate = async (index) => {
         const config = configData[index];
+        let status_type = '';
+
+        if (config.config_title === 'LEVEL_PERCENTAGE') {
+            status_type = 'level_percentage';
+        } else if (config.config_title === 'TOTAL_PROFIT') {
+            status_type = 'total_profit';
+        }
 
         try {
             const response = await apiConnectorPost(endpoint.change_general_status, {
                 u_id: config.config_id,
-                status_type: 'level_percentage',
+                status_type,
                 value: config.config_value,
             });
 
             if (response?.data?.success) {
-                toast.success('Level percentage updated successfully.');
+                toast.success(`${config.config_title.replace('_', ' ')} updated successfully.`);
             } else {
                 toast.error(response?.data?.message || 'Failed to update value.');
             }
@@ -68,6 +75,7 @@ const Master = () => {
             toast.error('Something went wrong.');
         }
     };
+
 
     const handleInputChange = (index, value) => {
         const updatedData = [...configData];
@@ -94,18 +102,22 @@ const Master = () => {
                         return (
                             <tr key={config.config_id}>
                                 <td className="border px-4 py-2">{index + 1}</td>
-                                <td className="border px-4 py-2">{ 
-                                title === 'LEVEL_PERCENTAGE' ? " Level Percentage" :
-                                  title ?  title === 'LEVEL_CLOSING' ? " Level Closing" :
-                                  title : title === 'WITHDRAWAL' ? " Payout" : title }</td>
                                 <td className="border px-4 py-2">
-                                    {title === 'LEVEL_PERCENTAGE' ? (
+                                    {
+                                        title === 'LEVEL_PERCENTAGE' ? "Level Percentage" :
+                                            title === 'LEVEL_CLOSING' ? "Level Closing" :
+                                                title === 'WITHDRAWAL' ? "Payout" :
+                                                    title === 'TOTAL_PROFIT' ? "Total Profit" :
+                                                        title
+                                    }
+                                </td>
+
+                                <td className="border px-4 py-2">
+                                    {title === 'LEVEL_PERCENTAGE' || title === 'TOTAL_PROFIT' ? (
                                         <TextField
                                             type="number"
                                             value={config.config_value || ''}
-                                            onChange={(e) =>
-                                                handleInputChange(index, e.target.value)
-                                            }
+                                            onChange={(e) => handleInputChange(index, e.target.value)}
                                             size="small"
                                             style={{ width: 100 }}
                                         />
@@ -114,7 +126,7 @@ const Master = () => {
                                     )}
                                 </td>
                                 <td className="border px-4 py-2">
-                                    {title === 'LEVEL_PERCENTAGE' ? (
+                                    {title === 'LEVEL_PERCENTAGE' || title === 'TOTAL_PROFIT' ? (
                                         <Button
                                             variant="contained"
                                             size="small"
@@ -128,15 +140,14 @@ const Master = () => {
                                             onChange={() =>
                                                 handleStatusChange(
                                                     index,
-                                                    title === 'LEVEL_CLOSING'
-                                                        ? 'level_closing'
-                                                        : 'payout'
+                                                    title === 'LEVEL_CLOSING' ? 'level_closing' : 'payout'
                                                 )
                                             }
                                             color="primary"
                                         />
                                     )}
                                 </td>
+
                             </tr>
                         );
                     })}

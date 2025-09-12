@@ -114,7 +114,7 @@ const Registration = () => {
                 name="full_name"
                 value={fk.values.full_name}
                 onChange={fk.handleChange}
-                className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green transition duration-300 ease-in-out transform hover:scale-105"
+                className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green "
                 required
               />
             </div>
@@ -127,7 +127,7 @@ const Registration = () => {
                   name="email"
                   value={fk.values.email}
                   onChange={fk.handleChange}
-                  className="w-full p-3 mt-1 text-black placeholder:text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green transition duration-300 ease-in-out transform hover:scale-105"
+                  className="w-full p-3 mt-1 text-black placeholder:text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green "
                   required
                 />
               </div>
@@ -138,7 +138,7 @@ const Registration = () => {
                   name="mobile"
                   value={fk.values.mobile}
                   onChange={fk.handleChange}
-                  className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green transition duration-300 ease-in-out transform hover:scale-105"
+                  className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green "
                   required
                 />
               </div>
@@ -148,7 +148,7 @@ const Registration = () => {
                   id="password"
                   value={fk.values.password}
                   onChange={fk.handleChange}
-                  className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green transition duration-300 ease-in-out transform hover:scale-105"
+                  className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green "
                   required
                 />
               </div>
@@ -159,7 +159,7 @@ const Registration = () => {
                   name="referral_id"
                   value={fk.values.referral_id}
                   onChange={fk.handleChange}
-                  className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green transition duration-300 ease-in-out transform hover:scale-105"
+                  className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green "
                   required
                 />
                 <span className="text-white !px-2">{data?.jnr_name}</span>
@@ -168,7 +168,7 @@ const Registration = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-3 text-white border-2 border-border-color-green font-semibold rounded-full hover:bg-black bg-[#64b1b8] focus:outline-none focus:ring-2 focus:ring-[#128C7E] transition duration-300 ease-in-out transform hover:scale-105"
+              className="w-full py-3 text-white border-2 border-border-color-green font-semibold rounded-full hover:bg-black bg-[#64b1b8] focus:outline-none focus:ring-2 focus:ring-[#128C7E] "
               onClick={fk.handleSubmit}
             >
               Register

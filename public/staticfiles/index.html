@@ -473,7 +473,8 @@
                             <div class="single-item">
                                 <div class="static-content">
                                     <h4><img src="assets/images/icons/icon-54.png" alt="">Access to Leaders
-                                        <span>02</span></h4>
+                                        <span>02</span>
+                                    </h4>
                                 </div>
                                 <div class="overlay-content">
                                     <p class="text-light">Access to Leaders</p>
@@ -495,7 +496,8 @@
                             <div class="single-item">
                                 <div class="static-content">
                                     <h4><img src="assets/images/icons/icon-54.png" alt="">Diversification
-                                        <span>04</span></h4>
+                                        <span>04</span>
+                                    </h4>
                                 </div>
                                 <div class="overlay-content">
                                     <p class="text-light">Diversification</p>
@@ -586,28 +588,32 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="">
+                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="">
+                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="">
+                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="">
+                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
                         </div>
                     </div>
 
                 </div>
             </div>
         </section>
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImg">
+        </div>
         <!-- gallery section end -->
 
         <!-- footer-style-three -->
@@ -716,27 +722,29 @@
 
     <!-- main-js -->
     <script src="assets/js/script.js"></script>
-    <!-- <script>
+    <script>
         $(document).ready(function () {
             $.ajax({
-                url: "https://backend.sonasutra.in/api/v1/get-banner",
+                url: "http://192.168.18.214:2000/api/v1/get-image-galary",
                 method: "GET",
                 success: function (response) {
+                    console.log(response.result);
                     if (response.success && Array.isArray(response.result)) {
-                        const banners = response.result.filter(b => b.ban_status === "Active");
+                        const banners = response.result.filter(b => b.gal_status === "Active");
                         const galleryRow = $(".platform-style-two .row");
 
-                        // Clear existing gallery items (if any)
+                        // Clear existing gallery items
                         galleryRow.empty();
 
                         banners.forEach(banner => {
+                            const imageUrl = "http://192.168.18.214:2000" + banner.gal_image;
                             const galleryBox = `
-              <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="gallery_box">
-                  <img src="${banner.ban_image}" alt="${banner.ban_tag}" />
-                </div>
-              </div>
-            `;
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="gallery_box">
+                                    <img src="${imageUrl}" alt="" onclick="openModal('${imageUrl}')">
+                                </div>
+                            </div>
+                        `;
                             galleryRow.append(galleryBox);
                         });
                     } else {
@@ -748,7 +756,17 @@
                 }
             });
         });
-    </script> -->
+
+        // Modal open/close functions
+        function openModal(src) {
+            document.getElementById("imageModal").style.display = "block";
+            document.getElementById("modalImg").src = src;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
 
 
     </form>
