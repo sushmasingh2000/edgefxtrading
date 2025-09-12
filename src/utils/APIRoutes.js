@@ -1,7 +1,7 @@
-export const domain = 'http://192.168.18.214:2000';
-// export const domain = 'https://deposite.edgefx.uk';
-// export const frontend = 'https://edgefx.uk';
-export const frontend = 'http://localhost:3000';
+// export const domain = 'http://192.168.18.214:2000';
+export const domain = 'https://edgefx.uk';
+export const frontend = 'https://edgefx.uk';
+// export const frontend = 'http://localhost:3000';
 export const dollar = "$"
 
 export const endpoint = {
