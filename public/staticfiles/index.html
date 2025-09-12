@@ -29,6 +29,10 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/responsive.css" rel="stylesheet" />
 
+    <!-- swipper slider cdn links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -585,29 +589,41 @@
                 <div class="sec-title text-center">
                     <h2>Our Gallery</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                <div class="swiper youtube mt-5">
+                    <div class="swiper-wrapper" id="gallery-swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="gallery_box">
+                                <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery_box">
+                                <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery_box">
+                                <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery_box">
+                                <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery_box">
+                                <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="gallery_box">
+                                <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="gallery_box">
-                            <img src="assets/images/resource/about-1.jpg" alt="" onclick="openModal(this.src)">
-                        </div>
-                    </div>
-
                 </div>
+
             </div>
         </section>
         <div id="imageModal" class="modal" onclick="closeModal()">
@@ -728,45 +744,64 @@
                 url: "https://edgefx.uk/api/v1/get-image-galary",
                 method: "GET",
                 success: function (response) {
-                    console.log(response.result);
+                    console.log("Gallery API Response:", response.result);
                     if (response.success && Array.isArray(response.result)) {
                         const banners = response.result.filter(b => b.gal_status === "Active");
-                        const galleryRow = $(".platform-style-two .row");
+                        const swiperWrapper = $("#gallery-swiper-wrapper");
 
-                        // Clear existing gallery items
-                        galleryRow.empty();
+                        swiperWrapper.empty(); // Clear existing slides if any
 
                         banners.forEach(banner => {
-                            const imageUrl = "http://192.168.18.214:2000" + banner.gal_image;
-                            const galleryBox = `
-                            <div class="col-lg-3 col-md-6 col-sm-12">
+                            const imageUrl = "https://edgefx.uk" + banner.gal_image;
+                            const slide = `
+                            <div class="swiper-slide">
                                 <div class="gallery_box">
-                                    <img src="${imageUrl}" alt="" onclick="openModal('${imageUrl}')">
+                                    <img src="${imageUrl}" alt="Gallery Image" onclick="openModal('${imageUrl}')">
                                 </div>
                             </div>
                         `;
-                            galleryRow.append(galleryBox);
+                            swiperWrapper.append(slide);
+                        });
+
+                        // Initialize Swiper
+                        new Swiper(".swiper.youtube", {
+                            slidesPerView: 4,
+                            spaceBetween: 30,
+                            loop: true,
+                            autoplay: {
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            },
+                            breakpoints: {
+                                1024: { slidesPerView: 4 },
+                                768: { slidesPerView: 2 },
+                                640: { slidesPerView: 1 },
+                                320: { slidesPerView: 1 }
+                            }
                         });
                     } else {
-                        console.warn("No banners found or API error.");
+                        console.warn("No active images found.");
                     }
                 },
                 error: function (err) {
-                    console.error("API fetch error:", err);
+                    console.error("Error fetching gallery:", err);
                 }
             });
         });
 
-        // Modal open/close functions
+        // Modal functions
         function openModal(src) {
-            document.getElementById("imageModal").style.display = "block";
-            document.getElementById("modalImg").src = src;
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+            modal.style.display = "block";
+            modalImg.src = src;
         }
 
         function closeModal() {
             document.getElementById("imageModal").style.display = "none";
         }
     </script>
+
 
 
     </form>
