@@ -73,14 +73,14 @@ const TraderList = () => {
         <span>Name</span>,
         <span>Email</span>,
         <span>Amount</span>,
-        <span>Account Id</span>,
+        <span>Server Name</span>,
         <span>Account No .</span>,
         <span>Currency</span>,
         <span>Broker Id</span>,
         <span>Broker Name</span>,
         <span>Group Type</span>,
         <span>Password</span>,
-        <span> Verification Status</span>,
+        <span>Verification Status</span>,
         <span>Verification Date</span>,
         <span> Account Status</span>,
 
@@ -92,7 +92,7 @@ const TraderList = () => {
             <span>{row.td_trad_name || "--"}</span>,
             <span>{row.td_trad_email || "--"}</span>,
             <span>{row.td_wallet_amount || "--"}</span>,
-            <span>{row.td_account_type || "--"}</span>,
+            <span>{row.td_server_name || "--"}</span>,
             <span>{row.td_account_number || "--"}</span>,
             <span>{row.td_base_currency || "--"}</span>,
             <span>{row?.td_broker_id || "--"}</span>,
@@ -105,9 +105,9 @@ const TraderList = () => {
                         row?.td_verification_status === "Pending"
                             ? "1"
                             : row?.td_verification_status === "Virified"
-                                ? "2"
+                                ? "3"
                                 : row?.td_verification_status === "Reject"
-                                    ? "3"
+                                    ? "2"
                                     : ""
                     }
                     onChange={(e) => VerificationStatusChange(row?.td_jnr_id
@@ -115,8 +115,8 @@ const TraderList = () => {
                     className="border border-gray-300 rounded px-2 py-1 text-sm"
                 >
                     <option value="1">Pending</option>
-                    <option value="2">Verified</option>
-                    <option value="3">Reject</option>
+                    <option value="3">Verified</option>
+                    <option value="2">Reject</option>
                 </select></span>,
             <span>{row.td_verification_date ? moment?.utc(row.td_verification_date).format("DD-MM-YYYY") : "--"}</span>,
             <span>
