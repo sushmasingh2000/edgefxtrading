@@ -1,11 +1,10 @@
+import { Cancel, CopyAll } from "@mui/icons-material";
 import copy from "copy-to-clipboard";
+import moment from "moment";
 import toast from "react-hot-toast";
 import {
-  FaBell,
   FaChartLine,
   FaDollarSign,
-  FaLink,
-  FaRocket,
   FaSitemap,
   FaUserFriends,
   FaUsers,
@@ -13,39 +12,26 @@ import {
 } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { apiConnectorGet } from "../utils/APIConnector";
-import { endpoint, frontend } from "../utils/APIRoutes";
-import Account from "./pages/Account";
-import CappingPieChart from "./pages/CappingChart";
+import { domain, endpoint, frontend } from "../utils/APIRoutes";
+import { useState } from "react";
+import { Dialog, IconButton } from "@mui/material";
 
 const Dashboard = () => {
 
-  const { data } = useQuery(
-    ["get_dashboard"],
-    () => apiConnectorGet(endpoint?.dashboard_data),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-    }
+  const [showPopup, setShowPopup] = useState(true);
+
+  const { data } = useQuery(["get_dashboard"], () =>
+    apiConnectorGet(endpoint?.dashboard_data)
   );
+
   const dashboard = data?.data?.result?.[0];
 
-  const { data: profile } = useQuery(
-    ["get_profile"],
-    () => apiConnectorGet(endpoint?.member_profile_detail),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-    }
+  const { data: profile } = useQuery(["get_profile"], () =>
+    apiConnectorGet(endpoint?.member_profile_detail)
   );
+
   const user_profile = profile?.data?.result?.[0] || {};
-  const Row = ({ label, value, highlight = false, color = "text-yellow-400" }) => (
-    <div className="flex justify-between pb-1">
-      <span className="text-white">{label}</span>
-      <span className={highlight ? `${color} font-semibold` : "text-white"}>{value}</span>
-    </div>
-  );
+
   const statCards = [
     { title: "Main Wallet", value: Number(user_profile?.jnr_curr_wallet || 0)?.toFixed(2), icon: <FaWallet /> },
     { title: "Fund Wallet", value: Number(dashboard?.td_wallet_amount || 0)?.toFixed(2), icon: <FaChartLine /> },
@@ -60,29 +46,34 @@ const Dashboard = () => {
     { title: " Withdrawal Reject", value: Number(dashboard?.total_reject_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
     { title: "Withdrawal Success", value: Number(dashboard?.total_success_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
     { title: "Withdrawal Pending", value: Number(dashboard?.total_pending_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    
+
   ];
   const functionTOCopy = (value) => {
     copy(value);
     toast.success("Copied to clipboard!", { id: 1 });
   };
+  const summaryData = [
+    { label: "Money Manager", value: user_profile?.jnr_name },
+    { label: "Created", value: user_profile?.lgn_created_at ? moment(user_profile?.lgn_created_at)?.format("DD-MM-YYYY") : "--" },
+    { label: "Activation Date", value: user_profile?.jnr_topup_date ? moment(user_profile?.jnr_topup_date)?.format("DD-MM-YYYY") : "--" },
+    { label: "Net Deposit", value: user_profile?.jnr_topup_wallet || 0 },
+    { label: "Net Withdrawal", value: user_profile?.total_withdrawal || 0 },
+    { label: "Main Wallet", value: user_profile?.jnr_curr_wallet || 0 },
+    { label: "Profit Wallet", value: user_profile?.jnr_total_income || 0 },
+  ];
+
   return (
-    <div className="lg:flex h-screen font-sans bg-[#f1f5f9]">
-      <main className="flex-1 overflow-y-auto max-h-screen example">
-        <div className="flex flex-wrap gap-4 lg:p-6 py-6">
-          <div className="w-full md:w-[calc(50%-0.5rem)] bg-[#1e293b] text-white p-4 py-6 rounded shadow">
-            <h2 className="font-bold mb-2 flex items-center gap-2">
-              <FaLink /> [ Rank Participant ] Referral Link
-            </h2>
-            <div className="flex items-center justify-between bg-gold-color text-black p-2 rounded">
-              <span className="text-sm overflow-x-auto">
-                {frontend}/register?referral_id={user_profile?.lgn_cust_id}
-              </span>
-              <button
-                onClick={() => functionTOCopy(frontend + "/register?referral_id=" + user_profile?.lgn_cust_id)}
-                className="bg-dark-color text-white px-2 py-1 rounded text-sm">Copy</button>
-            </div>
-            <div className="flex space-x-4 mt-3 text-xl">
+    <div className="h-screen bg-[#0f172a] font-sans text-white ">
+      <div className="overflow-y-auto max-h-screen example">
+        <div className="pt-2">
+          <div className="flex gap-5 items-center justify-start  w-fit  rounded m-4">
+            <span className="text-sm overflow-x-auto border border-white p-2 text-white">
+              {frontend}/register?referral_id={user_profile?.lgn_cust_id}
+            </span>
+            <button
+              onClick={() => functionTOCopy(frontend + "/register?referral_id=" + user_profile?.lgn_cust_id)}
+              className="border border-white p-1 text-sm "><CopyAll className="!text-white" /></button>
+            <div className="flex space-x-4 text-xl">
               <i className="fab fa-whatsapp"></i>
               <i className="fab fa-telegram"></i>
               <i className="fab fa-facebook"></i>
@@ -90,38 +81,78 @@ const Dashboard = () => {
               <i className="fab fa-twitter"></i>
             </div>
           </div>
+        </div>
 
-          <div className="w-full md:w-[calc(50%-0.5rem)] bg-[#1e293b] text-white p-4 rounded shadow">
-            <Row label="Email" value={user_profile?.lgn_email} highlight />
-            <Row label="Mobile No" value={user_profile?.lgn_mobile} highlight color="text-green-400" />
-            <Row
-              label=" Amount"
-              value= {
-                user_profile?.jnr_curr_wallet ||
-                    " ---"
-              }
-              highlight
-              color="text-green-400"
-            />
-
+        {/* News & Updates Tab */}
+        <div className="bg-[#1e293b] px-4 py-2">
+          <div className="bg-[#64b1b8]  text-white inline-block px-4 py-1 rounded-t-md text-sm font-semibold">
+            News & Updates
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:px-6 pb-6">
-          {statCards.map((card, i) => (
-            <div
-              key={i}
-              className="bg-gold-color text-black p-6 rounded-xl shadow flex items-center justify-between "
-            >
-              <div className="text-2xl">{card.icon}</div>
-              <div>
-                <div className="text-sm font-normal">{card.title}</div>
-                <div className="text-xl font-bold">{card.value}</div>
+        {/* Main Content Grid */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4 mb-10">
+          {/* Summary Panel */}
+          <div className="bg-white p-4 rounded-md col-span-1 shadow h-fit ">
+            <h2 className="text-xl text-black font-semibold mb-2">Summary</h2>
+            <p className="text-sm text-gray-400 mb-3">Last Update</p>
+            {summaryData.map((item, idx) => (
+              <div key={idx} className="flex justify-between py-1 !text-black text-sm border-dotted border-b  border-gray-500 last:border-none">
+                <span>{item.label}</span>
+                <span className={item.highlight ? "text-green-400 font-semibold" : ""}>
+                  {item.value}
+                </span>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Stat Cards Panel */}
+          <div className="col-span-1 lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {statCards.map((card, i) => (
+              <div
+                key={i}
+                className="bg-white  p-4 rounded-md shadow flex flex-col items-center justify-center"
+              >
+                <img src={"https://trade4you.uk/application/libraries/icons/wallet.png"} alt="" className="w-12 mb-5" />
+                <div className="text-xl !text-black">{card.title}</div>
+                <div className="text-lg !text-black font-bold">{card.value}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
+      { }
+      {showPopup && user_profile?.popup_status === "Active" && (
+
+      <Dialog
+        open={showPopup}
+        onClose={() => setShowPopup(false)}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+        PaperProps={{
+          className: "bg-white rounded-lg shadow-lg p-4 w-[90%] max-w-md text-center relative",
+        }}
+      >
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">📰 News & Updates</h2>
+
+          <img
+            src={domain + user_profile?.popup_img}
+            alt="Welcome"
+            className="w-full h-auto object-contain rounded"
+          />
+
+          <div className="mt-4 flex justify-center">
+            <IconButton onClick={() => setShowPopup(false)}>
+              <Cancel className="text-red-500" />
+            </IconButton>
+          </div>
+        </div>
+      </Dialog>
+
+      )}
+
+
     </div>
   );
 };

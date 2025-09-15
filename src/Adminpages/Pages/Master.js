@@ -50,38 +50,63 @@ const Master = () => {
 
     const handleValueUpdate = async (index) => {
         const config = configData[index];
-        let status_type = '';
+        let status_type = "";
 
-        if (config.config_title === 'LEVEL_PERCENTAGE') {
-            status_type = 'level_percentage';
-        } else if (config.config_title === 'TOTAL_PROFIT') {
-            status_type = 'total_profit';
+        if (config.config_title === "LEVEL_PERCENTAGE") {
+            status_type = "level_percentage";
+        } else if (config.config_title === "TOTAL_PROFIT") {
+            status_type = "total_profit";
+        } else if (config.config_title === "POPUP_IMAGE") {
+            status_type = "popup_image";
+        }
+        else if (config.config_title === "POPUP_IMAGE_STATUS") {
+            status_type = "popup_image_status";
+        }
+
+
+        const formData = new FormData();
+        formData.append("u_id", config.config_id);
+        formData.append("status_type", status_type);
+
+        if (status_type === "popup_image") {
+            if (!config.config_file) {
+                toast.error("Please select an image to upload.");
+                return;
+            }
+            formData.append("file", config.config_file);
+        } else {
+            formData.append("value", config.config_value);
         }
 
         try {
-            const response = await apiConnectorPost(endpoint.change_general_status, {
-                u_id: config.config_id,
-                status_type,
-                value: config.config_value,
+            const response = await apiConnectorPost(endpoint.change_general_status, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
             });
 
             if (response?.data?.success) {
-                toast.success(`${config.config_title.replace('_', ' ')} updated successfully.`);
+                toast.success(`${config.config_title.replace("_", " ")} updated successfully.`);
             } else {
-                toast.error(response?.data?.message || 'Failed to update value.');
+                toast.error(response?.data?.message || "Failed to update value.");
             }
         } catch (error) {
-            console.error('Error:', error);
-            toast.error('Something went wrong.');
+            console.error("Error:", error);
+            toast.error("Something went wrong.");
         }
     };
 
 
-    const handleInputChange = (index, value) => {
+    const handleInputChange = (index, value, isFile = false) => {
         const updatedData = [...configData];
-        updatedData[index].config_value = value;
+
+        if (isFile) {
+            updatedData[index].config_file = value;
+        } else {
+            updatedData[index].config_value = value;
+        }
+
         setConfigData(updatedData);
     };
+
 
     return (
         <div className="p-4">
@@ -108,25 +133,34 @@ const Master = () => {
                                             title === 'LEVEL_CLOSING' ? "Level Closing" :
                                                 title === 'WITHDRAWAL' ? "Payout" :
                                                     title === 'TOTAL_PROFIT' ? "Total Profit" :
-                                                        title
+                                                        title === 'POPUP_IMAGE' ? "PopUp Image" :
+                                                            title === 'POPUP_IMAGE_STATUS' ? "PopUp Image Status" :
+                                                                title
                                     }
                                 </td>
 
                                 <td className="border px-4 py-2">
-                                    {title === 'LEVEL_PERCENTAGE' || title === 'TOTAL_PROFIT' ? (
+                                    {title === "LEVEL_PERCENTAGE" || title === "TOTAL_PROFIT" ? (
                                         <TextField
                                             type="number"
-                                            value={config.config_value || ''}
+                                            value={config.config_value || ""}
                                             onChange={(e) => handleInputChange(index, e.target.value)}
                                             size="small"
                                             style={{ width: 100 }}
+                                        />
+                                    ) : title === "POPUP_IMAGE" ? (
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => handleInputChange(index, e.target.files[0], true)}
                                         />
                                     ) : (
                                         config.config_status
                                     )}
                                 </td>
+
                                 <td className="border px-4 py-2">
-                                    {title === 'LEVEL_PERCENTAGE' || title === 'TOTAL_PROFIT' ? (
+                                    {title === "LEVEL_PERCENTAGE" || title === "TOTAL_PROFIT" || title === "POPUP_IMAGE" ? (
                                         <Button
                                             variant="contained"
                                             size="small"
@@ -136,17 +170,23 @@ const Master = () => {
                                         </Button>
                                     ) : (
                                         <Switch
-                                            checked={config.config_status === 'Active'}
+                                            checked={config.config_status === "Active"}
                                             onChange={() =>
                                                 handleStatusChange(
                                                     index,
-                                                    title === 'LEVEL_CLOSING' ? 'level_closing' : 'payout'
+                                                    title === "LEVEL_CLOSING"
+                                                        ? "level_closing"
+                                                        : title === "POPUP_IMAGE_STATUS"
+                                                            ? "popup_image_status"
+                                                            : "payout"
                                                 )
                                             }
                                             color="primary"
                                         />
+
                                     )}
                                 </td>
+
 
                             </tr>
                         );
