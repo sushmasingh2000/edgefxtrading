@@ -6,6 +6,7 @@ import FundTransfer from '../dashboard/pages/Fund/Transfer';
 import Level from '../dashboard/pages/income/Level';
 import REWARD from '../dashboard/pages/income/REWARD';
 import Salryfn from '../dashboard/pages/income/Salary';
+import InvestorProfile from '../dashboard/pages/InvestorProfile';
 import MainLayout from '../dashboard/pages/Layout/MainLayout';
 import Downline from '../dashboard/pages/network/Downline';
 import JoinMember from '../dashboard/pages/network/JoinMember';
@@ -24,7 +25,10 @@ export const routes = [
     path: '/trading_registration',
     element: (<MainLayout><TradingRegistration /> </MainLayout>),
   },
-  
+  {
+    path: '/investor',
+    element: (<MainLayout><InvestorProfile /> </MainLayout>),
+  },
   {
     path: '/fund',
     element: (<MainLayout><Fund /> </MainLayout>),

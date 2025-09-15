@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { Button, Switch, TextField } from '@mui/material';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useQuery } from 'react-query';
 import { apiConnectorGet, apiConnectorPost } from '../../utils/APIConnector';
 import { endpoint } from '../../utils/APIRoutes';
-import toast from 'react-hot-toast';
-import { Switch, Button, TextField } from '@mui/material';
-import { useQuery } from 'react-query';
 
 const Master = () => {
     const [configData, setConfigData] = useState([]);
