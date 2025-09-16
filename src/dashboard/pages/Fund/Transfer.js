@@ -14,7 +14,8 @@ const FundTransfer = () => {
   const initialValues = {
     income_Type: "",
     search: "",
-    pageSize: 10,
+    page: "",
+    count: 10,
     start_date: "",
     end_date: "",
   };
@@ -37,8 +38,8 @@ const FundTransfer = () => {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
-        pageNumber: page,
-        pageSize: "10",
+        page: page,
+        count: 10,
       }),
     {
       keepPreviousData: true,

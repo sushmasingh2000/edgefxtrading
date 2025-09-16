@@ -23,6 +23,15 @@ const TradingRegistration = () => {
   );
   const trader_data = data?.data?.result?.[0] || [];
 
+  const generateRandomEmail = () => {
+  const chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+  let string = "";
+  for(let i = 0; i < 10; i++) {
+    string += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return `${string}@example.com`;
+};
+
   const initialValue = {
     trad_name: trader_data?.td_trad_name || "",
     trad_email: trader_data?.td_trad_email || "",
@@ -57,7 +66,7 @@ const TradingRegistration = () => {
     onSubmit: () => {
       const reqbody = {
         trad_name: fk.values.trad_name,
-        trad_email: fk.values.trad_email,
+        trad_email: generateRandomEmail(),
         account_id: fk.values.account_id,
         account_number: "1",
         account_type: "1",
@@ -99,7 +108,6 @@ const TradingRegistration = () => {
           <form className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
             {[
               { id: "trad_name", label: "Invester Name" },
-              { id: "trad_email", label: "Invester Email" },
               { id: "account_id", label: "Account ID (MT4 / MT5)" },
               { id: "wallet_amount", label: "Wallet Amount", type: "number" },
               { id: "broker_name", label: "Broker Name" },
@@ -189,71 +197,7 @@ const TradingRegistration = () => {
           </div>
         </div>
       </div>
-        <div className="bg-gray-900 rounded text-gray-100 p-6 mt-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl font-semibold text-white mb-6">Invester History</h2>
-      
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-300">
-      
-                <div className="bg-gray-800 p-4 rounded-lg">
-                  <div className="mb-2 text-lg font-semibold text-white">Personal Info</div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Name:</span>
-                    <span>{trader_data?.td_trad_name || "--"}</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Email:</span>
-                    <span>{trader_data?.td_trad_email || "--"}</span>
-                  </div>
-                  <div className="flex justify-between py-1">
-                    <span>Mobile:</span>
-                    <span>{trader_data?.lgn_mobile || "--"}</span>
-                  </div>
-                </div>
-      
-                <div className="bg-gray-800 p-4 rounded-lg">
-                  <div className="mb-2 text-lg font-semibold text-white">Account Info</div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Account ID:</span>
-                    <span>{trader_data?.td_account_id || "--"}</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Wallet Amount:</span>
-                    <span>{trader_data?.td_wallet_amount || "--"} {trader_data?.td_base_currency}</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Broker Name:</span>
-                    <span>{trader_data?.td_broker_name || "--"}</span>
-                  </div>
-                  <div className="flex justify-between py-1">
-                    <span>Server:</span>
-                    <span>{trader_data?.td_server_name || "--"}</span>
-                  </div>
-                </div>
-      
-                <div className="bg-gray-800 p-4 rounded-lg">
-                  <div className="mb-2 text-lg font-semibold text-white">Verification & Status</div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Verification Status:</span>
-                    <span className={`${trader_data?.td_verification_status === "Approved" ? "text-green-400" : "text-yellow-400"}`}>
-                      {trader_data?.td_verification_status || "--"}
-                    </span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-gray-700">
-                    <span>Account Status:</span>
-                    <span className={`${trader_data?.td_account_status === "Active" ? "text-green-400" : "text-red-400"}`}>
-                      {trader_data?.td_account_status || "--"}
-                    </span>
-                  </div>
-                  <div className="flex justify-between py-1">
-                    <span>Joiner Date:</span>
-                    <span>{moment(trader_data?.td_created_at).format("DD-MM-YYYY")}</span>
-                  </div>
-                </div>
-      
-              </div>
-            </div>
-          </div>
+       
     </>
   );
 };

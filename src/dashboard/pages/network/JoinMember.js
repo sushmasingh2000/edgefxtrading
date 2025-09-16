@@ -13,7 +13,8 @@ const JoinMember = () => {
   const initialValues = {
     income_Type: "",
     search: '',
-    pageSize: 10,
+    page: "",
+    count: 10,
     start_date: '',
     end_date: '',
   };
@@ -31,8 +32,8 @@ const JoinMember = () => {
         level_id: 1,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
-        pageNumber: page,
-        pageSize: "10",
+        page: page,
+        count: 10,
       }),
     {
       keepPreviousData: true,
@@ -49,8 +50,6 @@ const JoinMember = () => {
       const tablehead = [
           <span>S.No.</span>,
           <span>Login Id</span>,
-          <span>Email</span>,
-          <span>Mobile No.</span>,
           <span>User Name</span>,
           <span>Amount </span>,
           <span>Group Type</span>,
@@ -59,12 +58,10 @@ const JoinMember = () => {
   
   
       ];
-      const tablerow = allData?.map((row, index) => {
+      const tablerow = allData?.data?.map((row, index) => {
           return [
               <span> {index + 1}</span>,
               <span>{row.lgn_cust_id}</span>,
-              <span> {row.lgn_email}</span>,
-              <span>{row.lgn_mobile}</span>,
               <span>{row.jnr_name || '--'}</span>,
               <span> {row.td_wallet_amount || '--'}</span>,
               <span>{row.td_group_type}</span>,

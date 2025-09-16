@@ -16,7 +16,8 @@ const INRPaying = () => {
   const [page, setPage] = useState(1)
   const initialValuesssss = {
     search: '',
-    pageSize: 10,
+    count: 10,
+    page: "",
     start_date: '',
     end_date: '',
   };
@@ -33,8 +34,8 @@ const INRPaying = () => {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
-        pageNumber: page,
-        pageSize: "10",
+        page: page,
+        count: 10,
       }),
     {
       keepPreviousData: true,

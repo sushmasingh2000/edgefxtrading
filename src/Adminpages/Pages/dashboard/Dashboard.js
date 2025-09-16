@@ -20,9 +20,10 @@ const Dashboard = () => {
 
   const stats = [
     { label: "Total Customer", value: dashboard?.total_customer || 0 },
-    { label: "Current Topup Amount", value: `${dollar} ${dashboard?.curr_topup || 0}` },
+    // { label: "Current Topup Amount", value: `${dollar} ${dashboard?.curr_topup || 0}` },
     { label: "Total Investor Amount", value: `${dollar} ${dashboard?.total_trader_amount || 0}` },
     { label: "Verified Investor Account", value: dashboard?.verified_trader || 0} ,
+    { label: "Payout Wallet ", value: dashboard?.payout_wallet || 0} ,
     { label: "Success Payout Amount", value: `${dollar} ${Number(dashboard?.success_payout)?.toFixed(2) || 0}`},
     { label: "Pending Payout Amount", value: `${dollar} ${Number(dashboard?.pending_payout)?.toFixed(2) || 0}`},
     { label: "Pending Investor Account", value: dashboard?.pending_trader || 0 },

@@ -19,7 +19,7 @@ const TraderList = () => {
     const initialValues = {
         income_Type: "",
         search: '',
-        pageSize: 10,
+        count: 10,
         page:"",
         start_date: '',
         end_date: '',
@@ -38,7 +38,7 @@ const TraderList = () => {
                 start_date: fk.values.start_date,
                 end_date: fk.values.end_date,
                 page: page,
-                pageSize: "10",
+                count: 10,
             }),
         {
             keepPreviousData: true,
@@ -154,7 +154,7 @@ const TraderList = () => {
     const tablehead = [
         <span>S.No.</span>,
         <span>Name</span>,
-        <span>Email</span>,
+        // <span>Email</span>,
         <span>Amount</span>,
         <span>Server Name</span>,
         // <span>Account No .</span>,
@@ -173,7 +173,7 @@ const TraderList = () => {
         return [
             <span> {index + 1}</span>,
             <span>{row.td_trad_name || "--"}</span>,
-            <span>{row.td_trad_email || "--"}</span>,
+            // <span>{row.td_trad_email || "--"}</span>,
             <span>{row.td_wallet_amount || "--"}</span>,
             <span>{row.td_server_name || "--"}</span>,
             // <span>{row.td_account_number || "--"}</span>,

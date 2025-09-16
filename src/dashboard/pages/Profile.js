@@ -152,7 +152,7 @@ const Profile = () => {
                             </div>
 
                             <div className="flex justify-between py-1 border-b border-gray-700">
-                                <span>ID:</span>
+                                <span>Cust ID:</span>
                                 <span className="text-gray-100">{user_profile?.lgn_cust_id || "--"}</span>
                             </div>
                             <div className="flex justify-between py-1">

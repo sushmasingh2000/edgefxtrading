@@ -10,6 +10,7 @@ import InvestorProfile from '../dashboard/pages/InvestorProfile';
 import MainLayout from '../dashboard/pages/Layout/MainLayout';
 import Downline from '../dashboard/pages/network/Downline';
 import JoinMember from '../dashboard/pages/network/JoinMember';
+import PayoutDetails from '../dashboard/pages/Payoutdetails';
 import Profile from '../dashboard/pages/Profile';
 import Team from '../dashboard/pages/TeamTree/Team';
 import TradingRegistration from '../dashboard/pages/TradingRegistration';
@@ -28,6 +29,10 @@ export const routes = [
   {
     path: '/investor',
     element: (<MainLayout><InvestorProfile /> </MainLayout>),
+  },
+    {
+    path: '/payout_details',
+    element: (<MainLayout><PayoutDetails /> </MainLayout>),
   },
   {
     path: '/fund',

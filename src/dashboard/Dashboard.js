@@ -33,8 +33,8 @@ const Dashboard = () => {
   const user_profile = profile?.data?.result?.[0] || {};
 
   const statCards = [
-    { title: "Main Wallet", value: Number(user_profile?.jnr_curr_wallet || 0)?.toFixed(2), icon: <FaWallet /> },
-    { title: "Fund Wallet", value: Number(dashboard?.td_wallet_amount || 0)?.toFixed(2), icon: <FaChartLine /> },
+    // { title: "Main Wallet", value: Number(user_profile?.jnr_curr_wallet || 0)?.toFixed(2), icon: <FaWallet /> },
+    // { title: "Fund Wallet", value: Number(dashboard?.td_wallet_amount || 0)?.toFixed(2), icon: <FaChartLine /> },
     { title: "Current Rank", value: user_profile?.rank_name || "--", icon: <FaDollarSign /> },
     // { title: "Level Income", value: Number(dashboard?.levelinc || 0)?.toFixed(2), icon: <FaChartLine /> },
     // { title: "ROI Income", value: Number(dashboard?.satcking_bonus || 0)?.toFixed(2), icon: <FaRocket /> },
@@ -43,9 +43,9 @@ const Dashboard = () => {
     { title: "Total Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap /> },
     { title: "Direct / Referral", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends /> },
     { title: "Total Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: " Withdrawal Reject", value: Number(dashboard?.total_reject_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: "Withdrawal Success", value: Number(dashboard?.total_success_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: "Withdrawal Pending", value: Number(dashboard?.total_pending_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    // { title: " Withdrawal Reject", value: Number(dashboard?.total_reject_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    // { title: "Withdrawal Success", value: Number(dashboard?.total_success_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    // { title: "Withdrawal Pending", value: Number(dashboard?.total_pending_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
 
   ];
   const functionTOCopy = (value) => {
@@ -56,6 +56,7 @@ const Dashboard = () => {
     { label: "Money Manager", value: user_profile?.jnr_name },
     { label: "Created", value: user_profile?.lgn_created_at ? moment(user_profile?.lgn_created_at)?.format("DD-MM-YYYY") : "--" },
     { label: "Activation Date", value: user_profile?.jnr_topup_date ? moment(user_profile?.jnr_topup_date)?.format("DD-MM-YYYY") : "--" },
+    { label: "Current Trade Interval Profit", value: dashboard?.curr_trade_interval_profit || 0 },
     { label: "Net Deposit", value: user_profile?.jnr_topup_wallet || 0 },
     { label: "Net Withdrawal", value: user_profile?.total_withdrawal || 0 },
     { label: "Main Wallet", value: user_profile?.jnr_curr_wallet || 0 },

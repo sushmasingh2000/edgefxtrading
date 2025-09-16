@@ -12,7 +12,8 @@ const Downline = () => {
     const initialValues = {
         level_id: "1",
         search: '',
-        pageSize: 10,
+        page: "",
+        count: 10,
         start_date: '',
         end_date: '',
     };
@@ -26,11 +27,11 @@ const Downline = () => {
         ['data-downline', fk.values.search, fk.values.start_date, fk.values.end_date, fk.values.level_id, page],
         () => apiConnectorPost(endpoint.network_downline_api, {
             search: fk.values.search,
-            level_id: fk.values.level_id,
+            level_id:  10,
             start_date: fk.values.start_date,
             end_date: fk.values.end_date,
-            pageNumber: page,
-            pageSize: "10",
+             page: page,
+             count: 10,
         }),
         {
             refetchOnMount: false,
@@ -47,25 +48,23 @@ const Downline = () => {
     const tablehead = [
         <span>S.No.</span>,
         <span>Login Id</span>,
-        <span>Email</span>,
-        <span>Mobile No.</span>,
         <span>User Name</span>,
         <span>Amount </span>,
         <span>Group Type</span>,
+        <span>Level</span>,
         <span>Status</span>,
         <span> Date</span>,
 
 
     ];
-    const tablerow = allData?.map((row, index) => {
+    const tablerow = allData?.data?.map((row, index) => {
         return [
             <span> {index + 1}</span>,
             <span>{row.lgn_cust_id}</span>,
-            <span> {row.lgn_email}</span>,
-            <span>{row.lgn_mobile}</span>,
             <span>{row.jnr_name || '--'}</span>,
             <span> {row.td_wallet_amount || '--'}</span>,
             <span>{row.td_group_type}</span>,
+            <span>Level {row.level_id}</span>,
             <span>{row.td_verification_status}</span>,
             <span>{row.td_created_at ? moment(row.td_created_at)?.format("DD-MM-YYYY") : "--"}</span>,
         ];
@@ -101,7 +100,7 @@ const Downline = () => {
                         placeholder="User ID"
                         className="bg-gray-700 border border-gray-600 rounded-full py-2 px-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
                     /> */}
-                    <select
+                    {/* <select
                         name="level_id"
                         id="level_id"
                         value={fk.values.level_id}
@@ -118,7 +117,7 @@ const Downline = () => {
                         <option value="8">Level 8</option>
                         <option value="9">Level 9</option>
                         <option value="10">Level 10</option>
-                    </select>
+                    </select> */}
 
                     {/* <button
                         onClick={() => {

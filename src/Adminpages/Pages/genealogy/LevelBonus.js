@@ -12,7 +12,8 @@ const Level = () => {
   const initialValues = {
     income_Type: "",
     search: '',
-    pageSize: 10,
+    count: 10,
+    page: "",
     start_date: '',
     end_date: '',
   };
@@ -30,8 +31,8 @@ const Level = () => {
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,
-        pageNumber: page,
-        pageSize: "10",
+        page: page,
+        count: 10,
       }),
     {
       keepPreviousData: true,
@@ -50,7 +51,7 @@ const Level = () => {
      <span>Customer Id</span>,
      <span>Amount ($)</span>,
      <span>User Name</span>,
-     <span>Mobile</span>,
+    //  <span>Mobile</span>,
      <span>Description</span>,
    ];
    const tablerow = allData?.data?.map((row, index) => {
@@ -60,7 +61,7 @@ const Level = () => {
        <span>{row.lgn_cust_id || "--"}</span>,
        <span> {row.ledger_amount ||'$0.00'}</span>,
        <span>{row.jnr_name}</span>,
-       <span>{row.lgn_mobile || '--'}</span>,
+      //  <span>{row.lgn_mobile || '--'}</span>,
        <span>{row.ledger_des || '--'}</span>,
  
  
