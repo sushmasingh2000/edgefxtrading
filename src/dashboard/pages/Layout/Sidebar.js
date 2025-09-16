@@ -33,7 +33,7 @@ const Sidebar = () => {
     const menuItems = [
         { title: "Dashboard", icon: <FaTachometerAlt />, path: "/dashboard" },
         { title: "Invester Reg", icon: <FaCheck />, path: "/trading_registration" },
-        { title: "Invester Profile", icon: <FaUserAlt />, path: "/investor" },
+        // { title: "Invester Profile", icon: <FaUserAlt />, path: "/investor" },
 
 
         {
