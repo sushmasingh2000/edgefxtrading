@@ -27,7 +27,7 @@ const Salryfn = () => {
     ['get_salary', fk.values.search, fk.values.start_date, fk.values.end_date, page],
     () =>
       apiConnectorPost(endpoint?.roi_income_api, {
-        income_Type: 'SALARY',
+        income_type: 'SALARY',
         search: fk.values.search,
         start_date: fk.values.start_date,
         end_date: fk.values.end_date,

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import moment from 'moment';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQuery, useQueryClient } from 'react-query';
 import CustomToPagination from '../../../Shared/Pagination';
@@ -12,6 +12,7 @@ import Loader from '../../../Shared/Loader';
 import Swal from 'sweetalert2';
 
 const TraderList = () => {
+    const isSwalOpenRef = useRef(false);
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
     const client = useQueryClient();
@@ -19,6 +20,7 @@ const TraderList = () => {
         income_Type: "",
         search: '',
         pageSize: 10,
+        page:"",
         start_date: '',
         end_date: '',
     };
@@ -35,7 +37,7 @@ const TraderList = () => {
                 search: fk.values.search,
                 start_date: fk.values.start_date,
                 end_date: fk.values.end_date,
-                pageNumber: page,
+                page: page,
                 pageSize: "10",
             }),
         {
@@ -50,7 +52,10 @@ const TraderList = () => {
     const allData = data?.data?.result || [];
 
 
-    const VerificationStatusChange = async (userId, newStatus, statusType = "verification") => {
+
+    const VerificationStatusChange = useCallback(async (userId, newStatus, statusType = "verification") => {
+        if (isSwalOpenRef.current) return;
+
         const actionLabel =
             statusType === "verification"
                 ? newStatus === "1"
@@ -61,26 +66,30 @@ const TraderList = () => {
                 : newStatus === "1"
                     ? "Activate Account"
                     : "Deactivate Account";
-        const confirm = await Swal.fire({
-            title: `Are you sure?`,
-            text: `You are about to ${actionLabel} for this user.`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: `Yes, ${actionLabel}`,
-            cancelButtonText: 'Cancel',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-        });
 
-        if (!confirm.isConfirmed) return;
+        isSwalOpenRef.current = true; // Set flag to true
+
         try {
-            setLoading(true)
+            const confirm = await Swal.fire({
+                title: `Are you sure?`,
+                text: `You are about to change the status for this user.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: `Yes, ${actionLabel}`,
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+            });
+
+            if (!confirm.isConfirmed) return;
+
+            setLoading(true);
             const response = await apiConnectorPost(endpoint.change_verification, {
                 u_id: userId,
                 verification_status: newStatus,
                 status_type: statusType,
             });
-            setLoading(false)
+
             if (response?.data?.success) {
                 client.invalidateQueries(["get_user_trader"]);
                 toast.success("Status updated successfully.");
@@ -90,10 +99,56 @@ const TraderList = () => {
         } catch (err) {
             console.error("Error updating status:", err);
             toast.error("Something went wrong.");
-        }
+        } finally {
             setLoading(false);
+            isSwalOpenRef.current = false; // Reset the flag
+        }
+    }, [client, setLoading]);
 
-    };
+    // const VerificationStatusChange = async (userId, newStatus, statusType = "verification") => {
+    //     const actionLabel =
+    //         statusType === "verification"
+    //             ? newStatus === "1"
+    //                 ? "set to Pending"
+    //                 : newStatus === "2"
+    //                     ? "Reject"
+    //                     : "Verify"
+    //             : newStatus === "1"
+    //                 ? "Activate Account"
+    //                 : "Deactivate Account";
+    //     const confirm = await Swal.fire({
+    //         title: `Are you sure?`,
+    //         text: `You are about to  for this user.`,
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonText: `Yes, ${actionLabel}`,
+    //         cancelButtonText: 'Cancel',
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //     });
+
+    //     if (!confirm.isConfirmed) return;
+    //     try {
+    //         setLoading(true)
+    //         const response = await apiConnectorPost(endpoint.change_verification, {
+    //             u_id: userId,
+    //             verification_status: newStatus,
+    //             status_type: statusType,
+    //         });
+    //         setLoading(false)
+    //         if (response?.data?.success) {
+    //             client.invalidateQueries(["get_user_trader"]);
+    //             toast.success("Status updated successfully.");
+    //         } else {
+    //             toast.error("Failed to update status.");
+    //         }
+    //     } catch (err) {
+    //         console.error("Error updating status:", err);
+    //         toast.error("Something went wrong.");
+    //     }
+    //         setLoading(false);
+
+    // };
 
 
     const tablehead = [
@@ -138,27 +193,40 @@ const TraderList = () => {
                                     ? "2"
                                     : ""
                     }
-                    onChange={(e) => VerificationStatusChange(row?.td_jnr_id
-                        , e.target.value)}
+                    onChange={(e) => {
+                        const currentValue = e.target.value;
+                        const currentStatus =
+                            row?.td_verification_status === "Pending"
+                                ? "1"
+                                : row?.td_verification_status === "Virified"
+                                    ? "3"
+                                    : row?.td_verification_status === "Reject"
+                                        ? "2"
+                                        : "";
+
+                        if (currentValue !== currentStatus) {
+                            VerificationStatusChange(row?.td_jnr_id, currentValue);
+                        }
+                    }}
                     className="border border-gray-300 rounded px-2 py-1 text-sm"
                 >
                     <option value="1">Pending</option>
                     <option value="3">Verified</option>
                     <option value="2">Reject</option>
-                </select></span>,
+                </select>
+
+            </span>,
             <span>{row.td_verification_date ? moment?.utc(row.td_verification_date).format("DD-MM-YYYY") : "--"}</span>,
             <span>
                 <Switch
                     checked={row?.td_account_status === "Active"}
-                    onChange={() =>
-                        VerificationStatusChange(
-                            row?.td_jnr_id,
-                            row?.td_account_status === "Active" ? "2" : "1",
-                            "account_status"
-                        )
-                    }
+                    onChange={() => {
+                        const newStatus = row?.td_account_status === "Active" ? "2" : "1";
+                        VerificationStatusChange(row?.td_jnr_id, newStatus, "account_status");
+                    }}
                     color="primary"
                 />
+
 
             </span>,
 
