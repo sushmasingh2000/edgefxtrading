@@ -1,26 +1,30 @@
 import { Button, Switch, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { apiConnectorGet, apiConnectorPost } from '../../utils/APIConnector';
 import { endpoint } from '../../utils/APIRoutes';
+import Loader from '../../Shared/Loader';
 
 const Master = () => {
     const [configData, setConfigData] = useState([]);
+    const [loading, setloading] = useState(false);
 
-    const { data } = useQuery(
+    const { data, isLoading } = useQuery(
         ['master_data'],
         () => apiConnectorGet(endpoint.master_data),
         {
-            onSuccess: (res) => {
-                const fetchedData = res?.data?.result || [];
-                setConfigData(fetchedData);
-            },
-            refetchOnMount: false,
+            refetchOnMount: true,
             refetchOnReconnect: false,
             refetchOnWindowFocus: false,
         }
     );
+    const fetchedData = data?.data?.result || [];
+
+    useEffect(() => {
+        setConfigData(fetchedData);
+    }, [fetchedData])
+
 
     const handleStatusChange = async (index, type = 'payout') => {
         const config = configData[index];
@@ -28,24 +32,26 @@ const Master = () => {
         const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
 
         try {
+            setloading(true)
             const response = await apiConnectorPost(endpoint.change_general_status, {
                 u_id: config.config_id,
                 status_type: type,
                 new_status: newStatus,
             });
-
+            setloading(false);
             if (response?.data?.success) {
-                toast.success(`${config.config_title} status updated to ${newStatus}`);
+                toast(response?.data?.message,{id:1});
                 const updatedData = [...configData];
                 updatedData[index].config_status = newStatus;
                 setConfigData(updatedData);
             } else {
-                toast.error(response?.data?.message || 'Failed to update status.');
+                toast(response?.data?.message , {id:1});
             }
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Something went wrong.');
+            toast('Something went wrong.' ,{id:1});
         }
+        setloading(false)
     };
 
     const handleValueUpdate = async (index) => {
@@ -70,7 +76,7 @@ const Master = () => {
 
         if (status_type === "popup_image") {
             if (!config.config_file) {
-                toast.error("Please select an image to upload.");
+                toast("Please select an image to upload." , {id:1});
                 return;
             }
             formData.append("file", config.config_file);
@@ -79,19 +85,19 @@ const Master = () => {
         }
 
         try {
+            setloading(true)
             const response = await apiConnectorPost(endpoint.change_general_status, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-
+            setloading(false)
             if (response?.data?.success) {
-                toast.success(`${config.config_title.replace("_", " ")} updated successfully.`);
-            } else {
-                toast.error(response?.data?.message || "Failed to update value.");
-            }
+                toast(response?.data?.message,{id:1});
+            } 
         } catch (error) {
             console.error("Error:", error);
-            toast.error("Something went wrong.");
+            toast("Something went wrong." , {id:1});
         }
+        setloading(false)
     };
 
 
@@ -110,6 +116,7 @@ const Master = () => {
 
     return (
         <div className="p-4">
+            <Loader isLoading={isLoading || loading} />
             <h2 className="text-xl font-bold mb-4">Master Configurations</h2>
             <table className="w-full table-auto text-center border border-gray-300">
                 <thead>

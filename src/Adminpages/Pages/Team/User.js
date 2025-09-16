@@ -8,8 +8,11 @@ import CustomTable from '../../Shared/CustomTable';
 import moment from 'moment';
 import toast from 'react-hot-toast';
 import { Switch } from '@mui/material';
+import Loader from '../../../Shared/Loader';
+import Swal from 'sweetalert2';
 const UserDetail = () => {
     const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(false)
     const client = useQueryClient();
     const initialValues = {
         income_Type: "",
@@ -45,24 +48,41 @@ const UserDetail = () => {
 
     const allData = data?.data?.result || [];
 
-    const changestatus = async (id) => {
-        try {
-            const response = await apiConnectorPost(endpoint?.change_general_status, {
-                u_id: id,
-                status_type: "login",
-            });
+  const changestatus = async (id) => {
+    const confirm = await Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to change the account status?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, change it!',
+    });
 
-            if (response?.data?.success) {
-                toast.success("Account status updated successfully.");
-                client.invalidateQueries(["get_user_admin"]);
-            } else {
-                toast.error("Failed to update account status.");
-            }
-        } catch (error) {
-            console.error("Error updating account status:", error);
-            toast.error("Something went wrong.");
+    if (!confirm.isConfirmed) return;
+
+    try {
+        setLoading(true);
+        const response = await apiConnectorPost(endpoint?.change_general_status, {
+            u_id: id,
+            status_type: "login",
+        });
+        setLoading(false);
+
+        if (response?.data?.success) {
+            toast.success("Account status updated successfully.");
+            client.invalidateQueries(["get_user_admin"]);
+        } else {
+            toast.error("Failed to update account status.");
         }
-    };
+    } catch (error) {
+        console.error("Error updating account status:", error);
+        toast.error("Something went wrong.");
+    } finally {
+        setLoading(false);
+    }
+};
+
 
     const tablehead = [
         <span>S.No.</span>,
@@ -91,17 +111,18 @@ const UserDetail = () => {
             <span>{row.jnr_total_income}</span>,
             <span>{row?.lgn_pass}</span>,
             <span>
-                    <Switch
-                        checked={row?.lgn_is_blocked === "No"}
-                        onChange={() => changestatus(row?.lgn_jnr_id)}
-                        color="primary"
-                    />
-                </span>,
+                <Switch
+                    checked={row?.lgn_is_blocked === "No"}
+                    onChange={() => changestatus(row?.lgn_jnr_id)}
+                    color="primary"
+                />
+            </span>,
             <span>{row.lgn_created_at ? moment?.utc(row.lgn_created_at).format("DD-MM-YYYY") : "--"}</span>,
         ];
     });
     return (
         <div className="p-2">
+            <Loader isLoading={loading || isLoading} />
             <div className="bg-white bg-opacity-50 rounded-lg shadow-lg p-3 text-white mb-6">
                 <div className="flex flex-col sm:flex-wrap md:flex-row items-center gap-3 sm:gap-4 w-full text-sm sm:text-base">
                     <input

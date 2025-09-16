@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { DeleteForever, Edit, ToggleOn, ToggleOff } from "@mui/icons-material";
 import { apiConnectorGet, apiConnectorPost } from "../../utils/APIConnector";
 import { Switch } from "@mui/material";
+import Loader from "../../Shared/Loader";
 
 const Gallery = () => {
     const [Gallerys, setGallerys] = useState([]);
@@ -114,6 +115,7 @@ const Gallery = () => {
 
     return (
         <div className="p-6">
+            <Loader isLoading={loading}/>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Gallery</h1>
                 <button
