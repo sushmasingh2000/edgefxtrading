@@ -32,7 +32,9 @@ const Sidebar = () => {
 
     const menuItems = [
         { title: "Dashboard", icon: <FaTachometerAlt />, path: "/dashboard" },
-        { title: "Investor Reg", icon: <FaCheck />, path: "/trading_registration" },
+        { title: "Invester Reg", icon: <FaCheck />, path: "/trading_registration" },
+        { title: "Invester Profile", icon: <FaUserAlt />, path: "/investor" },
+
 
         {
             title: "Income",
@@ -64,7 +66,6 @@ const Sidebar = () => {
         //         { title: "Transfer", path: "/fund-tranfer" }
         //     ],
         // },
-        { title: "Investor Profile", icon: <FaUserAlt />, path: "/investor" },
 
         { title: "Paying", icon: <FaWallet />, path: "/fund-tranfer" },
         { title: "Payout", icon: <FaExchangeAlt />, path: "/withdrawal" },
