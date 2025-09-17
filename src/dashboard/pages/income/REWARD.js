@@ -48,9 +48,9 @@ const REWARD = () => {
  const tablehead = [
     <span>S.No.</span>,
     <span>Date</span>,
-    <span>Customer Id</span>,
+    // <span>Customer Id</span>,
     <span>Amount ($)</span>,
-    <span>User Name</span>,
+    // <span>User Name</span>,
     // <span>Mobile</span>,
     <span>Description</span>,
   ];
@@ -58,9 +58,9 @@ const REWARD = () => {
     return [
       <span> {index + 1}</span>,
       <span>{moment(row.ledger_created_at)?.format("DD-MM-YYYY")}</span>,
-      <span>{row.lgn_cust_id || "--"}</span>,
+      // <span>{row.lgn_cust_id || "--"}</span>,
       <span> {row.ledger_amount ||'$0.00'}</span>,
-      <span>{row.jnr_name}</span>,
+      // <span>{row.jnr_name}</span>,
       // <span>{row.lgn_mobile || '--'}</span>,
       <span>{row.ledger_des || '--'}</span>,
 

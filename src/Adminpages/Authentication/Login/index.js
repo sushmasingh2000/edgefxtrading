@@ -22,6 +22,7 @@ const LogIn = () => {
       const reqBody = {
         email: fk.values.username,
         password: fk.values.password,
+        type: "Admin"
       };
       loginFunction(reqBody);
     },
@@ -31,13 +32,13 @@ const LogIn = () => {
     setloding(true);
     try {
       const response = await axiosInstance.post(endpoint.login_api, reqBody);
-      toast(response?.data?.message);
-       if (response?.data?.success) {
-        localStorage.setItem("logindataen", response?.data?.result?.token);
-        navigate("/admindashboard");
-        window.location.reload();
-        // navigate('/Qrgenerator');
-      }
+          toast(response?.data?.message);
+      if (response?.data?.success) {
+          localStorage.setItem("logindataen", response?.data?.result?.token);
+          localStorage.setItem("type", response?.data?.result?.role);
+          navigate("/admindashboard");
+          window.location.reload();
+        }
     } catch (e) {
       console.log(e);
     } finally {
