@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Shared/Loader";
 import { apiConnectorPost } from "../utils/APIConnector";
 import body from "../assets/body-bg.png";
+import Swal from "sweetalert2";
 
 
 const Registration = () => {
@@ -53,10 +54,28 @@ const Registration = () => {
       toast(response?.data?.message);
       setLoading(false);
       if (response?.data?.success) {
-        fk.handleReset();
+        
         localStorage.setItem("logindataen", response?.data?.result?.[0]?.token);
-        navigate("/dashboard");
-        window.location.reload();
+        Swal.fire({
+          title: "🎉 Congratulations!",
+          html: `
+            <p style="font-size:14px; margin-bottom:8px;">Registration Successfully</p>
+            <p style="font-weight:bold; color:#f39c12; margin:0;">User Login Credentials </p>
+            <p style="font-size:13px; word-break:break-all; color:#16a085; margin-top:4px;">
+             Email:${fk.values.email}
+             <br/>
+             Password:${fk.values.password}
+            </p>
+          `,
+          icon: "success",
+          confirmButtonColor: "#75edf2",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fk.handleReset();
+            navigate("/dashboard");
+            window.location.reload();
+          }
+        });
       }
     } catch (e) {
       console.log(e);
@@ -93,7 +112,7 @@ const Registration = () => {
 
         <div
           className="w-full max-w-lg lg:p-6 p-4 border-border-color-green border rounded-xl shadow-2xl" >
-                    <div className="flex justify-center my-2 cursor-pointer" onClick={()=>navigate("/")}>
+          <div className="flex justify-center my-2 cursor-pointer" onClick={() => navigate("/")}>
 
             <img src={logo} alt="Logo" className="h-14 " />
           </div>
