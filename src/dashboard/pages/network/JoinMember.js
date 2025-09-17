@@ -46,29 +46,29 @@ const JoinMember = () => {
 
   const allData = data?.data?.result || [];
 
-  
-      const tablehead = [
-          <span>S.No.</span>,
-          <span>Login Id</span>,
-          <span>User Name</span>,
-          <span>Amount </span>,
-          <span>Group Type</span>,
-          <span>Status</span>,
-          <span> Date</span>,
-  
-  
-      ];
-      const tablerow = allData?.data?.map((row, index) => {
-          return [
-              <span> {index + 1}</span>,
-              <span>{row.lgn_cust_id}</span>,
-              <span>{row.jnr_name || '--'}</span>,
-              <span> {row.td_wallet_amount || '--'}</span>,
-              <span>{row.td_group_type}</span>,
-              <span>{row.td_verification_status}</span>,
-              <span>{row.td_created_at ? moment(row.td_created_at)?.format("DD-MM-YYYY") : "--"}</span>,
-          ];
-      });
+
+  const tablehead = [
+    <span>S.No.</span>,
+    <span>Login Id</span>,
+    <span>User Name</span>,
+    <span>Amount </span>,
+    <span>Group Type</span>,
+    <span>Status</span>,
+    <span> Date</span>,
+
+
+  ];
+  const tablerow = allData?.data?.map((row, index) => {
+    return [
+      <span> {index + 1}</span>,
+      <span>{row.lgn_cust_id}</span>,
+      <span>{row.jnr_name || '--'}</span>,
+      <span> {Number(row.td_wallet_amount || 0)?.toFixed(2) || 0}</span>,
+      <span>{row.td_group_type}</span>,
+      <span>{row.td_verification_status}</span>,
+      <span>{row.td_created_at ? moment(row.td_created_at)?.format("DD-MM-YYYY") : "--"}</span>,
+    ];
+  });
   return (
     <div className="p-2">
       <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700 mb-6">

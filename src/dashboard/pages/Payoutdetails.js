@@ -60,7 +60,7 @@ const PayoutDetails = () => {
             <span> {index + 1}</span>,
             <span>{row?.wdrl_created_at ? moment?.utc(row?.wdrl_created_at)?.format("DD-MM-YYYY HH:mm:ss") : "--"}</span>,
             <span>{row?.wdrl_transacton_id}</span>,
-            <span> {row?.wdrl_amont || 0}</span>,
+            <span> {Number(row?.wdrl_amont || 0)?.toFixed(2)|| 0}</span>,
             <span>{row?.wdrl_to}</span>,
             <span>{row?.wdrl_status || 'N/A'}</span>,
 

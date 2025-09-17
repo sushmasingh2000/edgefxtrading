@@ -56,11 +56,11 @@ const Dashboard = () => {
     { label: "Money Manager", value: user_profile?.jnr_name },
     { label: "Created", value: user_profile?.lgn_created_at ? moment(user_profile?.lgn_created_at)?.format("DD-MM-YYYY") : "--" },
     { label: "Activation Date", value: user_profile?.jnr_topup_date ? moment(user_profile?.jnr_topup_date)?.format("DD-MM-YYYY") : "--" },
-    { label: "Current Trade Interval Profit", value: dashboard?.curr_trade_interval_profit || 0 },
-    { label: "Net Deposit", value: user_profile?.jnr_topup_wallet || 0 },
-    { label: "Net Withdrawal", value: user_profile?.total_withdrawal || 0 },
-    { label: "Main Wallet", value: user_profile?.jnr_curr_wallet || 0 },
-    { label: "Profit Wallet", value: user_profile?.jnr_total_income || 0 },
+    { label: "Current Trade Interval Profit", value: Number(dashboard?.curr_trade_interval_profit || 0)?.toFixed(2) || 0 },
+    { label: "Net Deposit", value: Number(user_profile?.jnr_topup_wallet || 0)?.toFixed(2) || 0 },
+    { label: "Net Withdrawal", value: Number(user_profile?.total_withdrawal || 0)?.toFixed(2) || 0 },
+    { label: "Main Wallet", value: Number(user_profile?.jnr_curr_wallet || 0)?.toFixed(2) || 0 },
+    { label: "Profit Wallet", value: Number(user_profile?.jnr_total_income || 0)?.toFixed(2) || 0 },
   ];
 
   return (

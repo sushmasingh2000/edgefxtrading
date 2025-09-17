@@ -62,7 +62,7 @@ const Downline = () => {
             <span> {index + 1}</span>,
             <span>{row.lgn_cust_id}</span>,
             <span>{row.jnr_name || '--'}</span>,
-            <span> {row.td_wallet_amount || '--'}</span>,
+            <span> {Number(row.td_wallet_amount || 0)?.toFixed(2) || 0}</span>,
             <span>{row.td_group_type}</span>,
             <span>Level {row.level_id}</span>,
             <span>{row.td_verification_status}</span>,

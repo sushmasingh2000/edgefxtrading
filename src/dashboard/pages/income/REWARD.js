@@ -59,7 +59,7 @@ const REWARD = () => {
       <span> {index + 1}</span>,
       <span>{moment(row.ledger_created_at)?.format("DD-MM-YYYY")}</span>,
       // <span>{row.lgn_cust_id || "--"}</span>,
-      <span> {row.ledger_amount ||'$0.00'}</span>,
+      <span> {Number(row.ledger_amount || 0)?.toFixed(2) || '$0.00'}</span>,
       // <span>{row.jnr_name}</span>,
       // <span>{row.lgn_mobile || '--'}</span>,
       <span>{row.ledger_des || '--'}</span>,
