@@ -74,7 +74,7 @@ const Login = () => {
             <form onSubmit={formik.handleSubmit}>
               <div className="mb-4">
                 <input
-                  placeholder="Username"
+                  placeholder="Login ID"
                   type="text"
                   id="username"
                   name="username"

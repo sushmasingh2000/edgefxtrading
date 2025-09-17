@@ -40,16 +40,16 @@ const Master = () => {
             });
             setloading(false);
             if (response?.data?.success) {
-                toast(response?.data?.message,{id:1});
+                toast(response?.data?.message, { id: 1 });
                 const updatedData = [...configData];
                 updatedData[index].config_status = newStatus;
                 setConfigData(updatedData);
             } else {
-                toast(response?.data?.message , {id:1});
+                toast(response?.data?.message, { id: 1 });
             }
         } catch (error) {
             console.error('Error:', error);
-            toast('Something went wrong.' ,{id:1});
+            toast('Something went wrong.', { id: 1 });
         }
         setloading(false)
     };
@@ -68,6 +68,9 @@ const Master = () => {
         else if (config.config_title === "POPUP_IMAGE_STATUS") {
             status_type = "popup_image_status";
         }
+        else if (config.config_title === "GROUP_TYPE") {
+            status_type = "group_type";
+        }
 
 
         const formData = new FormData();
@@ -76,7 +79,7 @@ const Master = () => {
 
         if (status_type === "popup_image") {
             if (!config.config_file) {
-                toast("Please select an image to upload." , {id:1});
+                toast("Please select an image to upload.", { id: 1 });
                 return;
             }
             formData.append("file", config.config_file);
@@ -91,11 +94,11 @@ const Master = () => {
             });
             setloading(false)
             if (response?.data?.success) {
-                toast(response?.data?.message,{id:1});
-            } 
+                toast(response?.data?.message, { id: 1 });
+            }
         } catch (error) {
             console.error("Error:", error);
-            toast("Something went wrong." , {id:1});
+            toast("Something went wrong.", { id: 1 });
         }
         setloading(false)
     };
@@ -103,13 +106,11 @@ const Master = () => {
 
     const handleInputChange = (index, value, isFile = false) => {
         const updatedData = [...configData];
-
         if (isFile) {
             updatedData[index].config_file = value;
         } else {
             updatedData[index].config_value = value;
         }
-
         setConfigData(updatedData);
     };
 
@@ -142,7 +143,7 @@ const Master = () => {
                                                     title === 'TOTAL_PROFIT' ? "Total Profit" :
                                                         title === 'POPUP_IMAGE' ? "PopUp Image" :
                                                             title === 'POPUP_IMAGE_STATUS' ? "PopUp Image Status" :
-                                                                title
+                                                                title === 'GROUP_TYPE' ? "Group" : title
                                     }
                                 </td>
 
@@ -161,13 +162,25 @@ const Master = () => {
                                             accept="image/*"
                                             onChange={(e) => handleInputChange(index, e.target.files[0], true)}
                                         />
+                                    ) : title === "GROUP_TYPE" ? (
+                                        <select
+                                            value={config.config_value || ""}
+                                            onChange={(e) => handleInputChange(index, e.target.value)}
+                                            className="border border-gray-300 px-2 py-1 rounded text-sm"
+                                        >
+                                            <option value="">Select Group</option>
+                                            <option value="Cent Group">Cent Group</option>
+                                            <option value="USD Group">USD Group</option>
+                                            <option value="Pamm Group">Pamm Group</option>
+                                        </select>
                                     ) : (
                                         config.config_status
                                     )}
                                 </td>
 
+
                                 <td className="border px-4 py-2">
-                                    {title === "LEVEL_PERCENTAGE" || title === "TOTAL_PROFIT" || title === "POPUP_IMAGE" ? (
+                                    {title === "LEVEL_PERCENTAGE" || title === "TOTAL_PROFIT"  || title === "GROUP_TYPE" || title === "POPUP_IMAGE" ? (
                                         <Button
                                             variant="contained"
                                             size="small"
