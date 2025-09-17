@@ -1,6 +1,7 @@
 // src/routes/routes.jsx
 import Dashboard from '../dashboard/Dashboard';
 import Activation from '../dashboard/pages/Activation';
+import AssociateRegistration from '../dashboard/pages/AssociateRegistration';
 import Fund from '../dashboard/pages/Fund/Fund';
 import FundTransfer from '../dashboard/pages/Fund/Transfer';
 import Level from '../dashboard/pages/income/Level';
@@ -21,6 +22,10 @@ export const routes = [
   {
     path: '/dashboard',
     element: ( <MainLayout><Dashboard /> </MainLayout>),
+  },
+   {
+    path: '/associate_registration',
+    element: (<MainLayout><AssociateRegistration /> </MainLayout>),
   },
    {
     path: '/trading_registration',
