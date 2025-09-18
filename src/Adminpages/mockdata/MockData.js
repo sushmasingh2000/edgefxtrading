@@ -62,7 +62,7 @@ export const all_Data = [
   {
     id: 14,
     navLink: "/trader_detail",
-    navItem: "Investor ",
+    navItem: "Invester ",
     navIcon: (
       <span>
         <AddToPhotosIcon color="#15317E" fontSize="medium" />

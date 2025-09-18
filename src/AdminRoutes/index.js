@@ -101,7 +101,7 @@ export const adminroutes = [
     id: 43,
     path: "/trader_detail",
     component: <TraderList/>,
-    navItem: "Investor ",
+    navItem: "Invester ",
   },
   {
     id: 44,
