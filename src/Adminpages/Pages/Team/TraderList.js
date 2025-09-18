@@ -141,7 +141,7 @@ const TraderList = () => {
                                 ? "3"
                                 : row?.td_verification_status === "Reject"
                                     ? "2"
-                                    : ""
+                                    : "" 
                     }
                     onChange={(e) => {
                         const currentValue = e.target.value;

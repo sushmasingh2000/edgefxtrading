@@ -142,7 +142,7 @@ const TradingRegistration = () => {
                 onChange={fk.handleChange}
                 className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 required
-                >
+              >
                 <option value="">Select Broker Name</option>
                 <option value="Star Trader">Star Trader</option>
                 <option value="Vantage Markets">Vantage Markets </option>
@@ -176,26 +176,6 @@ const TradingRegistration = () => {
               </select>
             </div>
 
-
-            {/* Currency Select */}
-            <div>
-              <label htmlFor="base_currency" className="block text-sm font-medium text-white mb-1">
-                Currency
-              </label>
-              <select
-                id="base_currency"
-                name="base_currency"
-                value={fk.values.base_currency}
-                onChange={fk.handleChange}
-                className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-                required
-              >
-                <option value="">Select Currency</option>
-                <option value="1">USD</option>
-                <option value="2">USC</option>
-              </select>
-            </div>
-
             {/* Group Type Select */}
             <div>
               <label htmlFor="group_type" className="block text-sm font-medium text-white mb-1">
@@ -215,6 +195,29 @@ const TradingRegistration = () => {
                 <option value="3">PAMM</option>
               </select>
             </div>
+
+            {/* Currency Select */}
+            <div>
+              <label htmlFor="base_currency" className="block text-sm font-medium text-white mb-1">
+                Currency
+              </label>
+              <select
+                id="base_currency"
+                name="base_currency"
+                value={fk.values.base_currency}
+                onChange={fk.handleChange}
+                className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                required
+              >
+                {fk.values.group_type === "1" ? 
+                <option value="1">USC</option> :
+                  <option value="2">USD</option>
+                  }
+
+              </select>
+            </div>
+
+
 
             {/* Password Field - Keep it Last */}
             <div>
