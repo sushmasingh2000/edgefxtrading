@@ -24,13 +24,13 @@ const TradingRegistration = () => {
   const trader_data = data?.data?.result?.[0] || [];
 
   const generateRandomEmail = () => {
-  const chars = "abcdefghijklmnopqrstuvwxyz1234567890";
-  let string = "";
-  for(let i = 0; i < 10; i++) {
-    string += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return `${string}@example.com`;
-};
+    const chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+    let string = "";
+    for (let i = 0; i < 10; i++) {
+      string += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return `${string}@example.com`;
+  };
 
   const initialValue = {
     trad_name: trader_data?.td_trad_name || "",
@@ -75,7 +75,7 @@ const TradingRegistration = () => {
         base_currency: fk.values.base_currency,
         broker_id: "1",
         broker_name: fk.values.broker_name,
-        server_name:fk.values.server_name,
+        server_name: fk.values.server_name,
         regulatory_region: "",
         group_type: fk.values.group_type,
       };
@@ -109,7 +109,7 @@ const TradingRegistration = () => {
             {[
               { id: "trad_name", label: "Invester Name" },
               { id: "account_id", label: "Account ID (MT4 / MT5)" },
-              { id: "wallet_amount", label: "Wallet Amount", type: "number" },
+              { id: "wallet_amount", label: "USD Amount", type: "number" },
               { id: "broker_name", label: "Broker Name" },
               { id: "server_name", label: "Server Name" },
             ].map(({ id, label, type = "text" }) => (
@@ -123,7 +123,10 @@ const TradingRegistration = () => {
                   name={id}
                   placeholder={label}
                   value={fk.values[id]}
-                  onChange={fk.handleChange}
+                  onChange={(e) => {
+                    !["trad_name", "broker_name", "server_name"].includes(id)
+                    && fk.handleChange(e)
+                  }}
                   className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                   required
                 />
@@ -172,13 +175,13 @@ const TradingRegistration = () => {
             {/* Password Field - Keep it Last */}
             <div>
               <label htmlFor="u_password" className="block text-sm font-medium text-white mb-1">
-                User Password
+                Trading Password
               </label>
               <input
                 type="password"
                 id="u_password"
                 name="u_password"
-                placeholder="User Password"
+                placeholder="Trading Password"
                 value={fk.values.u_password}
                 onChange={fk.handleChange}
                 className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
@@ -197,7 +200,7 @@ const TradingRegistration = () => {
           </div>
         </div>
       </div>
-       
+
     </>
   );
 };

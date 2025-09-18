@@ -20,9 +20,10 @@ const TraderList = () => {
         income_Type: "",
         search: '',
         count: 10,
-        page:"",
+        page: "",
         start_date: '',
         end_date: '',
+        group_type: "Cent Group",
     };
 
     const fk = useFormik({
@@ -31,7 +32,7 @@ const TraderList = () => {
 
     })
     const { data, isLoading } = useQuery(
-        ['get_user_trader', fk.values.search, fk.values.start_date, fk.values.end_date, page],
+        ['get_user_trader', fk.values.search, fk.values.start_date, fk.values.end_date, page , fk.values.group_type],
         () =>
             apiConnectorPost(endpoint?.trader_list_details, {
                 search: fk.values.search,
@@ -39,6 +40,7 @@ const TraderList = () => {
                 end_date: fk.values.end_date,
                 page: page,
                 count: 10,
+                group_type:fk.values.group_type
             }),
         {
             keepPreviousData: true,
@@ -101,65 +103,16 @@ const TraderList = () => {
             toast.error("Something went wrong.");
         } finally {
             setLoading(false);
-            isSwalOpenRef.current = false; // Reset the flag
+            isSwalOpenRef.current = false; 
         }
     }, [client, setLoading]);
-
-    // const VerificationStatusChange = async (userId, newStatus, statusType = "verification") => {
-    //     const actionLabel =
-    //         statusType === "verification"
-    //             ? newStatus === "1"
-    //                 ? "set to Pending"
-    //                 : newStatus === "2"
-    //                     ? "Reject"
-    //                     : "Verify"
-    //             : newStatus === "1"
-    //                 ? "Activate Account"
-    //                 : "Deactivate Account";
-    //     const confirm = await Swal.fire({
-    //         title: `Are you sure?`,
-    //         text: `You are about to  for this user.`,
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonText: `Yes, ${actionLabel}`,
-    //         cancelButtonText: 'Cancel',
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //     });
-
-    //     if (!confirm.isConfirmed) return;
-    //     try {
-    //         setLoading(true)
-    //         const response = await apiConnectorPost(endpoint.change_verification, {
-    //             u_id: userId,
-    //             verification_status: newStatus,
-    //             status_type: statusType,
-    //         });
-    //         setLoading(false)
-    //         if (response?.data?.success) {
-    //             client.invalidateQueries(["get_user_trader"]);
-    //             toast.success("Status updated successfully.");
-    //         } else {
-    //             toast.error("Failed to update status.");
-    //         }
-    //     } catch (err) {
-    //         console.error("Error updating status:", err);
-    //         toast.error("Something went wrong.");
-    //     }
-    //         setLoading(false);
-
-    // };
-
 
     const tablehead = [
         <span>S.No.</span>,
         <span>Name</span>,
-        // <span>Email</span>,
         <span>Amount</span>,
         <span>Server Name</span>,
-        // <span>Account No .</span>,
         <span>Currency</span>,
-        // <span>Broker Id</span>,
         <span>Broker Name</span>,
         <span>Group Type</span>,
         <span>Password</span>,
@@ -173,12 +126,9 @@ const TraderList = () => {
         return [
             <span> {index + 1}</span>,
             <span>{row.td_trad_name || "--"}</span>,
-            // <span>{row.td_trad_email || "--"}</span>,
             <span>{row.td_wallet_amount || "--"}</span>,
             <span>{row.td_server_name || "--"}</span>,
-            // <span>{row.td_account_number || "--"}</span>,
             <span>{row.td_base_currency || "--"}</span>,
-            // <span>{row?.td_broker_id || "--"}</span>,
             <span>{row.td_broker_name || "--"}</span>,
             <span>{row.td_group_type || "--"}</span>,
             <span>{row?.td_password || "--"}</span>,
@@ -263,6 +213,18 @@ const TraderList = () => {
                         placeholder="User ID"
                         className="bg-white bg-opacity-50 border border-gray-600 rounded-full py-2 px-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
                     />
+                    <select
+                     className="bg-white bg-opacity-50 border border-gray-600 rounded py-2 px-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
+                        id='group_type'
+                        name='group_type'
+                         value={fk.values.group_type}
+                        onChange={fk.handleChange}
+                    >
+                        <option value={"Cent Group"}>Cent Group</option>
+                        <option value={"USD Group"}>USD Group</option>
+                        <option value={"Pamm Group"}>PAMM Group</option>
+                    </select>
+
                     <button
                         onClick={() => {
                             setPage(1);
