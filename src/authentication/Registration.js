@@ -54,15 +54,15 @@ const Registration = () => {
       toast(response?.data?.message);
       setLoading(false);
       if (response?.data?.success) {
-        
-        localStorage.setItem("logindataen", response?.data?.result?.[0]?.token);
+        // localStorage.setItem("logindataen", response?.data?.result?.[0]?.token);
+        console.log("logindataen", response?.data?.result?.[0]?.cust_id);
         Swal.fire({
           title: "🎉 Congratulations!",
           html: `
             <p style="font-size:14px; margin-bottom:8px;">Registration Successfully</p>
             <p style="font-weight:bold; color:#f39c12; margin:0;">User Login Credentials </p>
             <p style="font-size:13px; word-break:break-all; color:#16a085; margin-top:4px;">
-             Email:${fk.values.email}
+             Login ID:${response?.data?.result?.[0]?.cust_id}
              <br/>
              Password:${fk.values.password}
             </p>
