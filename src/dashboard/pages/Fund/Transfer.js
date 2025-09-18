@@ -77,7 +77,7 @@ const FundTransfer = () => {
     <div className="p-2 min-h-screen bg-gray-900">
       <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700 mb-6">
         <h2 className="text-xl font-semibold mb-4 text-gray-200">
-          Fund request
+          Invester Amount
         </h2>
         <div className="flex flex-col sm:flex-wrap md:flex-row items-center gap-3 sm:gap-4 w-full text-sm sm:text-base">
           <input

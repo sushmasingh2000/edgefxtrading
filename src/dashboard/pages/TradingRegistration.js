@@ -166,7 +166,7 @@ const TradingRegistration = () => {
                     <option value="Startraderfinancial-live">Startraderfinancial-live</option>
                     <option value="Startraderfinancial-live2">Startraderfinancial-live2</option> </>
                   : ""}
-                {fk.values.broker_name === "VantageInternational-Live" ?
+                {fk.values.broker_name === "Vantage Markets" ?
                   <><option value="">Select Server Name</option>
                     <option value="VantageInternational-Live">VantageInternational-Live</option>
                     <option value="VantageInternational-Live 3">VantageInternational-Live 3</option>
@@ -185,7 +185,15 @@ const TradingRegistration = () => {
                 id="group_type"
                 name="group_type"
                 value={fk.values.group_type}
-                onChange={fk.handleChange}
+                onChange={(e) => {
+                  fk.handleChange(e);
+                  const selectedGroupType = e.target.value;
+                  if (selectedGroupType === "1") {
+                    fk.setFieldValue("base_currency", "2"); 
+                  } else {
+                    fk.setFieldValue("base_currency", "1"); 
+                  }
+                }}
                 className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 required
               >
@@ -209,15 +217,13 @@ const TradingRegistration = () => {
                 className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 required
               >
-                {fk.values.group_type === "1" ? 
-                <option value="1">USC</option> :
-                  <option value="2">USD</option>
-                  }
-
+                {fk.values.group_type === "1" ? (
+                  <option value="2">USC</option>
+                ) : (
+                  <option value="1">USD</option>
+                )}
               </select>
             </div>
-
-
 
             {/* Password Field - Keep it Last */}
             <div>
