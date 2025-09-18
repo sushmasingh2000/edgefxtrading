@@ -5,7 +5,6 @@ import { useQuery, useQueryClient } from "react-query";
 import Loader from "../../Shared/Loader";
 import { apiConnectorGet, apiConnectorPost } from "../../utils/APIConnector";
 import { endpoint } from "../../utils/APIRoutes";
-import moment from "moment";
 
 
 const TradingRegistration = () => {

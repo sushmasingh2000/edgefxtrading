@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
-import { apiConnectorGet, apiConnectorPost } from "../../../utils/APIConnector";
-import { endpoint } from "../../../utils/APIRoutes";
-import CustomTable from "../../../Shared/CustomTable";
-import CustomToPagination from "../../../Shared/Pagination";
 import { useFormik } from "formik";
 import moment from "moment";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import CustomTable from "../../../Shared/CustomTable";
+import CustomToPagination from "../../../Shared/Pagination";
+import { apiConnectorPost } from "../../../utils/APIConnector";
+import { endpoint } from "../../../utils/APIRoutes";
 
 const FundTransfer = () => {
   const [page, setPage] = useState(1);
