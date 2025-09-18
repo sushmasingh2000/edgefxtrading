@@ -110,8 +110,6 @@ const TradingRegistration = () => {
               { id: "trad_name", label: "Invester Name" },
               { id: "account_id", label: "Account ID (MT4 / MT5)" },
               { id: "wallet_amount", label: "USD Amount", type: "number" },
-              { id: "broker_name", label: "Broker Name" },
-              { id: "server_name", label: "Server Name" },
             ].map(({ id, label, type = "text" }) => (
               <div key={id}>
                 <label htmlFor={id} className="block text-sm font-medium text-white mb-1">
@@ -125,13 +123,59 @@ const TradingRegistration = () => {
                   value={fk.values[id]}
                   onChange={(e) => {
                     !["trad_name", "broker_name", "server_name"].includes(id)
-                    && fk.handleChange(e)
+                      && fk.handleChange(e)
                   }}
                   className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                   required
                 />
               </div>
             ))}
+
+            <div>
+              <label htmlFor="broker_name" className="block text-sm font-medium text-white mb-1">
+                Broker Name
+              </label>
+              <select
+                id="broker_name"
+                name="broker_name"
+                value={fk.values.broker_name}
+                onChange={fk.handleChange}
+                className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                required
+              >
+                <option value="">Select Broker Name</option>
+                <option value="Star Trader">Star Trader</option>
+                <option value="VantageInternational-Live">VantageInternational-Live</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="broker_name" className="block text-sm font-medium text-white mb-1">
+                Server Name
+              </label>
+              <select
+                id="server_name"
+                name="server_name"
+                value={fk.values.server_name}
+                onChange={fk.handleChange}
+                className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                required
+              >
+                {fk.values.broker_name === "Star Trader" ?
+                  <>  <option value="">Select Server Name</option>
+                    <option value="Startraderfinancial-live">Startraderfinancial-live</option>
+                    <option value="Startraderfinancial-live2">Startraderfinancial-live2</option> </>
+                  : ""}
+                {fk.values.broker_name === "VantageInternational-Live" ?
+                  <><option value="">Select Server Name</option>
+                    <option value="VantageInternational-Live">VantageInternational-Live</option>
+                    <option value="VantageInternational-Live 3">VantageInternational-Live 3</option>
+                    <option value="VantageInternational-Live 5">VantageInternational-Live 5</option></>
+                  : ""
+                }
+              </select>
+            </div>
+
 
             {/* Currency Select */}
             <div>
