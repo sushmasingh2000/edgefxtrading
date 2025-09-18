@@ -54,8 +54,7 @@ const Registration = () => {
       toast(response?.data?.message);
       setLoading(false);
       if (response?.data?.success) {
-        // localStorage.setItem("logindataen", response?.data?.result?.[0]?.token);
-        console.log("logindataen", response?.data?.result?.[0]?.cust_id);
+        localStorage.setItem("logindataen", response?.data?.result?.[0]?.token);
         Swal.fire({
           title: "🎉 Congratulations!",
           html: `
