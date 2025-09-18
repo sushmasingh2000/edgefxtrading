@@ -137,7 +137,7 @@ const TraderList = () => {
                     value={
                         row?.td_verification_status === "Pending"
                             ? "1"
-                            : row?.td_verification_status === "Virified"
+                            : row?.td_verification_status === "Verified"
                                 ? "3"
                                 : row?.td_verification_status === "Reject"
                                     ? "2"
@@ -148,7 +148,7 @@ const TraderList = () => {
                         const currentStatus =
                             row?.td_verification_status === "Pending"
                                 ? "1"
-                                : row?.td_verification_status === "Virified"
+                                : row?.td_verification_status === "Verified"
                                     ? "3"
                                     : row?.td_verification_status === "Reject"
                                         ? "2"

@@ -142,10 +142,10 @@ const TradingRegistration = () => {
                 onChange={fk.handleChange}
                 className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 required
-              >
+                >
                 <option value="">Select Broker Name</option>
                 <option value="Star Trader">Star Trader</option>
-                <option value="VantageInternational-Live">VantageInternational-Live</option>
+                <option value="Vantage Markets">Vantage Markets </option>
               </select>
             </div>
 
