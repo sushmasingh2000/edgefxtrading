@@ -47,8 +47,7 @@ const ForgotPassword = () => {
                     }}>
                         <div className="mb-4">
                             <input
-                                placeholder="Enter Email"
-                                type="email"
+                                placeholder="Enter PIN"
                                 id="email"
                                 name="email"
                                 value={email}

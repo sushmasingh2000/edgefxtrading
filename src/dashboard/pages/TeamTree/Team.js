@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Tree from 'react-d3-tree';
 import { FaUser } from 'react-icons/fa';
 import { Menu, MenuItem } from '@mui/material';
@@ -25,7 +25,7 @@ const Team = () => {
 
   const { data } = useQuery(
     ['tree-downline'],
-    () => apiConnectorGet(endpoint.team_downline_user),
+    () => apiConnectorGet(endpoint.network_downline_api),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
@@ -38,39 +38,55 @@ const Team = () => {
   const flatData = data?.data?.result || [];
 
   const buildTreeFromFlatData = (data) => {
-    const map = {};
-    const rootNodes = [];
+    const groupedByLevel = {};
 
-    data.forEach((item) => {
-      map[item.User_Id] = {
-        name: item.User_Name,
-        mem_id: item.User_Id,
-        joining_date: item.Joining_Date,
-        topup_date: item.Topup_Date || '0',
-        email: item.Email,
-        mobile: item.Mobile,
-        introducer: item.Introducer_Id,
-        children: [],
-      };
-    });
-
-    data.forEach((item) => {
-      const node = map[item.User_Id];
-      if (item.Level_id === 0 || !item.Introducer_Id || !map[item.Introducer_Id]) {
-        rootNodes.push(node);
-      } else {
-        map[item.Introducer_Id].children.push(node);
+    data.forEach((node) => {
+      const level = node.level_id;
+      if (!groupedByLevel[level]) {
+        groupedByLevel[level] = [];
       }
+      groupedByLevel[level].push({
+        name: node.jnr_name,
+        mem_id: node.lgn_cust_id,
+        email: node.lgn_email,
+        mobile: node.lgn_mobile,
+        joining_date: node.td_created_at
+          ? moment(node.td_created_at).format("DD-MM-YYYY")
+          : null,
+        topup_date: node.td_verification_date
+          ? moment(node.td_verification_date).format("DD-MM-YYYY")
+          : '0',
+        group_type: node.td_group_type,
+        status: node.td_verification_status,
+        level_id: node.level_id,
+        children: [],
+      });
+    });
+    const buildRecursive = (level) => {
+      if (!groupedByLevel[level]) return [];
+
+      return groupedByLevel[level].map((node, idx) => {
+        node.children = buildRecursive(level + 1);
+        return node;
+      });
+    };
+
+    // Start from level 0 (root)
+    const rootLevel = groupedByLevel[0] || [];
+    rootLevel.forEach((node) => {
+      node.children = buildRecursive(1); // attach next level
     });
 
-    return rootNodes[0];
+    return rootLevel[0]; // Only return single root node
   };
 
-  const orgChart = buildTreeFromFlatData(flatData);
+  const orgChart = useMemo(() => {
+    return buildTreeFromFlatData(flatData);
+  }, [flatData]);
 
-  // 🧠 Dynamically center the tree
+  // Effect to set translate only when orgChart is ready
   useEffect(() => {
-    if (treeContainerRef.current) {
+    if (treeContainerRef.current && orgChart) {
       const dimensions = treeContainerRef.current.getBoundingClientRect();
       setTranslate({
         x: dimensions.width / 2,
@@ -78,6 +94,7 @@ const Team = () => {
       });
     }
   }, [orgChart, verticaa]);
+
 
   const renderCustomNode = ({ nodeDatum, toggleNode }) => {
     const nodeColor = '#FFFFFF';
@@ -170,7 +187,7 @@ const Team = () => {
         >
           <div ref={treeContainerRef} id="treeWrapper" className="w-full h-full "
             style={{ maxHeight: '100vh' }} >
-            {orgChart && (
+            {orgChart && translate.x !== 0 && (
               <Tree
                 data={orgChart}
                 orientation={verticaa}

@@ -1001,7 +1001,7 @@ img {
   transition:all 500ms ease;
 }
 
-.main-menu .navigation > li > a:before{
+/* .main-menu .navigation > li > a:before{
   position: absolute;
   content: "\f101";
   font-family: 'flaticon';
@@ -1010,7 +1010,7 @@ img {
   right: 0px;
   color: #a8a9b3;
   transition: all 500ms ease;
-}
+} */
 
 .main-menu .navigation > li.current > a,
 .main-menu .navigation > li:hover > a,

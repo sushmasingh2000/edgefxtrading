@@ -51,7 +51,7 @@ const Level = () => {
     <span>Customer Id</span>,
     <span>Amount ($)</span>,
     <span>User Name</span>,
-    // <span>Mobile</span>,
+    <span>TopUp Wallet</span>,
     <span>Description</span>,
   ];
   const tablerow = allData?.data?.map((row, index) => {
@@ -61,7 +61,7 @@ const Level = () => {
       <span>{row?.from_cust_id || "--"}</span>,
       <span> {Number(row.ledger_amount || 0)?.toFixed(2) || '$0.00'}</span>,
       <span>{row.from_name}</span>,
-      // <span>{row.lgn_mobile || '--'}</span>,
+      <span>{Number(row.jnr_topup_wallet)?.toFixed(2) || '--'}</span>,
       <span>{row.ledger_des || '--'}</span>,
     ];
   });

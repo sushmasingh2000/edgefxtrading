@@ -10,6 +10,7 @@ import WeeklyBonus from "../Adminpages/Pages/genealogy/WeeklyBonus";
 import INRPaying from "../Adminpages/Pages/INRPayment/INRPaying";
 import INRPayout from "../Adminpages/Pages/INRPayment/INRPayout";
 import Master from "../Adminpages/Pages/Master";
+import ContactDetail from "../Adminpages/Pages/Team/Contactlist";
 import TraderList from "../Adminpages/Pages/Team/TraderList";
 import UserDetail from "../Adminpages/Pages/Team/User";
 import TopUp from "../Adminpages/Pages/Topup";
@@ -102,6 +103,12 @@ export const adminroutes = [
     path: "/trader_detail",
     component: <TraderList/>,
     navItem: "Invester ",
+  },
+    {
+    id: 43,
+    path: "/contact",
+    component: <ContactDetail/>,
+    navItem: "Contact ",
   },
   {
     id: 44,

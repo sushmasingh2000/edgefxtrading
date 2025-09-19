@@ -41,8 +41,8 @@ const Dashboard = () => {
     { title: "Total Income", value: Number(user_profile?.jnr_total_income || 0)?.toFixed(2), icon: <FaDollarSign /> },
     { title: "Total Team", value: Number(dashboard?.jnr_total_team || 0)?.toFixed(2), icon: <FaUsers /> },
     { title: "Total Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap /> },
-    { title: "Direct / Referral", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends /> },
-    { title: "Total Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    { title: "Direct Team", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends /> },
+    { title: " Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends /> },
     // { title: " Withdrawal Reject", value: Number(dashboard?.total_reject_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
     // { title: "Withdrawal Success", value: Number(dashboard?.total_success_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
     // { title: "Withdrawal Pending", value: Number(dashboard?.total_pending_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
@@ -67,7 +67,7 @@ const Dashboard = () => {
     <div className="h-screen bg-[#0f172a] font-sans text-white ">
       <div className="overflow-y-auto max-h-screen example">
         <div className="pt-2">
-          <div className="flex gap-5 items-center justify-start  w-fit  rounded m-4">
+          <div className="lg:flex  gap-5 items-center justify-start  w-fit  rounded m-4">
             <span className="text-sm overflow-x-auto border border-white p-2 text-white">
               {frontend}/register?referral_id={user_profile?.lgn_cust_id}
             </span>
@@ -85,11 +85,17 @@ const Dashboard = () => {
         </div>
 
         {/* News & Updates Tab */}
-        <div className="bg-[#1e293b] px-4 py-2">
-          <div className="bg-[#64b1b8]  text-white inline-block px-4 py-1 rounded-t-md text-sm font-semibold">
+        <div className="bg-[#1e293b] px-4 py-2 flex">
+          <div className="bg-[#64b1b8] text-white px-4 py-1 rounded-t-md text-sm  flex font-semibold">
             News & Updates
           </div>
+         <div>
+           <marquee className="text-white text-sm mx-5 mt-2">
+            {dashboard?.news_updates}
+          </marquee>
+         </div>
         </div>
+
 
         {/* Main Content Grid */}
 
@@ -109,47 +115,52 @@ const Dashboard = () => {
           </div>
 
           {/* Stat Cards Panel */}
-          <div className="col-span-1 lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="col-span-2 lg:col-span-3 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {statCards.map((card, i) => (
               <div
                 key={i}
-                className="bg-white  p-4 rounded-md shadow flex flex-col items-center justify-center"
+                className="bg-white p-4 rounded-xl shadow-md flex flex-col items-center justify-center text-center transition duration-300 hover:shadow-lg"
               >
-                <img src={"https://trade4you.uk/application/libraries/icons/wallet.png"} alt="" className="w-12 mb-5" />
-                <div className="text-xl !text-black">{card.title}</div>
-                <div className="text-lg !text-black font-bold">{card.value}</div>
+                <img
+                  src={"https://trade4you.uk/application/libraries/icons/wallet.png"}
+                  alt=""
+                  className="w-10 h-10 mb-3"
+                />
+                <div className="text-[14px] font-semibold text-gray-700">{card.title}</div>
+                <div className="text-[16px] text-black font-bold mt-1">${card.value}</div>
               </div>
             ))}
           </div>
+
         </div>
       </div>
       { }
       {showPopup && user_profile?.popup_status === "Active" && (
 
-      <Dialog
-        open={showPopup}
-        onClose={() => setShowPopup(false)}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-        PaperProps={{
-          className: "bg-white rounded-lg shadow-lg p-4 w-[90%] max-w-md text-center relative",
-        }}
-      >
-        <div>
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">📰 News & Updates</h2>
+        <Dialog
+          open={showPopup}
+          onClose={() => setShowPopup(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+          PaperProps={{
+            className: "bg-white rounded-lg shadow-lg p-4 w-[90%] max-w-md text-center relative",
+          }}
+        >
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">📰 News & Updates</h2>
 
-          <img
-            src={domain + user_profile?.popup_img}
-            alt="Welcome"
-            className="w-full h-auto object-contain rounded"
-          />
+            <img
+              src={domain + user_profile?.popup_img}
+              alt="Welcome"
+              className="w-full h-auto object-contain rounded"
+            />
 
-          <div className="mt-4 flex justify-center">
-            <IconButton onClick={() => setShowPopup(false)}>
-              <Cancel className="text-red-500" />
-            </IconButton>
+            <div className="mt-4 flex justify-center">
+              <IconButton onClick={() => setShowPopup(false)}>
+                <Cancel className="text-red-500" />
+              </IconButton>
+            </div>
           </div>
-        </div>
-      </Dialog>
+        </Dialog>
 
       )}
 

@@ -71,7 +71,9 @@ const Master = () => {
         else if (config.config_title === "GROUP_TYPE") {
             status_type = "group_type";
         }
-
+        else if (config.config_title === "NEWS_UPDATEs") {
+            status_type = "news";
+        }
 
         const formData = new FormData();
         formData.append("u_id", config.config_id);
@@ -143,7 +145,9 @@ const Master = () => {
                                                     title === 'TOTAL_PROFIT' ? "Total Profit" :
                                                         title === 'POPUP_IMAGE' ? "PopUp Image" :
                                                             title === 'POPUP_IMAGE_STATUS' ? "PopUp Image Status" :
-                                                                title === 'GROUP_TYPE' ? "Group" : title
+                                                                title === 'GROUP_TYPE' ? "Group" :
+                                                                    title === 'NEWS_UPDATEs' ? "News Updates" :  // 👈 Add this
+                                                                        title
                                     }
                                 </td>
 
@@ -173,14 +177,27 @@ const Master = () => {
                                             <option value="USD Group">USD Group</option>
                                             <option value="Pamm Group">Pamm Group</option>
                                         </select>
+                                    ) : title === "NEWS_UPDATEs" ? (
+                                        <TextField
+                                            value={config.config_value || ""}
+                                            onChange={(e) => handleInputChange(index, e.target.value)}
+                                            size="small"
+                                            style={{ width: 200 }}
+                                            placeholder="Enter news update"
+                                        />
                                     ) : (
                                         config.config_status
                                     )}
                                 </td>
 
 
+
                                 <td className="border px-4 py-2">
-                                    {title === "LEVEL_PERCENTAGE" || title === "TOTAL_PROFIT"  || title === "GROUP_TYPE" || title === "POPUP_IMAGE" ? (
+                                    {title === "LEVEL_PERCENTAGE" ||
+                                        title === "TOTAL_PROFIT" ||
+                                        title === "GROUP_TYPE" ||
+                                        title === "POPUP_IMAGE" ||
+                                        title === "NEWS_UPDATEs" ? (  // 👈 Add here
                                         <Button
                                             variant="contained"
                                             size="small"
@@ -188,6 +205,8 @@ const Master = () => {
                                         >
                                             Update
                                         </Button>
+
+
                                     ) : (
                                         <Switch
                                             checked={config.config_status === "Active"}

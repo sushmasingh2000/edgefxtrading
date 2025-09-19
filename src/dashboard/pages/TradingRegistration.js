@@ -102,7 +102,7 @@ const TradingRegistration = () => {
       <Loader isLoading={loding || trade_loading} />
       <div className=" flex items-center justify-center px-4 py-5">
         <div className="w-full  bg-gray-900  shadow-xl p-8">
-          <h2 className="text-2xl font-bold mb-10 text-center text-white">Invester Reg</h2>
+          <h2 className="text-2xl font-bold mb-10 text-center text-white">Trade Account Details </h2>
 
           <form className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
             {[

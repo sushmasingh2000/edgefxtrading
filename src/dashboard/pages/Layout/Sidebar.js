@@ -51,9 +51,9 @@ const Sidebar = () => {
             title: "Network",
             icon: <FaNetworkWired />,
             subItems: [
-                { title: "Referral", path: "/referral" },
-                // { title: "Level Tree", path: "/team" },
+                { title: "Direct Team", path: "/referral" },
                  { title: "Downline", path: "/downline" },
+                { title: "Network Tree", path: "/team" },
             ],
         },
 
@@ -67,9 +67,9 @@ const Sidebar = () => {
         //     ],
         // },
 
-        { title: "Paying", icon: <FaWallet />, path: "/fund-tranfer" },
-        { title: "Payout", icon: <FaExchangeAlt />, path: "/withdrawal" },
-        { title: "Payout History ", icon: <FaUserAlt />, path: "/payout_details" },
+        { title: "Invester Amount", icon: <FaWallet />, path: "/fund-tranfer" },
+        { title: "Withdrawal", icon: <FaExchangeAlt />, path: "/withdrawal" },
+        { title: "Withdrawal History ", icon: <FaUserAlt />, path: "/payout_details" },
 
         { title: "Profile Settings", icon: <FaUserCog />, path: "/profile" },
         // { title: "Support", icon: <FaHeadset />, path: "/dashboard" },

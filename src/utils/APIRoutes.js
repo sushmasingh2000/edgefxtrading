@@ -10,7 +10,7 @@ export const endpoint = {
   trader_registration_api: `${domain}/api/v1/trader-registration`,
   trader_profile_api: `${domain}/api/v1/trader-profile-details`,
   roi_income_api: `${domain}/api/v1/get-income-details`,
-  network_downline_api: `${domain}/api/v1/get-downline-team`,
+  network_downline_api: `${domain}/api/v1/tree-data`,
   member_profile_detail: `${domain}/api/v1/member-profile-details`,
   add_user_withdrawal: `${domain}/api/v1/user-withdrawal-req`,
   withdrawal_list: `${domain}/api/v1/withdrawal-report`,
@@ -19,7 +19,6 @@ export const endpoint = {
   withdrawal_request_status: `${domain}/api/v1/withdrawal-req-approval`,
   dashboard_data: `${domain}/api/v1/user-dashboard-data`,
   admin_dashboard: `${domain}/api/v1/admin-dashboard-data`,
-
 
 
 
@@ -49,12 +48,12 @@ export const endpoint = {
   change_verification: `${domain}/api/v1/change-verification-status`,
   change_general_status: `${domain}/api/v1/change-general-status`,
   master_data: `${domain}/api/v1/master-data`,
+
   //bnanner
   create_Gallery: `${domain}/api/v1/craete-image-galary`,
   get_Gallery: `${domain}/api/v1/get-image-galary`,
   update_Gallery: `${domain}/api/v1/update-image-galary`,
   delete_Gallery: `${domain}/api/v1/delete-image-galary`,
   status_Gallery: `${domain}/api/v1/update-image-galary-status`,
-  
-  
+  contact_support: `${domain}/api/v1/contact-support-list`,
 };
