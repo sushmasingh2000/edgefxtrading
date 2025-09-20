@@ -1,4 +1,4 @@
-// export const domain = 'http://192.168.18.214:9038';
+// export const domain = 'http://192.168.243.250:9038';
 export const domain = 'https://edgefx.uk';
 export const frontend = 'https://edgefx.uk';
 export const dollar = "$"

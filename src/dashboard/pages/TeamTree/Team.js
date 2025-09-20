@@ -37,48 +37,39 @@ const Team = () => {
 
   const flatData = data?.data?.result || [];
 
-  const buildTreeFromFlatData = (data) => {
-    const groupedByLevel = {};
-
-    data.forEach((node) => {
-      const level = node.level_id;
-      if (!groupedByLevel[level]) {
-        groupedByLevel[level] = [];
+  const buildTreeFromFlatData = (flatData) => {
+    const map = {};
+    let root = null;
+  
+    flatData.forEach(item => {
+      const formattedNode = {
+        ...item,
+        name: item.jnr_name,                         // ✅ needed for renderCustomNode
+        joining_date: item.td_created_at,            // ✅ rename if needed
+        topup_date: item.td_verification_date,       // ✅ rename if needed
+        children: []
+      };
+  
+      map[item.lgn_jnr_id] = formattedNode;
+    });
+  
+    flatData.forEach(item => {
+      const node = map[item.lgn_jnr_id];
+      const parent = map[item.lgn_spon_id];
+  
+      if (parent) {
+        parent.children.push(node);
+      } else {
+        root = node;
       }
-      groupedByLevel[level].push({
-        name: node.jnr_name,
-        mem_id: node.lgn_cust_id,
-        email: node.lgn_email,
-        mobile: node.lgn_mobile,
-        joining_date: node.td_created_at
-          ? moment(node.td_created_at).format("DD-MM-YYYY")
-          : null,
-        topup_date: node.td_verification_date
-          ? moment(node.td_verification_date).format("DD-MM-YYYY")
-          : '0',
-        group_type: node.td_group_type,
-        status: node.td_verification_status,
-        level_id: node.level_id,
-        children: [],
-      });
     });
-    const buildRecursive = (level) => {
-      if (!groupedByLevel[level]) return [];
-
-      return groupedByLevel[level].map((node, idx) => {
-        node.children = buildRecursive(level + 1);
-        return node;
-      });
-    };
-
-    // Start from level 0 (root)
-    const rootLevel = groupedByLevel[0] || [];
-    rootLevel.forEach((node) => {
-      node.children = buildRecursive(1); // attach next level
-    });
-
-    return rootLevel[0]; // Only return single root node
+  
+    return root;
   };
+  
+  
+  
+  
 
   const orgChart = useMemo(() => {
     return buildTreeFromFlatData(flatData);
@@ -98,17 +89,19 @@ const Team = () => {
 
   const renderCustomNode = ({ nodeDatum, toggleNode }) => {
     const nodeColor = '#FFFFFF';
-    const IconComponent =
-      nodeDatum.topup_date === '0' ? (
-        <FaUser className="!text-red-600 !text-3xl" />
-      ) : (
-        <FaUser className="!text-green-600 !text-3xl" />
-      );
+    const IconComponent = !nodeDatum.topup_date ? (
+      <FaUser className="!text-red-600 !text-3xl" />
+    ) : (
+      <FaUser className="!text-green-600 !text-3xl" />
+    );
+  
     return (
       <g onClick={toggleNode} style={{ cursor: 'pointer' }}>
         <circle r={30} fill={nodeColor} />
         <foreignObject x={-20} y={-20} width={40} height={40}>
-          <div className="w-full h-full flex justify-center items-center">{IconComponent}</div>
+          <div className="w-full h-full flex justify-center items-center">
+            {IconComponent}
+          </div>
         </foreignObject>
         <text
           x={0}
@@ -132,6 +125,7 @@ const Team = () => {
       </g>
     );
   };
+  
 
   return (
     <>
@@ -223,13 +217,13 @@ const Team = () => {
               Joining Date
             </p>
             <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.joining_date}
+              {selectedNode?.joining_date ? moment(selectedNode?.joining_date)?.format("DD-MM-YYYY"): "--"}
             </p>
             <p className="px-4 py-2 text-center font-semibold border border-gray-700">
               Topup Date
             </p>
             <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.topup_date === '0' ? '--' : moment(selectedNode?.topup_date)?.format("DD-MM-YYYY")}
+              {selectedNode?.topup_date ? moment(selectedNode?.topup_date)?.format("DD-MM-YYYY"): "--"}
             </p>
             {/*    <p className="px-4 py-2 text-center font-semibold border border-gray-700">
               Email

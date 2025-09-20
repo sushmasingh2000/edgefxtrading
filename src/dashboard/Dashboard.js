@@ -32,7 +32,7 @@ const Dashboard = () => {
 
   const user_profile = profile?.data?.result?.[0] || {};
 
-  const statCards = [
+  const statCjhgbjbards = [
     // { title: "Main Wallet", value: Number(user_profile?.jnr_curr_wallet || 0)?.toFixed(2), icon: <FaWallet /> },
     // { title: "Fund Wallet", value: Number(dashboard?.td_wallet_amount || 0)?.toFixed(2), icon: <FaChartLine /> },
     { title: "Current Rank", value: user_profile?.rank_name || "--", icon: <FaDollarSign /> },
@@ -48,6 +48,15 @@ const Dashboard = () => {
     // { title: "Withdrawal Pending", value: Number(dashboard?.total_pending_withdrawal || 0)?.toFixed(2), icon: <FaUserFriends /> },
 
   ];
+  const statCards = [
+    { title: "Current Rank", value: user_profile?.rank_name || "--", icon: <FaDollarSign />, isCurrency: false },
+    { title: "Total Income", value: Number(user_profile?.jnr_total_income || 0)?.toFixed(2), icon: <FaDollarSign />, isCurrency: true },
+    { title: "Total Team", value: Number(dashboard?.jnr_total_team || 0)?.toFixed(2), icon: <FaUsers />, isCurrency: false },
+    { title: "Total Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap />, isCurrency: true },
+    { title: "Direct Team", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: false },
+    { title: " Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
+  ];
+  
   const functionTOCopy = (value) => {
     copy(value);
     toast.success("Copied to clipboard!", { id: 1 });
@@ -74,13 +83,13 @@ const Dashboard = () => {
             <button
               onClick={() => functionTOCopy(frontend + "/register?referral_id=" + user_profile?.lgn_cust_id)}
               className="border border-white p-1 text-sm "><CopyAll className="!text-white" /></button>
-            <div className="flex space-x-4 text-xl">
+            {/* <div className="flex space-x-4 text-xl">
               <i className="fab fa-whatsapp"></i>
               <i className="fab fa-telegram"></i>
               <i className="fab fa-facebook"></i>
               <i className="fab fa-instagram"></i>
               <i className="fab fa-twitter"></i>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -127,7 +136,10 @@ const Dashboard = () => {
                   className="w-10 h-10 mb-3"
                 />
                 <div className="text-[14px] font-semibold text-gray-700">{card.title}</div>
-                <div className="text-[16px] text-black font-bold mt-1">${card.value}</div>
+                <div className="text-[16px] text-black font-bold mt-1">
+  {card.isCurrency ? `$${card.value}` : card.value}
+</div>
+
               </div>
             ))}
           </div>
