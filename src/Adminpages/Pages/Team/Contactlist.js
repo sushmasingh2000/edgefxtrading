@@ -66,8 +66,8 @@ const ContactDetail = () => {
         return [
             <span> {index + 1}</span>,
             <span>{row.cs_name}</span>,
-            <span>{row?.cs_phone}</span>,
             <span>{row.cs_email}</span>,
+            <span>{row?.cs_phone}</span>,
             <span>{row.cs_query}</span>,
             <span>{row?.cs_msg}</span>,   
             <span>{row.cs_created_at ? moment?.utc(row.cs_created_at).format("DD-MM-YYYY") : "--"}</span>,

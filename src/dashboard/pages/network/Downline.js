@@ -25,7 +25,7 @@ const Downline = () => {
     })
     const { data } = useQuery(
         ['data-downline', fk.values.search, fk.values.start_date, fk.values.end_date, fk.values.level_id, page],
-        () => apiConnectorPost(endpoint.network_downline_api, {
+        () => apiConnectorPost(endpoint.get_downline_api, {
             search: fk.values.search,
             level_id:  10,
             start_date: fk.values.start_date,

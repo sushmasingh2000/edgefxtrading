@@ -27,7 +27,7 @@ const JoinMember = () => {
   const { data, isLoading } = useQuery(
     ['get_direct_referral', fk.values.search, fk.values.start_date, fk.values.end_date, page],
     () =>
-      apiConnectorPost(endpoint?.network_downline_api, {
+      apiConnectorPost(endpoint?.get_downline_api, {
         search: fk.values.search,
         level_id: 1,
         start_date: fk.values.start_date,

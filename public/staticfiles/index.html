@@ -63,8 +63,8 @@
                                     <ul class="navigation clearfix">
                                         <li class="#"><a href="index.html">Home</a></li>
                                         <li class="#"><a href="#about">About Us</a></li>
-                                        <li class="#"><a href="assets/images/edgefx_uk_-4.pdf" target="_blank">Business
-                                                Plan</a></li>
+                                        <!-- <li class="#"><a href="assets/images/edgefx_uk_-4.pdf" target="_blank">Business
+                                                Plan</a></li> -->
                                         <li class="#"><a href="#gallery">Gallery</a></li>
                                         <li class="#"><a href="#contact">Contact Us</a></li>
                                         <li class="#"><a onclick="parent.postMessage('goToLogin', '*')">Login</a></li>
@@ -541,7 +541,7 @@
         <!-- benefits-section end -->
 
         <!-- contact-section -->
-        <section class="contact-section sec-pad centred">
+        <section class="contact-section sec-pad centred" id="contact">
             <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-33.png);"></div>
             <div class="auto-container">
                 <div class="sec-title light">
@@ -841,13 +841,12 @@
                     },
                     body: JSON.stringify(payload),
                 });
-
-                if (response.data?.success) {
-                    const result = await response.json();
+                const result = await response.json();
+                if (result.success) {
                     alert("Data has successfully saved!");
                     document.getElementById("contact-form").reset();
                 } else {
-                    alert("Everything is required");
+                    alert(result.message || "Something went wrong."); // ✅ Show error message
                 }
             } catch (error) {
                 console.error("Error submitting form:", error);

@@ -10,6 +10,8 @@ export const endpoint = {
   trader_registration_api: `${domain}/api/v1/trader-registration`,
   trader_profile_api: `${domain}/api/v1/trader-profile-details`,
   roi_income_api: `${domain}/api/v1/get-income-details`,
+  
+  get_downline_api: `${domain}/api/v1/get-downline-team`,
   network_downline_api: `${domain}/api/v1/tree-data`,
   member_profile_detail: `${domain}/api/v1/member-profile-details`,
   add_user_withdrawal: `${domain}/api/v1/user-withdrawal-req`,
