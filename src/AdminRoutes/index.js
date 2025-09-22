@@ -15,6 +15,7 @@ import TraderList from "../Adminpages/Pages/Team/TraderList";
 import UserDetail from "../Adminpages/Pages/Team/User";
 import TopUp from "../Adminpages/Pages/Topup";
 import TopUpDetail from "../Adminpages/Pages/TopUP/TopUpDetail";
+import AdminTicketList from "../Adminpages/Ticket/List";
 
 
 export const adminroutes = [ 
@@ -109,6 +110,12 @@ export const adminroutes = [
     path: "/contact",
     component: <ContactDetail/>,
     navItem: "Contact ",
+  },
+  {
+    id: 43,
+    path: "/ticket_list",
+    component: <AdminTicketList/>,
+    navItem: "Ticket ",
   },
   {
     id: 44,

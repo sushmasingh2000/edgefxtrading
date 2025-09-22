@@ -105,6 +105,15 @@ const Sidebar = () => {
       external: true,
       download: false, // true if you want to auto-download
     },
+    {
+      title: "Support",
+      icon: <FaNetworkWired />,
+      subItems: [
+        // { title: "Ticket", path: "/add_ticket" },
+        { title: "Ticket", path: "/chat_ticket" },
+        // { title: "Inbox", path: "/add_ticket" },
+      ],
+    },
 
     // { title: "Support", icon: <FaHeadset />, path: "/dashboard" },
     {

@@ -7,7 +7,7 @@ import logo from "../assets/favicon.png";
 import { useEffect, useState } from "react";
 import Loader from "../Shared/Loader";
 import { apiConnectorPost } from "../utils/APIConnector";
-import body from "../assets/body-bg.png";
+import bgVideo from "../assets/bluewhite.mp4";
 import Swal from "sweetalert2";
 
 
@@ -101,16 +101,20 @@ const Registration = () => {
     <>
       <Loader isLoading={loding} />
       <div
-        className="flex justify-center items-center min-h-screen"
-        style={{
-          backgroundImage: `url(${body})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+        className="flex justify-center items-center min-h-screen">
+          <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
+                >
+                    <source src={bgVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
 
         <div
-          className="w-full max-w-lg lg:p-6 p-4 border-border-color-green border rounded-xl shadow-2xl" >
+          className="w-full max-w-lg lg:p-6 p-4 border-border-color-green bg-[#000000db] bg-opacity-20 border rounded-xl shadow-2xl" >
           <div className="flex justify-center my-2 cursor-pointer" onClick={() => navigate("/")}>
 
             <img src={logo} alt="Logo" className="h-14 " />

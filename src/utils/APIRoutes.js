@@ -1,4 +1,4 @@
-// export const domain = 'http://192.168.243.250:9038';
+// export const domain = 'http://192.168.18.101:9038';
 export const domain = 'https://edgefx.uk';
 export const frontend = 'https://edgefx.uk';
 export const dollar = "$"
@@ -58,4 +58,13 @@ export const endpoint = {
   delete_Gallery: `${domain}/api/v1/delete-image-galary`,
   status_Gallery: `${domain}/api/v1/update-image-galary-status`,
   contact_support: `${domain}/api/v1/contact-support-list`,
+
+
+  create_ticket: `${domain}/api/v1/create-ticket`,
+  send_ticket_reply: `${domain}/api/v1/sender-reply`,
+  get_all_ticket: `${domain}/api/v1/all-tickets`,
+  get_ticket_replies: `${domain}/api/v1/ticket`,
+  my_tickets: `${domain}/api/v1/my-tickets`,
+  close_tickets: `${domain}/api/v1/close-ticket`,
+  
 };

@@ -55,6 +55,8 @@ const Dashboard = () => {
     { title: "Total Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap />, isCurrency: true },
     { title: "Direct Team", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: false },
     { title: " Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
+    { title: " Level Income", value: Number(dashboard?.jnr_level_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
+    { title: " Reward Income", value: Number(dashboard?.jnr_reward_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
   ];
   
   const functionTOCopy = (value) => {

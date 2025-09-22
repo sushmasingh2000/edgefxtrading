@@ -14,6 +14,8 @@ import JoinMember from '../dashboard/pages/network/JoinMember';
 import PayoutDetails from '../dashboard/pages/Payoutdetails';
 import Profile from '../dashboard/pages/Profile';
 import Team from '../dashboard/pages/TeamTree/Team';
+import TicketRaise from '../dashboard/pages/Ticket/AddTicket';
+import UserSupportChat from '../dashboard/pages/Ticket/ChatTicket';
 import TradingRegistration from '../dashboard/pages/TradingRegistration';
 import Wallet from '../dashboard/pages/Wallet';
 import Withdrawal from '../dashboard/pages/Withdrawal';
@@ -87,5 +89,12 @@ export const routes = [
     path: '/downline',
     element: (<MainLayout><Downline /> </MainLayout>),
   },
-  
+   {
+    path: '/add_ticket',
+    element: (<MainLayout><TicketRaise /> </MainLayout>),
+  },
+   {
+    path: '/chat_ticket',
+    element: (<MainLayout><UserSupportChat /> </MainLayout>),
+  },
 ];

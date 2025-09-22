@@ -658,4 +658,15 @@ export const all_Data = [
     ),
     subcomponent: [],
   },
+  {
+    id: 1,
+    navLink: "/ticket_list",
+    navItem: "Ticket List",
+    navIcon: (
+      <span>
+        <LeaderboardSharp color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
 ];
