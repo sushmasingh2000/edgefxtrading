@@ -77,7 +77,7 @@ const AdminTicketChat = ({ ticket }) => {
             <img
               src={ticket.attachment.startsWith("http") ? ticket.attachment : `${domain}${ticket.attachment}`}
               alt="Ticket Attachment"
-              className="max-w-full h-auto rounded mt-1"
+              className="max-w-full h-28 rounded mt-1"
             />
           </div>
         )}
@@ -101,7 +101,7 @@ const AdminTicketChat = ({ ticket }) => {
               >
                 <p>{reply.message}</p>
                 {reply.attachment && (
-                  <img src={domain + reply?.attachment} alt=""/>
+                  <img src={domain + reply?.attachment} alt="" className="h-28"/>
                 )}
               </div>
             </div>
