@@ -1,4 +1,4 @@
-// export const domain = 'http://192.168.18.101:9038';
+// export const domain = 'http://192.168.18.214:9038';
 export const domain = 'https://edgefx.uk';
 export const frontend = 'https://edgefx.uk';
 export const dollar = "$"
@@ -21,10 +21,10 @@ export const endpoint = {
   withdrawal_request_status: `${domain}/api/v1/withdrawal-req-approval`,
   dashboard_data: `${domain}/api/v1/user-dashboard-data`,
   admin_dashboard: `${domain}/api/v1/admin-dashboard-data`,
+  reward_manual: `${domain}/api/v1/reward-income-credited`,
 
 
 
-  admin_fund_memeber: `${domain}/api/v1/admin-fund-member-topup`,
   topup_report: `${domain}/api/v1/topup-report`,
   admin_topup_report: `${domain}/api/v1/admin-topup-report`,
   user_details: `${domain}/api/v1/user-invester-details`,

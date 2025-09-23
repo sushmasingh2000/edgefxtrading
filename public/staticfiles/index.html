@@ -746,7 +746,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: "http://edgefx.uk/api/v1/get-image-galary",
+                url: "https://edgefx.uk/api/v1/get-image-galary",
                 method: "GET",
                 success: function (response) {
                     console.log("Gallery API Response:", response.result);
@@ -855,6 +855,14 @@
 
 
     </form>
+<script>
+    document.querySelectorAll('.mobile-menu .menu-box a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.mobile-menu').classList.remove('menu-visible');
+            document.body.classList.remove('mobile-menu-visible');
+        });
+    });
+</script>
 
 
 </body>

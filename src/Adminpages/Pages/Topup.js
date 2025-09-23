@@ -12,7 +12,7 @@ const TopUp = () => {
 
   const initialValues = {
     user_id: "",
-    topup_type: "RealTopup",
+    description: "",
   };
 
   const fk = useFormik({
@@ -20,10 +20,9 @@ const TopUp = () => {
     enableReinitialize: true,
     onSubmit: () => {
       const reqbody = {
-        // pack_id: fk.values.topup_type === "special" ? 11000 : 1100, // ✅ set pack_id based on selection
-        pack_id: 1,
-        user_id: fk.values.user_id,
-        topup_type: fk.values.topup_type==="RealTopup"? 2 : 3
+        req_amount: fk.values.amount,
+        customer_id: fk.values.user_id,
+        descripton: fk.values.description 
       };
       TopUpFn(reqbody);
     },
@@ -32,7 +31,7 @@ const TopUp = () => {
   async function TopUpFn(reqbody) {
     try {
       setLoding(true);
-      const res = await apiConnectorPost(endpoint?.admin_fund_memeber, reqbody);
+      const res = await apiConnectorPost(endpoint?.reward_manual, reqbody);
       toast(res?.data?.message);
       fk.handleReset();
     } catch (e) {
@@ -43,7 +42,7 @@ const TopUp = () => {
 
   const Customerfunction = async () => {
     const reqbody = {
-      user_id: fk.values.user_id,
+      customer_id: fk.values.user_id,
     };
     try {
       const res = await apiConnectorPost(endpoint?.customer_api, reqbody);
@@ -67,11 +66,11 @@ const TopUp = () => {
   return (
     <div className="!flex justify-center items-center w-full">
       <div className="p-5 lg:w-1/2 md:w-3/4 w-full bg-white !bg-opacity-30 rounded-lg">
-        <p className="!text-center font-bold !py-4 !pb-10 text-lg">Add TopUp</p>
+        <p className="!text-center font-bold !py-4 !pb-10 text-lg">Add Reward</p>
 
         <div className="grid grid-cols-1 gap-[6%] gap-y-4">
           {/* ✅ Radio Button Group */}
-          <div>
+          {/* <div>
             <p className="my-2 font-bold">TopUp Type</p>
             <RadioGroup
               row
@@ -82,19 +81,7 @@ const TopUp = () => {
               <FormControlLabel value="RealTopup" control={<Radio />} label="Real TopUp" />
               <FormControlLabel value="Special Topup" control={<Radio />} label="Special TopUp" />
             </RadioGroup>
-          </div>
-          <div>
-            <p className="my-2 font-bold">Package Amount</p>
-            <TextField
-              fullWidth
-              id="pack_id"
-              name="pack_id"
-              value="1100"
-              disabled
-            />
-          </div>
-
-          {/* ✅ User ID Input */}
+          </div> */}
           <div>
             <p>UserID</p>
             <TextField
@@ -105,6 +92,27 @@ const TopUp = () => {
               onChange={fk.handleChange}
             />
             <span className="text-red-800 !px-2">{data?.jnr_name}</span>
+          </div>
+          <div>
+            <p className="my-2 font-bold"> Amount</p>
+            <TextField
+              fullWidth
+              id="amount"
+              name="amount"
+              value={fk.values.amount}
+              onChange={fk.handleChange}
+
+            />
+          </div>
+          <div>
+            <p className="my-2 font-bold"> Description</p>
+            <TextField
+              fullWidth
+              id="description"
+              name="description"
+              value={fk.values.description}
+              onChange={fk.handleChange}
+            />
           </div>
         </div>
 

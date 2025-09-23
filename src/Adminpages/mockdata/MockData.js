@@ -3,6 +3,7 @@ import {
   Games,
   Image,
   LeaderboardSharp,
+  LockReset,
   LoginOutlined,
   MonetizationOn,
   Money,
@@ -635,17 +636,17 @@ export const all_Data = [
   //     </span>
   //   ),
   // },
-  // {
-  //   id: 8,
-  //   navLink: "/change-password",
-  //   navItem: "Change Password",
-  //   navIcon: (
-  //     <span>
-  //       <LockResetIcon color="#15317E" fontSize="medium" />
-  //     </span>
-  //   ),
-  //   subcomponent: [],
-  // },
+  {
+    id: 8,
+    navLink: "/topup",
+    navItem: "Manual Reward",
+    navIcon: (
+      <span>
+        <LockReset color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
 
  {
     id: 1,

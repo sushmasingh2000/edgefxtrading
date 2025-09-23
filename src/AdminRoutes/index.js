@@ -121,7 +121,7 @@ export const adminroutes = [
     id: 44,
     path: "/topup",
     component: <TopUp/>,
-    navItem: "Top Up",
+    navItem: "Manual Reward ",
   },
     {
     id: 45,

@@ -146,7 +146,7 @@ const Gallery = () => {
                                 <td className="px-4 py-2">
                                     <img
                                         src={domain + Gallery.gal_image}
-                                        alt={""}
+                                        alt={"ghgh"}
                                         className="w-16 h-auto rounded"
                                     />
                                 </td>

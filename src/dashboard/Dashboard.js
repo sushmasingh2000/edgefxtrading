@@ -52,7 +52,7 @@ const Dashboard = () => {
     { title: "Current Rank", value: user_profile?.rank_name || "--", icon: <FaDollarSign />, isCurrency: false },
     { title: "Total Income", value: Number(user_profile?.jnr_total_income || 0)?.toFixed(2), icon: <FaDollarSign />, isCurrency: true },
     { title: "Total Team", value: Number(dashboard?.jnr_total_team || 0)?.toFixed(2), icon: <FaUsers />, isCurrency: false },
-    { title: "Total Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap />, isCurrency: true },
+    { title: " Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap />, isCurrency: true },
     { title: "Direct Team", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: false },
     { title: " Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
     { title: " Level Income", value: Number(dashboard?.jnr_level_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
@@ -165,7 +165,7 @@ const Dashboard = () => {
             <img
               src={domain + user_profile?.popup_img}
               alt="Welcome"
-              className="w-full h-auto object-contain rounded"
+              className="w-full h-72 object-contain rounded"
             />
 
             <div className="mt-4 flex justify-center">
