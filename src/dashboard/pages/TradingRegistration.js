@@ -48,14 +48,14 @@ const TradingRegistration = () => {
         ? "1"
         : trader_data?.td_base_currency === "USC"
           ? "2"
-          : "",
+          : "2",
     group_type:
       trader_data?.td_group_type === "Cent Group"
         ? "1"
         : trader_data?.td_group_type === "USD Group"
           ? "2"
           : trader_data?.td_group_type === "PAMM Group"
-            ? "3" : "-",
+            ? "3" : "1",
   };
 
   const fk = useFormik({
@@ -107,7 +107,7 @@ const TradingRegistration = () => {
           <form className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
             {[
               { id: "trad_name", label: "Invester Name" },
-              { id: "account_id", label: "Account ID (MT4 / MT5)" },
+              { id: "account_id", label: "Account ID (MT5)" },
               { id: "wallet_amount", label: "USD Amount", type: "number" },
             ].map(({ id, label, type = "text" }) => (
               <div key={id}>

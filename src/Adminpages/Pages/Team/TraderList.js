@@ -115,6 +115,7 @@ const TraderList = () => {
         <span>Currency</span>,
         <span>Broker Name</span>,
         <span>Group Type</span>,
+        <span>Mt5</span>,
         <span>Password</span>,
         <span>Verification Status</span>,
         <span>Verification Date</span>,
@@ -131,6 +132,7 @@ const TraderList = () => {
             <span>{row.td_base_currency || "--"}</span>,
             <span>{row.td_broker_name || "--"}</span>,
             <span>{row.td_group_type || "--"}</span>,
+           <span>{row?.td_account_id || "--"}</span>,
             <span>{row?.td_password || "--"}</span>,
             <span>
                 <select

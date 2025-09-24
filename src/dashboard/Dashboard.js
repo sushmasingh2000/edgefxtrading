@@ -100,7 +100,7 @@ const Dashboard = () => {
           <div className="bg-[#64b1b8] text-white px-4 py-1 rounded-t-md text-sm  flex font-semibold">
             News & Updates
           </div>
-         <div>
+         <div className="w-full">
            <marquee className="text-white text-sm mx-5 mt-2">
             {dashboard?.news_updates}
           </marquee>
