@@ -163,7 +163,6 @@ const REWARD = () => {
           }
       );
       const user_profile = profile?.data?.result?.[0] || {};
-      console.log(user_profile?.jnr_curr_rank)
       const jnr_rank = Number(user_profile?.jnr_curr_rank) || 0;
 
   const tablerow = [
