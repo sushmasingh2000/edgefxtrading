@@ -32,7 +32,7 @@ const TraderList = () => {
 
     })
     const { data, isLoading } = useQuery(
-        ['get_user_trader', fk.values.search, fk.values.start_date, fk.values.end_date, page , fk.values.group_type],
+        ['get_user_trader', fk.values.search, fk.values.start_date, fk.values.end_date, page, fk.values.group_type],
         () =>
             apiConnectorPost(endpoint?.trader_list_details, {
                 search: fk.values.search,
@@ -40,7 +40,7 @@ const TraderList = () => {
                 end_date: fk.values.end_date,
                 page: page,
                 count: 10,
-                group_type:fk.values.group_type
+                group_type: fk.values.group_type
             }),
         {
             keepPreviousData: true,
@@ -103,7 +103,7 @@ const TraderList = () => {
             toast.error("Something went wrong.");
         } finally {
             setLoading(false);
-            isSwalOpenRef.current = false; 
+            isSwalOpenRef.current = false;
         }
     }, [client, setLoading]);
 
@@ -112,7 +112,7 @@ const TraderList = () => {
         <span>Name</span>,
         <span>Amount</span>,
         <span>Server Name</span>,
-        <span>Currency</span>,
+        // <span>Currency</span>,
         <span>Broker Name</span>,
         <span>Group Type</span>,
         <span>Mt5</span>,
@@ -127,12 +127,12 @@ const TraderList = () => {
         return [
             <span> {index + 1}</span>,
             <span>{row.td_trad_name || "--"}</span>,
-            <span>{row.td_wallet_amount || "--"}</span>,
+            <span>{Number(row.td_wallet_amount || 0)?.toFixed(2) || "--"}</span>,
             <span>{row.td_server_name || "--"}</span>,
-            <span>{row.td_base_currency || "--"}</span>,
+            // <span>{row.td_base_currency || "--"}</span>,
             <span>{row.td_broker_name || "--"}</span>,
             <span>{row.td_group_type || "--"}</span>,
-           <span>{row?.td_account_id || "--"}</span>,
+            <span>{row?.td_account_id || "--"}</span>,
             <span>{row?.td_password || "--"}</span>,
             <span>
                 <select
@@ -143,7 +143,7 @@ const TraderList = () => {
                                 ? "3"
                                 : row?.td_verification_status === "Reject"
                                     ? "2"
-                                    : "" 
+                                    : ""
                     }
                     onChange={(e) => {
                         const currentValue = e.target.value;
@@ -178,8 +178,6 @@ const TraderList = () => {
                     }}
                     color="primary"
                 />
-
-
             </span>,
 
         ];
@@ -216,10 +214,10 @@ const TraderList = () => {
                         className="bg-white bg-opacity-50 border border-gray-600 rounded-full py-2 px-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
                     />
                     <select
-                     className="bg-white bg-opacity-50 border border-gray-600 rounded py-2 px-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
+                        className="bg-white bg-opacity-50 border border-gray-600 rounded py-2 px-3 text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
                         id='group_type'
                         name='group_type'
-                         value={fk.values.group_type}
+                        value={fk.values.group_type}
                         onChange={fk.handleChange}
                     >
                         <option value={"Cent Group"}>Cent Group</option>
