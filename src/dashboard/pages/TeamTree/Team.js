@@ -40,42 +40,38 @@ const Team = () => {
   const buildTreeFromFlatData = (flatData) => {
     const map = {};
     let root = null;
-  
+
     flatData.forEach(item => {
       const formattedNode = {
         ...item,
-        name: item.jnr_name,                         // ✅ needed for renderCustomNode
-        joining_date: item.td_created_at,            // ✅ rename if needed
-        topup_date: item.td_verification_date,       // ✅ rename if needed
+        name: item.jnr_name,
+        joining_date: item.td_created_at,
+        topup_date: item.td_verification_date,
         children: []
       };
-  
+
       map[item.lgn_jnr_id] = formattedNode;
     });
-  
+
     flatData.forEach(item => {
       const node = map[item.lgn_jnr_id];
       const parent = map[item.lgn_spon_id];
-  
+
       if (parent) {
         parent.children.push(node);
       } else {
         root = node;
       }
     });
-  
+
     return root;
   };
-  
-  
-  
-  
 
   const orgChart = useMemo(() => {
     return buildTreeFromFlatData(flatData);
   }, [flatData]);
 
-  // Effect to set translate only when orgChart is ready
+
   useEffect(() => {
     if (treeContainerRef.current && orgChart) {
       const dimensions = treeContainerRef.current.getBoundingClientRect();
@@ -94,7 +90,7 @@ const Team = () => {
     ) : (
       <FaUser className="!text-green-600 !text-3xl" />
     );
-  
+
     return (
       <g onClick={toggleNode} style={{ cursor: 'pointer' }}>
         <circle r={30} fill={nodeColor} />
@@ -125,20 +121,20 @@ const Team = () => {
       </g>
     );
   };
-  
+
 
   return (
     <>
       <div className="flex min-h-screen justify-center items-center ">
         {/* Sidebar Toggle for Mobile */}
-        <div className="md:hidden fixed top-4 right-3 z-50">
+        {/* <div className="md:hidden fixed top-4 right-3 z-50">
           <button
             onClick={() => setShowSidebar(!showSidebar)}
             className="p-2 bg-white rounded-full shadow-lg"
           >
             <WidgetsIcon className="text-black !text-3xl" />
           </button>
-        </div>
+        </div> */}
         {/* Sidebar only developer change  
         <div
           className={`fixed md:static top-0 right-0 z-40 md:h-screen bg-white shadow-md ease-in-out transition-all transition-duration-300 text-black ${
@@ -173,7 +169,7 @@ const Team = () => {
             ))}
           </div>
         </div>
-*/}
+        */}
         {/* Tree Chart */}
         <div
           className={`flex-1  h-screen flex  flex-col justify-center items-center ${showSidebar ? 'pl-[250px]' : 'pl-0'
@@ -205,33 +201,33 @@ const Team = () => {
           'aria-labelledby': 'basic-text',
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose} className='!bg-white'>
           <div className="grid grid-cols-2">
-            <p className="px-4 py-2 text-center text-sm border border-gray-700 font-semibold">
-              Name
+            <p className="p-1 text-center text-xs border border-gray-700 font-semibold">
+              Cust ID
             </p>
-            <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.name}
+            <p className="p-1 text-xs text-center border border-gray-700">
+              {selectedNode?.lgn_cust_id}
             </p>
-            <p className="px-4 py-2 text-center font-semibold border border-gray-700">
+            <p className="p-1 text-center text-xs font-semibold border border-gray-700">
               Joining Date
             </p>
-            <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.joining_date ? moment(selectedNode?.joining_date)?.format("DD-MM-YYYY"): "--"}
+            <p className="p-1 text-xs text-center border border-gray-700">
+              {selectedNode?.td_created_at ? moment(selectedNode?.td_created_at)?.format("DD-MM-YYYY") : "--"}
             </p>
-            <p className="px-4 py-2 text-center font-semibold border border-gray-700">
+            <p className="p-1 text-center text-xs font-semibold border border-gray-700">
               Topup Date
             </p>
-            <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.topup_date ? moment(selectedNode?.topup_date)?.format("DD-MM-YYYY"): "--"}
+            <p className="p-1 text-xs text-center border border-gray-700">
+              {selectedNode?.td_verification_date ? moment(selectedNode?.td_verification_date)?.format("DD-MM-YYYY") : "--"}
             </p>
-            {/*    <p className="px-4 py-2 text-center font-semibold border border-gray-700">
-              Email
+               <p className="p-1 text-center text-xs font-semibold border border-gray-700">
+              Team Buss.
             </p>
-            <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.email}
+            <p className="p-1 text-xs text-center border border-gray-700">
+              {Number(selectedNode?.jnr_total_team_buss || 0)?.toFixed(2)}
             </p>
-            <p className="px-4 py-2 text-center font-semibold border border-gray-700">
+           {/*  <p className="px-4 py-2 text-center font-semibold border border-gray-700">
               Mobile
             </p>
             <p className="px-4 py-2 text-sm text-center border border-gray-700">
