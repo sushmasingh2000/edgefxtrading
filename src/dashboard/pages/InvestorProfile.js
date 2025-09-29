@@ -39,7 +39,7 @@ const InvestorProfile = () => {
                   </div>
                   <div className="flex justify-between py-1 border-b border-gray-700">
                     <span>Wallet Amount:</span>
-                    <span>{Number(trader_data?.td_wallet_amount || 0)?.toFixed(2) || "--"} {trader_data?.td_base_currency}</span>
+                    <span>{Number(trader_data?.td_wallet_amount || 0)?.toFixed(2) || "--"} USD</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-gray-700">
                     <span>Broker Name:</span>

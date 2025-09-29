@@ -11,6 +11,8 @@ import INRPaying from "../Adminpages/Pages/INRPayment/INRPaying";
 import INRPayout from "../Adminpages/Pages/INRPayment/INRPayout";
 import Master from "../Adminpages/Pages/Master";
 import ContactDetail from "../Adminpages/Pages/Team/Contactlist";
+import TraderRejct from "../Adminpages/Pages/Team/subinvestor/InvestorReject";
+import TraderSucess from "../Adminpages/Pages/Team/subinvestor/InvestorSuccess";
 import TraderList from "../Adminpages/Pages/Team/TraderList";
 import UserDetail from "../Adminpages/Pages/Team/User";
 import TopUp from "../Adminpages/Pages/Topup";
@@ -124,6 +126,24 @@ export const adminroutes = [
     navItem: "Manual Reward ",
   },
     {
+    id: 45,
+    path: "/admin_fund",
+    component: <AddAddress/>,
+    navItem: "Fund",
+  },
+  {
+    id: 45,
+    path: "/trader_sucess",
+    component: <TraderSucess/>,
+    navItem: "Verified Investor",
+  },
+  {
+    id: 45,
+    path: "/trader_reject",
+    component: <TraderRejct/>,
+    navItem: "Reject Investor ",
+  },
+  {
     id: 45,
     path: "/admin_fund",
     component: <AddAddress/>,

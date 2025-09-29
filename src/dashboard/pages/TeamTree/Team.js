@@ -237,7 +237,8 @@ const Team = () => {
               Direct Buss.
             </p>
             <p className="px-4 py-2 text-xs  text-center border border-gray-700">
-              {selectedNode?.jnr_direct_business || "--"}
+              {Number(selectedNode?.jnr_direct_business || 0)?.toFixed(2)}
+
             </p>
                <p className="p-1 text-center text-xs font-semibold border border-gray-700">
               Team Buss.

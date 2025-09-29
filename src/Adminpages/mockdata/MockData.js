@@ -69,7 +69,39 @@ export const all_Data = [
         <AddToPhotosIcon color="#15317E" fontSize="medium" />
       </span>
     ),
-    subcomponent: [],
+    subcomponent: [
+       {
+        id: 6.3,
+        navLink: "/trader_detail",
+        navItem: "Investor",
+        navIcon: (
+          <span>
+            <SelfImprovement color="#15317E" fontSize="medium" />
+          </span>
+        ),
+      },
+       {
+        id: 6.3,
+        navLink: "/trader_sucess",
+        navItem: "Verified Investor",
+        navIcon: (
+          <span>
+            <SelfImprovement color="#15317E" fontSize="medium" />
+          </span>
+        ),
+      },
+      
+      {
+        id: 6.3,
+        navLink: "/trader_reject",
+        navItem: "Reject Investor",
+        navIcon: (
+          <span>
+            <SelfImprovement color="#15317E" fontSize="medium" />
+          </span>
+        ),
+      },
+    ],
   },
     {
     id: 6,
