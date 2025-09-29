@@ -207,7 +207,7 @@ const Team = () => {
               Cust ID
             </p>
             <p className="p-1 text-xs text-center border border-gray-700">
-              {selectedNode?.lgn_cust_id}
+              {selectedNode?.lgn_cust_id || "--"}
             </p>
             <p className="p-1 text-center text-xs font-semibold border border-gray-700">
               Joining Date
@@ -218,8 +218,26 @@ const Team = () => {
             <p className="p-1 text-center text-xs font-semibold border border-gray-700">
               Topup Date
             </p>
-            <p className="p-1 text-xs text-center border border-gray-700">
+            <p className="p-1 text-xs font-semibold text-center border border-gray-700">
               {selectedNode?.td_verification_date ? moment(selectedNode?.td_verification_date)?.format("DD-MM-YYYY") : "--"}
+            </p>
+              <p className="px-4 py-2 text-xs text-center font-semibold border border-gray-700">
+              Direct Team
+            </p>
+            <p className="px-4 py-2 text-xs  text-center border border-gray-700">
+              {selectedNode?.jnr_direct_team || "--"}
+            </p>
+              <p className="px-4 py-2 text-center text-xs font-semibold border border-gray-700">
+              Direct TopUp Mem.
+            </p>
+            <p className="px-4 py-2 text-xs  text-center border border-gray-700">
+              {selectedNode?.jnr_direct_topup_mem || "--"}
+            </p>
+             <p className="px-4 py-2 text-center text-xs font-semibold border border-gray-700">
+              Direct Buss.
+            </p>
+            <p className="px-4 py-2 text-xs  text-center border border-gray-700">
+              {selectedNode?.jnr_direct_business || "--"}
             </p>
                <p className="p-1 text-center text-xs font-semibold border border-gray-700">
               Team Buss.
@@ -227,12 +245,7 @@ const Team = () => {
             <p className="p-1 text-xs text-center border border-gray-700">
               {Number(selectedNode?.jnr_total_team_buss || 0)?.toFixed(2)}
             </p>
-           {/*  <p className="px-4 py-2 text-center font-semibold border border-gray-700">
-              Mobile
-            </p>
-            <p className="px-4 py-2 text-sm text-center border border-gray-700">
-              {selectedNode?.mobile}
-            </p> */}
+          
           </div>
         </MenuItem>
       </Menu>
