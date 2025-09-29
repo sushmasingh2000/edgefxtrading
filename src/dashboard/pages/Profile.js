@@ -157,8 +157,8 @@ const Profile = () => {
                             </div>
                             <div className="flex justify-between py-1">
                                 <span>Account Status:</span>
-                                <span className={`font-medium ${user_profile?.lgn_is_blocked === "No" ? "text-green-400" : "text-red-400"}`}>
-                                    {user_profile?.lgn_is_blocked === "No" ? "Active" : "Deactive"}
+                                <span className={`font-medium ${user_profile?.td_account_status === "Active" ? "text-green-400" : "text-red-400"}`}>
+                                    {user_profile?.td_account_status}
                                 </span>
                             </div>
                         </div>
