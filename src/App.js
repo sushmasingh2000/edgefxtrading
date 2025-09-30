@@ -27,18 +27,20 @@ const App = () => {
         <Route path="/forgot" element={<ForgotPassword />} />
         {/* //admin */}
         <Route path="/adminlogin" element={<LogIn />} />
-        
-
 
         {user ? (
           adminroutes.map((route, i) => (
-            <Route key={i} path={route.path} element=
-              {<AdminLayout
-                id={route.id}
-                navLink={route.path}
-                navItem={route.navItem}
-                component={route.component}
-              />}
+            <Route
+              key={i}
+              path={route.path}
+              element={
+                <AdminLayout
+                  id={route.id}
+                  navLink={route.path}
+                  navItem={route.navItem}
+                  component={route.component}
+                />
+              }
             />
           ))
         ) : (

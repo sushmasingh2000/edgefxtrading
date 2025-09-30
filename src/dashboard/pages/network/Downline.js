@@ -1,81 +1,90 @@
-import React, { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
-import { apiConnectorPost } from '../../../utils/APIConnector';
-import { endpoint } from '../../../utils/APIRoutes';
-import CustomTable from '../../../Shared/CustomTable';
-import CustomToPagination from '../../../Shared/Pagination';
-import { useFormik } from 'formik';
-import moment from 'moment';
+import React, { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { apiConnectorPost } from "../../../utils/APIConnector";
+import { endpoint } from "../../../utils/APIRoutes";
+import CustomTable from "../../../Shared/CustomTable";
+import CustomToPagination from "../../../Shared/Pagination";
+import { useFormik } from "formik";
+import moment from "moment";
 
 const Downline = () => {
-    const [page, setPage] = useState(1)
-    const initialValues = {
-        level_id: "1",
-        search: '',
-        page: "",
+  const [page, setPage] = useState(1);
+  const initialValues = {
+    level_id: "1",
+    search: "",
+    page: "",
+    count: 10,
+    start_date: "",
+    end_date: "",
+  };
+
+  const fk = useFormik({
+    initialValues: initialValues,
+    enableReinitialize: true,
+  });
+  const { data, isLoading } = useQuery(
+    [
+      "data-downline",
+      fk.values.search,
+      fk.values.start_date,
+      fk.values.end_date,
+      fk.values.level_id,
+      page,
+    ],
+    () =>
+      apiConnectorPost(endpoint.get_downline_api, {
+        search: fk.values.search,
+        level_id: 500,
+        start_date: fk.values.start_date,
+        end_date: fk.values.end_date,
+        page: page,
         count: 10,
-        start_date: '',
-        end_date: '',
-    };
+      }),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 
-    const fk = useFormik({
-        initialValues: initialValues,
-        enableReinitialize: true,
+  const allData = data?.data?.result || [];
+  // const checked = allData?.data?.filter((i) => i?.Level_id !== 0 && allData)
 
-    })
-    const { data } = useQuery(
-        ['data-downline', fk.values.search, fk.values.start_date, fk.values.end_date, fk.values.level_id, page],
-        () => apiConnectorPost(endpoint.get_downline_api, {
-            search: fk.values.search,
-            level_id:  10,
-            start_date: fk.values.start_date,
-            end_date: fk.values.end_date,
-             page: page,
-             count: 10,
-        }),
-        {
-            refetchOnMount: false,
-            refetchOnReconnect: false,
-            retry: false,
-            retryOnMount: false,
-            refetchOnWindowFocus: false,
-        }
-    );
-
-    const allData = data?.data?.result || [];
-    // const checked = allData?.data?.filter((i) => i?.Level_id !== 0 && allData)
-
-    const tablehead = [
-        <span>S.No.</span>,
-        <span>Login Id</span>,
-        <span>User Name</span>,
-        <span>Amount </span>,
-        <span>Group Type</span>,
-        <span>Level</span>,
-        <span>Status</span>,
-        <span> Date</span>,
-
-
+  const tablehead = [
+    <span>S.No.</span>,
+    <span>Login Id</span>,
+    <span>User Name</span>,
+    <span>Amount </span>,
+    <span>Group Type</span>,
+    <span>Level</span>,
+    <span>Status</span>,
+    <span> Date</span>,
+  ];
+  const tablerow = allData?.data?.map((row, index) => {
+    return [
+      <span> {index + 1}</span>,
+      <span>{row.lgn_cust_id}</span>,
+      <span>{row.jnr_name || "--"}</span>,
+      <span> {Number(row.td_wallet_amount || 0)?.toFixed(2) || 0}</span>,
+      <span>{row.td_group_type}</span>,
+      <span>Level {row.level_id}</span>,
+      <span>{row.td_verification_status}</span>,
+      <span>
+        {row.td_created_at
+          ? moment(row.td_created_at)?.format("DD-MM-YYYY")
+          : "--"}
+      </span>,
     ];
-    const tablerow = allData?.data?.map((row, index) => {
-        return [
-            <span> {index + 1}</span>,
-            <span>{row.lgn_cust_id}</span>,
-            <span>{row.jnr_name || '--'}</span>,
-            <span> {Number(row.td_wallet_amount || 0)?.toFixed(2) || 0}</span>,
-            <span>{row.td_group_type}</span>,
-            <span>Level {row.level_id}</span>,
-            <span>{row.td_verification_status}</span>,
-            <span>{row.td_created_at ? moment(row.td_created_at)?.format("DD-MM-YYYY") : "--"}</span>,
-        ];
-    });
-    return (
-        <div className="p-2">
-            <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700 mb-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-200">Downline</h2>
+  });
+  return (
+    <div className="p-2">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700 mb-6">
+        <h2 className="text-xl font-semibold mb-4 text-gray-200">Downline</h2>
 
-                <div className="flex flex-col sm:flex-wrap md:flex-row items-center gap-3 sm:gap-4 w-full text-sm sm:text-base">
-                    {/* <input
+        <div className="flex flex-col sm:flex-wrap md:flex-row items-center gap-3 sm:gap-4 w-full text-sm sm:text-base">
+          {/* <input
                         type="date"
                         name="start_date"
                         id="start_date"
@@ -100,7 +109,7 @@ const Downline = () => {
                         placeholder="User ID"
                         className="bg-gray-700 border border-gray-600 rounded-full py-2 px-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto text-sm"
                     /> */}
-                    {/* <select
+          {/* <select
                         name="level_id"
                         id="level_id"
                         value={fk.values.level_id}
@@ -119,7 +128,7 @@ const Downline = () => {
                         <option value="10">Level 10</option>
                     </select> */}
 
-                    {/* <button
+          {/* <button
                         onClick={() => {
                             setPage(1);
                             client.invalidateQueries(["get_direct"]);
@@ -138,24 +147,20 @@ const Downline = () => {
                     >
                         Clear
                     </button> */}
-                </div>
-            </div>
-
-
-            {/* Main Table Section */}
-            <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700">
-                <CustomTable
-                    tablehead={tablehead}
-                    tablerow={tablerow}
-                />
-                <CustomToPagination
-                    page={page}
-                    setPage={setPage}
-                    data={allData}
-                />
-            </div>
         </div>
-    );
+      </div>
+
+      {/* Main Table Section */}
+      <div className="bg-gray-800 rounded-lg shadow-lg p-3 text-white border border-gray-700">
+        <CustomTable
+          tablehead={tablehead}
+          tablerow={tablerow}
+          isLoading={isLoading}
+        />
+        <CustomToPagination page={page} setPage={setPage} data={allData} />
+      </div>
+    </div>
+  );
 };
 
 export default Downline;
