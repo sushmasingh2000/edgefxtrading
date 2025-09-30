@@ -102,16 +102,16 @@ const Registration = () => {
       <Loader isLoading={loding} />
       <div
         className="flex justify-center items-center min-h-screen">
-          <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
-                >
-                    <source src={bgVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
+        >
+          <source src={bgVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
         <div
           className="w-full max-w-lg lg:p-6 p-4 border-border-color-green bg-[#000000db] bg-opacity-20 border rounded-xl shadow-2xl" >
@@ -184,7 +184,15 @@ const Registration = () => {
                   className="w-full p-3 mt-1 border text-black placeholder:text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-border-color-green "
                   required
                 />
-                <span className="text-white !px-2">{data?.jnr_name}</span>
+                {fk.values.referral_id && (
+                  <span className="text-white !px-2"><span className="text-white !px-2">
+                    {data
+                      ? (data.jnr_name ? "Active" : "")
+                      : "Invalid Referral Id"}
+                  </span> </span>
+                )}
+
+
               </div>
 
             </div>

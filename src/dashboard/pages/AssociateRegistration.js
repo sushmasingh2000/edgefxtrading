@@ -89,10 +89,10 @@ const AssociateRegistration = () => {
 
                     <form className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
                         {[
-                           
+
                             { id: "full_name", label: "Full Name" },
                             { id: "email", label: "Email", type: "email" },
-                            { id: "mobile", label: "Mobile",},
+                            { id: "mobile", label: "Mobile", },
                             { id: "password", label: "Password" },
                             { id: "referral_id", label: "Refferral" },
                         ].map(({ id, label, type = "text" }) => (
@@ -110,10 +110,15 @@ const AssociateRegistration = () => {
                                     className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                                     required
                                 />
-                            {id==="referral_id" && (
-                                <span className="text-white !px-2">{data?.jnr_name}</span>
 
-                             )}
+                                {id === "referral_id" && (
+                                    <span className="text-white !px-2"><span className="text-white !px-2">
+                                        {data
+                                            ? (data.jnr_name ? "Active" : "")
+                                            : "Invalid Referral Id"}
+                                    </span> </span>
+                                )}
+
                             </div>
                         ))}
                     </form>

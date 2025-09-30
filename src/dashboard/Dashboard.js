@@ -160,8 +160,7 @@ const Dashboard = () => {
           }}
         >
           <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">📰 News & Updates</h2>
-
+            <h2 className="text-xl font-semibold text-gray-800 mb-4"> 📰 News & Updates</h2>
             <img
               src={domain + user_profile?.popup_img}
               alt="Welcome"
