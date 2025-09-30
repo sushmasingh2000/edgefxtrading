@@ -58,7 +58,7 @@ const Dashboard = () => {
     { title: " Level Income", value: Number(dashboard?.jnr_level_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
     { title: " Reward Income", value: Number(dashboard?.jnr_reward_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
   ];
-  
+
   const functionTOCopy = (value) => {
     copy(value);
     toast.success("Copied to clipboard!", { id: 1 });
@@ -100,11 +100,11 @@ const Dashboard = () => {
           <div className="bg-[#64b1b8] text-white px-4 py-1 rounded-t-md text-sm  flex font-semibold">
             News & Updates
           </div>
-         <div className="w-full">
-           <marquee className="text-white text-sm mx-5 mt-2">
-            {dashboard?.news_updates}
-          </marquee>
-         </div>
+          <div className="w-full">
+            <marquee className="text-white text-sm mx-5 mt-2">
+              {dashboard?.news_updates}
+            </marquee>
+          </div>
         </div>
 
 
@@ -139,8 +139,8 @@ const Dashboard = () => {
                 />
                 <div className="text-[14px] font-semibold text-gray-700">{card.title}</div>
                 <div className="text-[16px] text-black font-bold mt-1">
-  {card.isCurrency ? `$${card.value}` : card.value}
-</div>
+                  {card.isCurrency ? `$${card.value}` : card.value}
+                </div>
 
               </div>
             ))}
