@@ -51,9 +51,9 @@ const Dashboard = () => {
   const statCards = [
     { title: "Current Rank", value: user_profile?.rank_name || "--", icon: <FaDollarSign />, isCurrency: false },
     { title: "Total Income", value: Number(user_profile?.jnr_total_income || 0)?.toFixed(2), icon: <FaDollarSign />, isCurrency: true },
-    { title: "Total Team", value: Number(dashboard?.jnr_total_team || 0)?.toFixed(2), icon: <FaUsers />, isCurrency: false },
+    { title: "Total Team", value: Number(dashboard?.jnr_total_team || 0)?.toFixed(0,2), icon: <FaUsers />, isCurrency: false },
     { title: " Team Business", value: Number(dashboard?.jnr_total_team_buss || 0)?.toFixed(2), icon: <FaSitemap />, isCurrency: true },
-    { title: "Direct Team", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: false },
+    { title: "Direct Team", value: Number(dashboard?.jnr_direct_team || 0)?.toFixed(0,2), icon: <FaUserFriends />, isCurrency: false },
     { title: " Direct Business", value: Number(dashboard?.jnr_direct_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
     { title: " Level Income", value: Number(dashboard?.jnr_level_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
     { title: " Reward Income", value: Number(dashboard?.jnr_reward_business || 0)?.toFixed(2), icon: <FaUserFriends />, isCurrency: true },
