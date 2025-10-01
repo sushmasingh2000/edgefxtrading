@@ -62,7 +62,7 @@ const FundTransfer = () => {
 
   const tablerow = allData?.data?.map((row, index) => {
     return [
-      <span> {index + 1}</span>,
+     <span> {(page - 1) * 10 + index + 1}</span>,
       <span>{ Number(row?.topup_real_amount || 0)?.toFixed(2) || "--"}</span>,
       <span>{row?.topup_trans_id || "--"}</span>,
       

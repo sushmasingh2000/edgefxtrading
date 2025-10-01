@@ -64,7 +64,7 @@ const ContactDetail = () => {
 
     const tablerow = allData?.data?.map((row, index) => {
         return [
-            <span> {index + 1}</span>,
+           <span> {(page - 1) * 10 + index + 1}</span>,
             <span>{row.cs_name}</span>,
             <span>{row.cs_email}</span>,
             <span>{row?.cs_phone}</span>,

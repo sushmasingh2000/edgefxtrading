@@ -64,7 +64,7 @@ const Downline = () => {
   ];
   const tablerow = allData?.data?.map((row, index) => {
     return [
-      <span> {index + 1}</span>,
+      <span> {(page - 1) * 10 + index + 1}</span>,
       <span>{row.lgn_cust_id}</span>,
       <span>{row.jnr_name || "--"}</span>,
       <span> {Number(row.td_wallet_amount || 0)?.toFixed(2) || 0}</span>,

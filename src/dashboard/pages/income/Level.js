@@ -56,7 +56,7 @@ const Level = () => {
   ];
   const tablerow = allData?.data?.map((row, index) => {
     return [
-      <span> {index + 1}</span>,
+     <span> {(page - 1) * 10 + index + 1}</span>,
       <span>{moment(row.ledger_created_at)?.format("DD-MM-YYYY")}</span>,
       <span>{row?.from_cust_id || "--"}</span>,
       <span> {Number(row.ledger_amount || 0)?.toFixed(2) || '$0.00'}</span>,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { apiConnectorPost } from '../../../utils/APIConnector';
 import { endpoint } from '../../../utils/APIRoutes';
 import CustomTable from '../../../Shared/CustomTable';
@@ -9,7 +9,6 @@ import moment from 'moment';
 
 const JoinMember = () => {
   const [page, setPage] = useState(1)
-  const client = useQueryClient();
   const initialValues = {
     income_Type: "",
     search: '',
@@ -60,7 +59,7 @@ const JoinMember = () => {
   ];
   const tablerow = allData?.data?.map((row, index) => {
     return [
-      <span> {index + 1}</span>,
+       <span> {(page - 1) * 10 + index + 1}</span>,
       <span>{row.lgn_cust_id}</span>,
       <span>{row.jnr_name || '--'}</span>,
       <span> {Number(row.td_wallet_amount || 0)?.toFixed(2) || 0}</span>,

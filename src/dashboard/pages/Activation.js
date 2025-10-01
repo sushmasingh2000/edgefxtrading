@@ -55,7 +55,7 @@ const Activation = () => {
   ];
   const tablerow = allData?.data?.map((row, index) => {
     return [
-      <span> {index + 1}</span>,
+     <span> {(page - 1) * 10 + index + 1}</span>,
       <span>{moment?.utc(row.tr_date).format("DD-MM-YYYY HH:mm:ss")}</span>,
       <span>{row.tr_invoice}</span>,
       <span> {row.m_pack_name}</span>,

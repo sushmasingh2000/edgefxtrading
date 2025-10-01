@@ -82,7 +82,7 @@ const AddAddress = () => {
   ];
   const tablerow = address?.map((row, index) => {
     return [
-      <span> {index + 1}</span>,
+     <span> {index + 1}</span>,
       <span>{row.m39_add}</span>,
       <span>{row.m39_coin}</span>,
       <span><img src={row.m39_qr} alt={`QR code ${index + 1}`} style={{ maxWidth: "80px", height: "auto" }} /></span>
