@@ -175,7 +175,8 @@ const Profile = () => {
                             <p className="text-gray-400 text-sm">Manage account settings securely</p>
                         </div>
 
-                        {["Update Profile",
+                        {[
+                            // "Update Profile",
                         //  "Update Password",
                          "Update Wallet Address"].map((label, index) => (
                             <div key={index} className={`flex justify-between items-center py-2 ${index < 2 ? "border-b border-gray-700" : ""}`}>
