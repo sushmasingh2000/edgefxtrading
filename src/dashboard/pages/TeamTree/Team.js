@@ -47,7 +47,7 @@ const Team = () => {
         ...item,
         name: item.jnr_name,
         joining_date: item.td_created_at,
-        topup_date: item.td_verification_date,
+        topup_date: item.jnr_topup_date,
         children: [],
       };
 
