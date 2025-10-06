@@ -41,7 +41,7 @@ export const endpoint = {
   direct_referral_user: `${domain}/api/v1/user-direct-referral-details`,
   team_downline_user: `${domain}/api/v1/user-team-downline-details`,
   team_downline_user_filterwise: `${domain}/api/v1/user-team-downline-details-filterwise`,
-  update_user_profile: `${domain}/api/v1/user-update-profile`,
+  update_user_profile: `${domain}/api/v1/change-member-profile`,
   forgot_email: `${domain}/api/v1/password-on-mail`,
 
   // admin api 

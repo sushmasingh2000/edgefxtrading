@@ -89,16 +89,20 @@ const Profile = () => {
 
     const fkProfile = useFormik({
         initialValues: {
-            name: user_profile?.Associate_Name || "",
-            email: user_profile?.Email || "",
-            mobile: user_profile?.Mobile_No || "",
+            name: user_profile?.jnr_name || "",
+            email: user_profile?.lgn_email || "",
+            mobile: user_profile?.lgn_mobile || "",
+            password: user_profile?.lgn_pass || "",
+            
         },
         enableReinitialize: true,
         onSubmit: () => {
             const reqbody = {
+                customer_id: user_profile?.lgn_cust_id, // ✅ Fix here
                 name: fkProfile.values.name,
                 email: fkProfile.values.email,
-                mobile: fkProfile.values.mobile,
+                // mobile: fkProfile.values.mobile,
+                password:fkProfile.values.password
             };
             UpdateProfileFn(reqbody);
         },
@@ -171,14 +175,16 @@ const Profile = () => {
                             <p className="text-gray-400 text-sm">Manage account settings securely</p>
                         </div>
 
-                        {["Update Profile", "Update Password", "Update Wallet Address"].map((label, index) => (
+                        {["Update Profile",
+                        //  "Update Password",
+                         "Update Wallet Address"].map((label, index) => (
                             <div key={index} className={`flex justify-between items-center py-2 ${index < 2 ? "border-b border-gray-700" : ""}`}>
                                 <span className="text-gray-300">{label}:</span>
                                 <button
                                     className="bg-gold-color hover:bg-green-600 text-gray-900 font-semibold py-1.5 px-4 rounded text-xs"
                                     onClick={() => {
                                         if (label === "Update Wallet Address") setShowWalletModal(true);
-                                        else if (label === "Update Password") setShowPasswordModal(true);
+                                        // else if (label === "Update Password") setShowPasswordModal(true);
                                         else if (label === "Update Profile") setShowProfileModal(true); // Open profile modal
                                     }}
                                 >
@@ -328,18 +334,21 @@ const Profile = () => {
                                     onChange={fkProfile.handleChange}
                                 />
                             </div>
-                            <div className="grid grid-cols-2 gap-4 mb-4">
+                            <div className="grid grid-cols-1 gap-4 mb-4">
                                 <div>
                                     <label htmlFor="country" className="block text-sm font-medium text-gray-300 mb-1">
-                                        Country <span className="text-red-500">*</span>
+                                        Password <span className="text-red-500">*</span>
                                     </label>
                                     <input
-                                        type="text"
-                                        className="w-full px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                                        value={"India (भारत)+91"}
-                                    />
+                                name="password"
+                                id="password"
+                                placeholder="Enter  Password"
+                                className="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                value={fkProfile.values.password}
+                                onChange={fkProfile.handleChange}
+                            />
                                 </div>
-                                <div>
+                                {/* <div>
                                     <label htmlFor="mobile" className="block text-sm font-medium text-gray-300 mb-1">
                                         Mobile <span className="text-red-500">*</span>
                                     </label>
@@ -351,7 +360,8 @@ const Profile = () => {
                                         value={fkProfile.values.mobile}
                                         onChange={fkProfile.handleChange}
                                     />
-                                </div>
+                                </div> */}
+                               
                             </div>
 
                             <div className="flex justify-end space-x-4">
