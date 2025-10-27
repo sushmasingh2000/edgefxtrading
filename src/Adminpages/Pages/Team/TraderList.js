@@ -109,6 +109,7 @@ const TraderList = () => {
 
     const tablehead = [
         <span>S.No.</span>,
+        <span>Cust ID</span>,
         <span>Name</span>,
         <span>Amount</span>,
         <span>Server Name</span>,
@@ -126,6 +127,7 @@ const TraderList = () => {
     const tablerow = allData?.data?.map((row, index) => {
         return [
            <span> {(page - 1) * 10 + index + 1}</span>,
+            <span>{row.lgn_cust_id || "--"}</span>,
             <span>{row.td_trad_name || "--"}</span>,
             <span>{Number(row.td_wallet_amount || 0)?.toFixed(2) || "--"}</span>,
             <span>{row.td_server_name || "--"}</span>,

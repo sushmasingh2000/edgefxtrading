@@ -78,7 +78,7 @@ const TradingRegistration = () => {
         regulatory_region: "",
         group_type: fk.values.group_type,
       };
-      RegistrationFn(reqbody);
+     RegistrationFn(reqbody);
     },
   });
   const RegistrationFn = async (reqbody) => {
@@ -129,7 +129,7 @@ const TradingRegistration = () => {
                 />
               </div>
             ))}
-
+           
             <div>
               <label htmlFor="broker_name" className="block text-sm font-medium text-white mb-1">
                 Broker Name
@@ -145,35 +145,55 @@ const TradingRegistration = () => {
                 <option value="">Select Broker Name</option>
                 <option value="Star Trader">Star Trader</option>
                 <option value="Vantage Markets">Vantage Markets </option>
+                <option value="Other">Other </option>
               </select>
             </div>
 
-            <div>
-              <label htmlFor="broker_name" className="block text-sm font-medium text-white mb-1">
-                Server Name
-              </label>
-              <select
-                id="server_name"
-                name="server_name"
-                value={fk.values.server_name}
-                onChange={fk.handleChange}
-                className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-                required
-              >
-                {fk.values.broker_name === "Star Trader" ?
-                  <>  <option value="">Select Server Name</option>
-                    <option value="Startraderfinancial-live">Startraderfinancial-live</option>
-                    <option value="Startraderfinancial-live2">Startraderfinancial-live2</option> </>
-                  : ""}
-                {fk.values.broker_name === "Vantage Markets" ?
-                  <><option value="">Select Server Name</option>
-                    <option value="VantageInternational-Live">VantageInternational-Live</option>
-                    <option value="VantageInternational-Live 3">VantageInternational-Live 3</option>
-                    <option value="VantageInternational-Live 5">VantageInternational-Live 5</option></>
-                  : ""
-                }
-              </select>
-            </div>
+           
+              <div>
+                <label htmlFor="server_name" className="block text-sm font-medium text-white mb-1">
+                  Server Name
+                </label>
+
+                {fk.values.broker_name !== "Other" ? (
+                  <select
+                    id="server_name"
+                    name="server_name"
+                    value={fk.values.server_name}
+                    onChange={fk.handleChange}
+                    className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                    required
+                  >
+                    <option value="">Select Server Name</option>
+
+                    {fk.values.broker_name === "Star Trader" && (
+                      <>
+                        <option value="Startraderfinancial-live">Startraderfinancial-live</option>
+                        <option value="Startraderfinancial-live2">Startraderfinancial-live2</option>
+                      </>
+                    )}
+
+                    {fk.values.broker_name === "Vantage Markets" && (
+                      <>
+                        <option value="VantageInternational-Live">VantageInternational-Live</option>
+                        <option value="VantageInternational-Live 3">VantageInternational-Live 3</option>
+                        <option value="VantageInternational-Live 5">VantageInternational-Live 5</option>
+                      </>
+                    )}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    id="server_name"
+                    name="server_name"
+                    placeholder="Enter Server Name"
+                    value={fk.values.server_name}
+                    onChange={fk.handleChange}
+                    className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                    required
+                  />
+                )}
+              </div>
 
             {/* Group Type Select */}
             <div>
@@ -188,9 +208,9 @@ const TradingRegistration = () => {
                   fk.handleChange(e);
                   const selectedGroupType = e.target.value;
                   if (selectedGroupType === "1") {
-                    fk.setFieldValue("base_currency", "2"); 
+                    fk.setFieldValue("base_currency", "2");
                   } else {
-                    fk.setFieldValue("base_currency", "1"); 
+                    fk.setFieldValue("base_currency", "1");
                   }
                 }}
                 className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
