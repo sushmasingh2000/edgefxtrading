@@ -90,7 +90,7 @@ const UserSupportChat = () => {
                                 key={ticket.id}
                                 onClick={() => setSelectedTicket(ticket)}
                                 className={`cursor-pointer p-3 mb-2 rounded-lg ${selectedTicket?.id === ticket.id
-                                    ? "bg-[#64b1b8] text-black"
+                                    ? "bg-[#e98d2c] text-black"
                                     : "bg-gray-700 hover:bg-gray-600"
                                     }`}
                             >
@@ -154,7 +154,7 @@ const UserSupportChat = () => {
                                                 }`}
                                         >
                                             <div
-                                                className={`max-w-xs p-3 rounded-lg ${reply.sender_type === "user" ? "bg-[#64b1b8] text-black" : "bg-gray-700"
+                                                className={`max-w-xs p-3 rounded-lg ${reply.sender_type === "user" ? "bg-[#e98d2c] text-black" : "bg-gray-700"
                                                     }`}
                                             >
                                                 <p>{reply.message}</p>
@@ -198,7 +198,7 @@ const UserSupportChat = () => {
 
                                     <button
                                         onClick={sendMessage}
-                                        className="px-4 py-2 bg-[#64b1b8] text-black rounded hover:bg-[#64b1b8] w-full sm:w-auto"
+                                        className="px-4 py-2 bg-[#e98d2c] text-black rounded hover:bg-[#e98d2c] w-full sm:w-auto"
                                     >
                                         Send
                                     </button>

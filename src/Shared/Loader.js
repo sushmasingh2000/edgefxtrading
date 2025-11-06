@@ -15,7 +15,7 @@ const Loader = ({isLoading}) => {
           style: {
             backgroundColor: "transparent",
             backgroundImage:
-                  "linear-gradient(225deg, rgba(0, 170, 216, 1) 0%, rgba(20, 20, 20, 1) 61%)",
+                  "linear-gradient(225deg, #e98d2c 0%, rgba(20, 20, 20, 1) 61%)",
             boxShadow: "none",
           },
           className: `!h-[4rem] !w-[4rem] !flex !justify-center !items-center `,

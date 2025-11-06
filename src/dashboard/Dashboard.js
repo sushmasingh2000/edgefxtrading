@@ -97,7 +97,7 @@ const Dashboard = () => {
 
         {/* News & Updates Tab */}
         <div className="bg-[#1e293b] px-4 py-2 flex">
-          <div className="bg-[#64b1b8] text-white px-4 py-1 rounded-t-md text-sm  flex font-semibold">
+          <div className="bg-[#e98d2c] text-white px-4 py-1 rounded-t-md text-sm  flex font-semibold">
             News & Updates
           </div>
           <div className="w-full">

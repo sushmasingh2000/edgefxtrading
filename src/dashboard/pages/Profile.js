@@ -132,7 +132,7 @@ const Profile = () => {
 
                     <div className="bg-gray-800 p-3 rounded-lg shadow-lg">
                         <div className="flex flex-col items-center mb-6">
-                            <img src={logo} alt="Coin Icon" className="w-16 h-16 mb-3" />
+                            <img src={logo} alt="Coin Icon" className="w-20  mb-3" />
                             <h2 className="text-lg font-semibold text-white">General Account Information</h2>
                         </div>
 
@@ -170,7 +170,7 @@ const Profile = () => {
 
                     <div className="bg-gray-800 h-fit p-3 rounded-lg shadow-lg">
                         <div className="flex flex-col items-center mb-6">
-                            <img src={logo} alt="Coin Icon" className="w-16 h-16 mb-3" />
+                            <img src={logo} alt="Coin Icon" className="w-20 mb-3" />
                             <h2 className="text-lg font-semibold text-white">Password &  Address</h2>
                             <p className="text-gray-400 text-sm">Manage account settings securely</p>
                         </div>

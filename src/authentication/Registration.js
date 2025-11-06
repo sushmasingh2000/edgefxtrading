@@ -198,7 +198,7 @@ const Registration = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-3 text-white border-2 border-border-color-green font-semibold rounded-full hover:bg-black bg-[#64b1b8] focus:outline-none focus:ring-2 focus:ring-[#128C7E] "
+              className="w-full py-3 text-white border-2 border-border-color-green font-semibold rounded-full hover:bg-black bg-[#e98d2c] focus:outline-none focus:ring-2 focus:ring-[#703f0a] "
               onClick={fk.handleSubmit}
             >
               Register

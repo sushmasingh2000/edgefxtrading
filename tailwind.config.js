@@ -8,10 +8,10 @@ module.exports = {
         glow: "0 0 10px #FFD700",
       },
       colors: {
-        "gold-color": "#64b1b8",
+        "gold-color": "#e98d2c",
         "dark-color": "black",
         background: "#ffffff",
-        "text-color": "#64b1b8",
+        "text-color": "#e98d2c",
         "gray-color": "#f2f0ef",
         "border-color-green" : "8#64b1b"
       },

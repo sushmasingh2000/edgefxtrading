@@ -85,7 +85,7 @@ const Login = () => {
                 name="username"
                 value={formik.values.username}
                 onChange={formik.handleChange}
-                className="w-full p-3 mt-1 text-black placeholder:text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#008eff] "
+                className="w-full p-3 mt-1 text-black placeholder:text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e98d2c] "
                 required
               />
             </div>
@@ -97,13 +97,13 @@ const Login = () => {
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
-                className="w-full p-3 mt-1 text-black placeholder:text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#008eff] "
+                className="w-full p-3 mt-1 text-black placeholder:text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e98d2c] "
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full py-3 text-white border-2 border-white font-semibold rounded-full hover:bg-black bg-[#64b1b8]  focus:ring-[#128C7E]"
+              className="w-full py-3 text-white border-2 border-white font-semibold rounded-full hover:bg-black bg-[#e98d2c]  focus:ring-[#e98d2c]"
             >
               Login
             </button>
@@ -113,7 +113,7 @@ const Login = () => {
               onClick={() => navigate('/forgot')}>Forget Password ?</p>
           </div>
           <div className="mt-4 text-center">
-            <p className="text-sm text-blue-400">
+            <p className="text-sm text-orange-400">
               Don't have an account?{" "}
               <span
                 className="text-white cursor-pointer hover:underline"
