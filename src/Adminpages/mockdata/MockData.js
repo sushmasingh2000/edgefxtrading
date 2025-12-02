@@ -70,7 +70,8 @@ export const all_Data = [
       </span>
     ),
     subcomponent: [
-       {
+
+      {
         id: 6.3,
         navLink: "/trader_detail",
         navItem: "Investor",
@@ -80,7 +81,7 @@ export const all_Data = [
           </span>
         ),
       },
-       {
+      {
         id: 6.3,
         navLink: "/trader_sucess",
         navItem: "Verified Investor",
@@ -90,7 +91,7 @@ export const all_Data = [
           </span>
         ),
       },
-      
+
       {
         id: 6.3,
         navLink: "/trader_reject",
@@ -101,9 +102,20 @@ export const all_Data = [
           </span>
         ),
       },
+
+      {
+        id: 6.3,
+        navLink: "/copier__detail",
+        navItem: "Copier Detail",
+        navIcon: (
+          <span>
+            <SelfImprovement color="#15317E" fontSize="medium" />
+          </span>
+        ),
+      },
     ],
   },
-    {
+  {
     id: 6,
     navLink: "/levelBonus",
     navItem: "Income",
@@ -134,7 +146,7 @@ export const all_Data = [
       //     </span>
       //   ),
       // },
-     
+
       // {
       //   id: 8.5,
       //   navLink: "/salarybonus",
@@ -145,7 +157,7 @@ export const all_Data = [
       //     </span>
       //   ),
       // },
-      
+
       {
         id: 8.5,
         navLink: "/giftBonus",
@@ -176,10 +188,10 @@ export const all_Data = [
           </span>
         ),
       },
-    
+
     ],
   },
- 
+
   // {
   //   id: 2,
   //   navLink: "/player",
@@ -418,10 +430,21 @@ export const all_Data = [
     ),
     subcomponent: [],
   },
-   {
+  {
     id: 11,
     navLink: "/inr_Paying",
     navItem: "Fund Request",
+    navIcon: (
+      <span>
+        <Games color="#15317E" fontSize="medium" />
+      </span>
+    ),
+    subcomponent: [],
+  },
+   {
+    id: 11,
+    navLink: "/copier_report",
+    navItem: "Cpy Payment Report",
     navIcon: (
       <span>
         <Games color="#15317E" fontSize="medium" />
@@ -534,8 +557,8 @@ export const all_Data = [
   //         </span>
   //       ),
   //     },
-     
-   
+
+
 
   //   ],
   // },
@@ -623,41 +646,41 @@ export const all_Data = [
   //     </span>
   //   ),
   // },
-//   {
-//     id: 31,
-//     navLink: "/topup",
-//     navItem: "Top Up",
-//     navIcon: (
-//       <span>
-//         <LoginOutlined color="#15317E" fontSize="medium" />
-//       </span>
-//     ),
-//     subcomponent: [],
-//   },
-//   {
-//     id: 44,
-//     navLink: "/top_up",
-//     navItem: "Top Up Detail",
-//     navIcon: (
-//       <span>
-//         <Compare color="#15317E" fontSize="medium" />
-//       </span>
-//     ),
-//     subcomponent: [],
-//   },
-//  {
-//     id: 8,
-//     navLink: "/admin_fund",
-//     navItem: "Upload Qr",
-//     navIcon: (
-//       <span>
-//         <Money color="#15317E" fontSize="medium" />
-//       </span>
-//     ),
-//     subcomponent: [],
-//   },
+  //   {
+  //     id: 31,
+  //     navLink: "/topup",
+  //     navItem: "Top Up",
+  //     navIcon: (
+  //       <span>
+  //         <LoginOutlined color="#15317E" fontSize="medium" />
+  //       </span>
+  //     ),
+  //     subcomponent: [],
+  //   },
+  //   {
+  //     id: 44,
+  //     navLink: "/top_up",
+  //     navItem: "Top Up Detail",
+  //     navIcon: (
+  //       <span>
+  //         <Compare color="#15317E" fontSize="medium" />
+  //       </span>
+  //     ),
+  //     subcomponent: [],
+  //   },
+  //  {
+  //     id: 8,
+  //     navLink: "/admin_fund",
+  //     navItem: "Upload Qr",
+  //     navIcon: (
+  //       <span>
+  //         <Money color="#15317E" fontSize="medium" />
+  //       </span>
+  //     ),
+  //     subcomponent: [],
+  //   },
 
-  
+
   // {
   //   id: 12,
   //   navLink: "/dashboard",
@@ -680,7 +703,7 @@ export const all_Data = [
   //   subcomponent: [],
   // },
 
- {
+  {
     id: 1,
     navLink: "/contact",
     navItem: "Contact",

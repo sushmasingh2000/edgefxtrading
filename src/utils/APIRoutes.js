@@ -8,7 +8,11 @@ export const endpoint = {
   login_api: `${domain}/api/v1/member-login`,
   customer_api: `${domain}/api/v1/member-name-by-cust-id`,
   trader_registration_api: `${domain}/api/v1/trader-registration`,
+  copier_trade_api: `${domain}/api/v1/copier-registration`,
   trader_profile_api: `${domain}/api/v1/trader-profile-details`,
+  copier_profile_api: `${domain}/api/v1/copier-profile-details`,
+  copier_payment: `${domain}/api/v1/copier-payment`,
+ 
   roi_income_api: `${domain}/api/v1/get-income-details`,
   
   get_downline_api: `${domain}/api/v1/get-downline-team`,
@@ -47,7 +51,11 @@ export const endpoint = {
   // admin api 
   member_list_details: `${domain}/api/v1/member-list-details`,
   trader_list_details: `${domain}/api/v1/trader-list-details`,
+  copier_list_details: `${domain}/api/v1/copier-list-details`,
+  copier_fund_report: `${domain}/api/v1/copier-payment-report`,
   change_verification: `${domain}/api/v1/change-verification-status`,
+  update_copier_apyment_status: `${domain}/api/v1/update-copier-payment-status`,
+  change_copier_verification: `${domain}/api/v1/change-copier-verification-status`,
   change_general_status: `${domain}/api/v1/change-general-status`,
   master_data: `${domain}/api/v1/master-data`,
 

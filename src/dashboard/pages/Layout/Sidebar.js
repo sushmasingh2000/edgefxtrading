@@ -58,6 +58,11 @@ const Sidebar = () => {
       icon: <FaCheck />,
       path: "/trading_registration",
     },
+    {
+      title: "Copier Trade ",
+      icon: <FaCheck />,
+      path: "/copier_trade",
+    },
     { title: "Invester History", icon: <FaUserAlt />, path: "/investor" },
 
     {
@@ -86,8 +91,8 @@ const Sidebar = () => {
     //     title: "Fund",
     //     icon: <FaMoneyBillWave />,
     //     subItems: [
-    //         { title: "Fund Request", path: "/fund" },
-    //         { title: "Transfer", path: "/fund-tranfer" }
+    //         { title: "Copier Fund ", path: "/fund" },
+    //         // { title: "Transfer", path: "/fund-tranfer" }
     //     ],
     // },
 

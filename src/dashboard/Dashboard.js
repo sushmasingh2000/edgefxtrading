@@ -84,7 +84,9 @@ const Dashboard = () => {
             </span>
             <button
               onClick={() => functionTOCopy(frontend + "/register?referral_id=" + user_profile?.lgn_cust_id)}
-              className="border border-white p-1 text-sm "><CopyAll className="!text-white" /></button>
+              className="border border-white p-1 text-sm ">
+                <CopyAll className="!text-white" />
+              </button>
             {/* <div className="flex space-x-4 text-xl">
               <i className="fab fa-whatsapp"></i>
               <i className="fab fa-telegram"></i>

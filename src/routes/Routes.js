@@ -2,6 +2,7 @@
 import Dashboard from "../dashboard/Dashboard";
 import Activation from "../dashboard/pages/Activation";
 import AssociateRegistration from "../dashboard/pages/AssociateRegistration";
+import CopierTrade from "../dashboard/pages/CopierTrade";
 import Fund from "../dashboard/pages/Fund/Fund";
 import FundTransfer from "../dashboard/pages/Fund/Transfer";
 import Level from "../dashboard/pages/income/Level";
@@ -42,6 +43,14 @@ export const routes = [
     element: (
       <MainLayout>
         <TradingRegistration />{" "}
+      </MainLayout>
+    ),
+  },
+  {
+    path: "/copier_trade",
+    element: (
+      <MainLayout>
+        <CopierTrade />{" "}
       </MainLayout>
     ),
   },

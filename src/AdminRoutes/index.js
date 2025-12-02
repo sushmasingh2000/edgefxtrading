@@ -7,10 +7,12 @@ import DirectBonus from "../Adminpages/Pages/genealogy/DirectBonus";
 import LevelBonus from "../Adminpages/Pages/genealogy/LevelBonus";
 import ROIBonus from "../Adminpages/Pages/genealogy/ROIBonus";
 import WeeklyBonus from "../Adminpages/Pages/genealogy/WeeklyBonus";
+import CopierFund from "../Adminpages/Pages/INRPayment/CopierFund";
 import INRPaying from "../Adminpages/Pages/INRPayment/INRPaying";
 import INRPayout from "../Adminpages/Pages/INRPayment/INRPayout";
 import Master from "../Adminpages/Pages/Master";
 import ContactDetail from "../Adminpages/Pages/Team/Contactlist";
+import CopierList from "../Adminpages/Pages/Team/CopierList";
 import TraderRejct from "../Adminpages/Pages/Team/subinvestor/InvestorReject";
 import TraderSucess from "../Adminpages/Pages/Team/subinvestor/InvestorSuccess";
 import TraderList from "../Adminpages/Pages/Team/TraderList";
@@ -82,6 +84,12 @@ export const adminroutes = [
     component: <INRPaying/>,
     navItem: "INR Paying",
   },
+   {
+    id: 42,
+    path: "/copier_report",
+    component: <CopierFund/>,
+    navItem: "Copier List",
+  },
   {
     id: 43,
     path: "/inr_Payout",
@@ -106,6 +114,12 @@ export const adminroutes = [
     path: "/trader_detail",
     component: <TraderList/>,
     navItem: "Invester ",
+  },
+   {
+    id: 43,
+    path: "/copier__detail",
+    component: <CopierList/>,
+    navItem: "Copier Detail",
   },
     {
     id: 43,
