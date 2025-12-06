@@ -219,7 +219,7 @@ const TradingRegistration = () => {
                 <option value="">Select Group Type</option>
                 <option value="1">CENT</option>
                 <option value="2">USD</option>
-                {/* <option value="3">PAMM</option> */}
+                <option value="3">PAMM</option>
               </select>
             </div>
 
